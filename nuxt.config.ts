@@ -1,0 +1,30 @@
+export default defineNuxtConfig({
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  pinia: {
+    autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+  },
+  // css: ["@/assets/main.scss"],
+  css: [
+    "~/assets/css/bootstrap.min.css",
+    "~/assets/fonts/font-awesome.min.css",
+    "~/assets/fonts/themify-icons.css",
+    "~/assets/css/magnific-popup.css",
+    "~/assets/css/niceselect.css",
+    "~/assets/css/shop.css",
+    "~/assets/css/slicknav.css",
+    "~/assets/css/slider.css",
+    "~/assets/css/style.css",
+  ],
+  plugins: [
+    "~/assets/js/bootstrap.min.js",
+    "~/assets/js/jquery-1.12.4.min.js",
+    "~/assets/js/nicesellect.js",
+    "~/assets/js/jquery.magnific-popup.min.js",
+    "~/assets/js/jquery.mixitup.js",
+    "~/assets/js/jquery.slicknav.js",
+    "~/assets/js/purecounter_vanilla.js",
+    "~/assets/js/wow.min.js",
+    "~/assets/js/scrolltopcontrol.js",
+    "~/assets/js/scripts.js",
+  ],
+});
