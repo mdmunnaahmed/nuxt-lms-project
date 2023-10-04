@@ -1,28 +1,40 @@
-
-export const useTaskStore = defineStore("taskStore", {
+export const useAuthStore = defineStore("authStore", {
   state: () => ({
     name: "Munna",
-    tasks: [],
-    loading: false,
+    studentAccounts: [],
+    serverError: null,
+    isLoggedIn: false,
   }),
   actions: {
-    async getTasks() {
-      this.isLoading = true;
-      const res = await fetch("http://localhost:3000/tasks");
+    async getAccounts() {
+      const res = await fetch("http://localhost:3000/studentAccounts");
       const data = await res.json();
-
-      this.tasks = data;
-      this.isLoading = false;
+      this.studentAccounts = data;
     },
-    async addTask(task) {
-      this.tasks.push(task);
-      const res = await fetch("http://localhost:3000/tasks", {
+    async addAccount(account) {
+      this.studentAccounts.push(account);
+      const res = await fetch("http://localhost:3000/studentAccounts", {
         method: "POST",
-        body: JSON.stringify(task),
+        body: JSON.stringify(account),
         headers: { "Content-Type": "application/json" },
       });
       if (res.error) {
         console.log(res.error);
+      }
+    },
+    async loginAccount(info) {
+      const res = await fetch("http://localhost:3000/studentAccounts");
+      const data = await res.json();
+
+      const user = data.find((u) => (u.uname === info.uname || u.email === info.email) && u.password === info.password);
+
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("isLoggedIn", true);
+      }
+
+      if (res.error) {
+        serverError = res.error;
       }
     },
     async deleteTask(id) {
@@ -52,6 +64,9 @@ export const useTaskStore = defineStore("taskStore", {
     },
   },
   getters: {
+    getUnamePass() {
+      return this.studentAccounts;
+    },
     favs() {
       return this.tasks.filter((t) => t.isFav);
     },

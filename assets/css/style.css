@@ -3603,7 +3603,6 @@ margin-bottom:30px;
 }
 .login button, .register button{border:none;width: 100%;}
 .login p, .register p {
-	color: #232434;
 	font-weight: 600;
 	text-align: center;
 	margin-top: 15px;

@@ -1,8 +1,4 @@
 export default defineNuxtConfig({
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
-  pinia: {
-    autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
-  },
   // css: ["@/assets/main.scss"],
   css: [
     "~/assets/css/bootstrap.min.css",
@@ -27,4 +23,8 @@ export default defineNuxtConfig({
     "~/assets/js/scrolltopcontrol.js",
     "~/assets/js/scripts.js",
   ],
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  pinia: {
+    autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+  },
 });
