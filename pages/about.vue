@@ -5,7 +5,12 @@
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {
+  setup() {
+    definePageMeta({
+      middleware: ["auth"],
+      // or middleware: 'auth'
+    });
+  },
+};
 </script>

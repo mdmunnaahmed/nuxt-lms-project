@@ -31,7 +31,7 @@
           <div class="col-lg-6 offset-lg-3 col-xs-12">
             <form @submit.prevent="submitForm" class="login">
               <h4 class="login_register_title">Sign in to your account</h4>
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <label for="">Username or Email</label>
                 <input
                   type="text"
@@ -40,7 +40,7 @@
                   v-model="uname"
                 />
               </div>
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <label for="">Password</label>
                 <input
                   type="password"
@@ -48,7 +48,9 @@
                   v-model="password"
                 />
               </div>
-              <div class="form-group col-lg-12">
+              <UISpinner v-if="authStore.loading" />
+              <p>{{ authStore.serverError }}</p>
+              <div class="form-group col-lg-12 mt-3">
                 <button class="btn_one">login</button>
               </div>
               <p>
@@ -65,10 +67,13 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/AuthStore";
 export default {
   setup() {
+    const router = useRouter();
     const authStore = useAuthStore();
+    const success = ref(false);
     const uname = ref("");
     const password = ref("");
     const submitForm = () => {
@@ -76,14 +81,21 @@ export default {
         uname: uname.value,
         password: password.value,
       });
+      success.value = true;
       uname.value = "";
       password.value = "";
+      // router.push("/my-profile");
     };
-
+    const closeDialog = () => {
+      success.value = false;
+    };
     return {
+      authStore,
       submitForm,
       uname,
       password,
+      success,
+      closeDialog,
     };
   },
 };

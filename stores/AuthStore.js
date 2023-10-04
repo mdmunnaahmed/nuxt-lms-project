@@ -2,8 +2,10 @@ export const useAuthStore = defineStore("authStore", {
   state: () => ({
     name: "Munna",
     studentAccounts: [],
+    authUser: [],
     serverError: null,
     isLoggedIn: false,
+    loading: false,
   }),
   actions: {
     async getAccounts() {
@@ -19,23 +21,29 @@ export const useAuthStore = defineStore("authStore", {
         headers: { "Content-Type": "application/json" },
       });
       if (res.error) {
-        console.log(res.error);
+        this.serverError = res.error;
       }
     },
     async loginAccount(info) {
+      this.loading = true;
       const res = await fetch("http://localhost:3000/studentAccounts");
       const data = await res.json();
 
       const user = data.find((u) => (u.uname === info.uname || u.email === info.email) && u.password === info.password);
 
+      if (res.error) {
+        this.serverError = res.error;
+      }
+
       if (user) {
+        this.authUser = user;
+        this.isLoggedIn = true;
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("isLoggedIn", true);
       }
 
-      if (res.error) {
-        serverError = res.error;
-      }
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      this.loading = false;
     },
     async deleteTask(id) {
       this.tasks = this.tasks.filter((t) => {
@@ -62,21 +70,11 @@ export const useAuthStore = defineStore("authStore", {
         console.log(res.error);
       }
     },
+    getAuthUser() {
+      this.authUser = localStorage.getItem("user");
+      this.isLoggedIn = localStorage.getItem("isLoggedIn");
+    },
   },
   getters: {
-    getUnamePass() {
-      return this.studentAccounts;
-    },
-    favs() {
-      return this.tasks.filter((t) => t.isFav);
-    },
-    favCount() {
-      return this.tasks.reduce((p, c) => {
-        return c.isFav ? p + 1 : p;
-      }, 0);
-    },
-    totalCount(state) {
-      return state.tasks.length;
-    },
   },
 });

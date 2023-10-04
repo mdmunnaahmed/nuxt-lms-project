@@ -6,14 +6,19 @@
   </div>
 </template>
 
+<script>
+import { onBeforeMount } from "vue";
 
-<script setup lang="ts">
-useHead({
-  link: [
-    {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
-    },
-  ],
-});
+import { useAuthStore } from "../stores/AuthStore";
+export default {
+  setup() {
+    const authStore = useAuthStore();
+    onBeforeMount(() => {
+      authStore.getAuthUser();
+    });
+    return {
+      authStore,
+    };
+  },
+};
 </script>
