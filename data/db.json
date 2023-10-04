@@ -20,6 +20,20 @@
       "email": "debamitox@mailinator.com",
       "password": "username",
       "id": 3
+    },
+    {
+      "uname": "cacido",
+      "name": "Steven Mullins",
+      "email": "powohy@mailinator.com",
+      "password": "username",
+      "id": 4
+    },
+    {
+      "uname": "tumyra",
+      "name": "Paul Stanton",
+      "email": "kowow@mailinator.com",
+      "password": "username",
+      "id": 5
     }
   ]
 }

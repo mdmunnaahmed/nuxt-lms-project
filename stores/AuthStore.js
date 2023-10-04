@@ -13,6 +13,10 @@ export const useAuthStore = defineStore("authStore", {
       const data = await res.json();
       this.studentAccounts = data;
     },
+    getAuthUser() {
+      this.authUser = localStorage.getItem("user");
+      this.isLoggedIn = localStorage.getItem("isLoggedIn");
+    },
     async addAccount(account) {
       this.studentAccounts.push(account);
       const res = await fetch("http://localhost:3000/studentAccounts", {
@@ -70,11 +74,6 @@ export const useAuthStore = defineStore("authStore", {
         console.log(res.error);
       }
     },
-    getAuthUser() {
-      this.authUser = localStorage.getItem("user");
-      this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    },
   },
-  getters: {
-  },
+  getters: {},
 });

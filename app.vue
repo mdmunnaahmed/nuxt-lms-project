@@ -13,6 +13,7 @@ import { useAuthStore } from "../stores/AuthStore";
 export default {
   setup() {
     const authStore = useAuthStore();
+    authStore.getAccounts();
     onBeforeMount(() => {
       authStore.getAuthUser();
     });

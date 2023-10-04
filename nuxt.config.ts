@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   // css: ["@/assets/main.scss"],
+  ssr: true,
   css: [
     "~/assets/css/bootstrap.min.css",
     "~/assets/fonts/font-awesome.min.css",
@@ -9,6 +10,8 @@ export default defineNuxtConfig({
     "~/assets/css/shop.css",
     "~/assets/css/slicknav.css",
     "~/assets/css/slider.css",
+    "~/assets/css/owlcarousel/css/owl.carousel.css",
+    "~/assets/css/owlcarousel/css/owl.theme.css",
     "~/assets/css/style.css",
   ],
   plugins: [
@@ -21,6 +24,7 @@ export default defineNuxtConfig({
     "~/assets/js/purecounter_vanilla.js",
     "~/assets/js/wow.min.js",
     "~/assets/js/scrolltopcontrol.js",
+    "~/assets/css/owlcarousel/js/owl.carousel.min.js",
     "~/assets/js/scripts.js",
   ],
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
