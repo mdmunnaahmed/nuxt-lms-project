@@ -2219,8 +2219,8 @@ font-size: 30px;
 	color:#1a2d62;
 }
 .testimonial_content i {
-	color: #ffbd35;
-	font-size: 22px;
+	font-size: 18px;
+	margin-right: 2px;
 }
 .testimonial_content p {
 	overflow: hidden;

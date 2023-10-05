@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useFrontStore = defineStore("frontStore", {
   state: () => ({
     loading: false,
+    serverError: null,
     banner: [
       {
         title: "Better Learning Future Starts With Mun's",
@@ -186,18 +187,108 @@ export const useFrontStore = defineStore("frontStore", {
       pera: "From blogs to emails to ad copies, auto-generate catchy, original, and high-converting copies in popular tones languages.",
       promo: ["9/10 Average Satisfaction Rate", "96% Completitation Rate", "Friendly Environment & Expert Teacher"],
     },
+    subsMails: [],
+    topics: [
+      {
+        icon: "images/icon/ct1.svg",
+        title: "UI/UX Design",
+        courseCount: 165,
+      },
+      {
+        icon: "images/icon/ct2.svg",
+        title: "Digital Program",
+        courseCount: 45,
+      },
+      {
+        icon: "images/icon/ct3.svg",
+        title: "Modern Physics",
+        courseCount: 55,
+      },
+      {
+        icon: "images/icon/ct4.svg",
+        title: "Finance",
+        courseCount: 120,
+      },
+      {
+        icon: "images/icon/ct5.svg",
+        title: "Music Production",
+        courseCount: 230,
+      },
+      {
+        icon: "images/icon/ct6.svg",
+        title: "Data Science",
+        courseCount: 405,
+      },
+    ],
+    events: [
+      {
+        thumb: "images/event/e1.png",
+        title: "Electrical Engineering of Batparder new event",
+        location: "At Penn School",
+        pera: "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
+        description:
+          "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
+        date: "12/20/2023",
+        time: ["12:30", "01:50"],
+      },
+      {
+        thumb: "images/event/e2.png",
+        title: "Architecture Design of International Art Fair 2023",
+        location: "At Penn School",
+        pera: "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
+        description:
+          "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
+        date: "4/27/2023",
+        time: ["12:30", "01:50"],
+      },
+      {
+        thumb: "images/event/e3.png",
+        title: "Chiter astana event",
+        location: "At Penn School",
+        pera: "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
+        description:
+          "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
+        date: "1/12/2023",
+        time: ["12:30", "01:50"],
+      },
+    ],
+    testimonials: [
+      {
+        rating: 1,
+        pera: 'a formal assessment of something with the intention of instituting change if necessary. "a comprehensive review of UK defence policy',
+      },
+      {
+        rating: 4,
+        pera: 'a formal assessment of something with the intention of instituting change if necessary. "a comprehensive review of UK defence policy',
+      },
+      {
+        rating: 5,
+        pera: 'a formal assessment of something with the intention of instituting change if necessary. "a comprehensive review of UK defence policy',
+      },
+    ],
+    posts: [
+      {
+        thumb: "images/blog/2.png",
+        title: "Professional Mobile Painting and Sculpting",
+        date: "05/06/2023",
+        tag: "Education",
+      },
+    ],
   }),
   actions: {
-    async getTasks() {
+    async addSubscription(email) {
       this.loading = true;
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      const res = await fetch("http://localhost:3000/tasks");
-      const data = await res.json();
-      this.tasks = data;
-      this.loading = false;
+      this.subsMails.push(email);
+      const res = await fetch("http://localhost:3000/subsMail", {
+        method: "POST",
+        body: JSON.stringify(email),
+        headers: { "Content-Type": "application/json" },
+      });
       if (res.error) {
-        console.log(res.error);
+        this.serverError = res.error;
       }
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      this.loading = false;
     },
   },
   getters: {},
