@@ -75,6 +75,7 @@ import { useFrontStore } from "../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
+    
     return {
       frontStore,
     };

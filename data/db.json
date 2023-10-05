@@ -34,6 +34,13 @@
       "email": "kowow@mailinator.com",
       "password": "username",
       "id": 5
+    },
+    {
+      "uname": "jedocuz",
+      "name": "Chava Martinez",
+      "email": "vadujopi@mailinator.com",
+      "password": "username",
+      "id": 6
     }
   ],
   "subsMail": [
@@ -180,6 +187,10 @@
     {
       "email": "taquli@mailinator.com",
       "id": 36
+    },
+    {
+      "email": "myqekeko@mailinator.com",
+      "id": 37
     }
   ]
 }

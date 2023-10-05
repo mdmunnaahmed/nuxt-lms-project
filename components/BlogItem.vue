@@ -3,11 +3,11 @@
     <img :src="thumb" class="img-fluid" alt="image" />
     <div class="content_box">
       <span
-        >{{ date }} | <a href="blog_single.html">{{ tag }}</a></span
+        >{{ formattedDate }} | <a href="blog_single.html">{{ tag }}</a></span
       >
       <h2>
         <NuxtLink :to="slug"
-          >Professional Ceramic Moulding for Beginner</NuxtLink
+          >{{ title }}</NuxtLink
         >
       </h2>
       <NuxtLink :to="slug" class="cta d-inline-flex align-items-center"
@@ -26,9 +26,41 @@ export default {
   props: ["date", "thumb", "title", "tag"],
   setup(props) {
     const title = ref(props.title);
+    const date = ref(props.date);
     const stitle = title.value.toLowerCase().replaceAll(/[^\w\s]/gi, "");
     const slug = stitle.replaceAll(" ", "-").replaceAll("--", "-");
-    return { slug };
+    function formatDate(inputDate) {
+      const parts = inputDate.split("/");
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);
+      const year = parseInt(parts[2], 10);
+
+      // Create an array of month names
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      // Get the month name
+      const monthName = monthNames[month - 1];
+
+      // Format the date
+      const formattedDate = `${day} ${monthName}, ${year}`;
+
+      return formattedDate;
+    }
+    const formattedDate = formatDate(date.value);
+    return { slug, formattedDate };
   },
 };
 </script>

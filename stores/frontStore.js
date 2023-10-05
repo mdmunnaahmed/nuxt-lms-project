@@ -273,6 +273,18 @@ export const useFrontStore = defineStore("frontStore", {
         date: "05/06/2023",
         tag: "Education",
       },
+      {
+        thumb: "images/blog/1.png",
+        title: "Education Is About Create Leaders For Tomorrow ",
+        date: "05/08/2023",
+        tag: "Education",
+      },
+      {
+        thumb: "images/blog/3.png",
+        title: "Professional Ceramic Moulding for Beginner",
+        date: "05/12/2023",
+        tag: "Education",
+      },
     ],
   }),
   actions: {
