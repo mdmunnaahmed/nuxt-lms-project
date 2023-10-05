@@ -34,7 +34,9 @@
         />
       </template>
       <template #default>
-        <p class="text-center mt-0 text-green-600 mb-2">Account Successfully Created.</p>
+        <p class="text-center mt-0 text-green-600 mb-2">
+          Account Successfully Created.
+        </p>
       </template>
       <template #actions>
         <div class="text-center">
@@ -133,6 +135,9 @@ export default {
     const password = ref("");
 
     authStore.getAccounts();
+    definePageMeta({
+      middleware: ["auth"],
+    });
 
     const checkUname = () => {
       if (uname.value.length < 6) {

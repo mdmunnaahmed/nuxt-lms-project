@@ -10,10 +10,10 @@
             data-wow-delay="0.3s"
             data-wow-offset="0"
           >
-            <h1>Instructor Details</h1>
+            <h1>My Profile</h1>
             <ul>
               <li><a href="index.html">Home</a></li>
-              <li>/ Team Details</li>
+              <li>/ Profile</li>
             </ul>
           </div>
           <!-- //.HERO-TEXT -->
@@ -378,7 +378,7 @@
 </template>
 
 <script>
-import { useAuthStore } from "../../stores/AuthStore";
+import { useAuthStore } from "../stores/AuthStore";
 export default {
   setup() {
     const authStore = useAuthStore();

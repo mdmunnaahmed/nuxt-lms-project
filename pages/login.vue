@@ -76,6 +76,9 @@ export default {
     const success = ref(false);
     const uname = ref("");
     const password = ref("");
+    definePageMeta({
+      middleware: ["auth"],
+    });
     const submitForm = () => {
       authStore.loginAccount({
         uname: uname.value,

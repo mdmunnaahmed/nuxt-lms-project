@@ -32,7 +32,6 @@ export default {
     const time = ref(props.time);
     const timeF = time.value.join(" - ");
 
-    console.log(date.value);
     const parts = date.value.split("/");
     const day = parseInt(parts[1], 10);
     const month = parseInt(parts[0], 10);
