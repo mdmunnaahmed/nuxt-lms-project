@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <UIPreloader v-if="$nuxt.loading" />
-    <Header />
+    <LayoutHeader />
     <div class="main-wrapper">
       <slot />
     </div>
     <div class="mt-auto"></div>
-    <Footer />
+    <LayoutFooter />
   </div>
 </template>

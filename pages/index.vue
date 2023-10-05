@@ -1,18 +1,18 @@
 <template>
-  <LayoutBanner />
-  <LayoutOverview />
-  <LayoutAbout />
-  <LayoutCounter />
-  <LayoutPartner />
-  <LayoutWhyChoose />
-  <LayoutCourse />
-  <LayoutCoursePromotion />
-  <LayoutNewslatter />
-  <LayoutTopic />
-  <LayoutEvent />
-  <LayoutTestimonial />
-  <LayoutTeam />
-  <LayoutBlog />
+  <SectionBanner />
+  <SectionOverview />
+  <SectionAbout />
+  <SectionCounter />
+  <SectionPartner />
+  <SectionWhyChoose />
+  <SectionCourse />
+  <SectionCoursePromotion />
+  <SectionNewslatter />
+  <SectionTopic />
+  <SectionEvent />
+  <SectionTestimonial />
+  <SectionTeam />
+  <SectionBlog />
 </template>
 
 <script>
