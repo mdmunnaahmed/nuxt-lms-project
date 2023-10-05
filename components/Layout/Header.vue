@@ -135,7 +135,7 @@
               <i class="ti-shopping-cart-full"></i>
               <span class="gactive">2</span>
             </NuxtLink>
-            <NuxtLink class="btn_one text-white" to="/my-profile">Profile</NuxtLink>
+            <NuxtLink class="btn_one text-white" to="/profile">Profile</NuxtLink>
           </div>
           <div v-if="!authStore.isLoggedIn" class="call_to_action">
             <NuxtLink class="btn_one" to="/login">Login</NuxtLink>

@@ -63,11 +63,8 @@
           <BlogItem :title="b.title" :thumb="b.thumb" :tag="b.tag" :date="b.date" />
         </div>
       </div>
-      <!-- / END ROW -->
     </div>
-    <!-- END CONTAINER  -->
   </section>
-  <!-- END BLOG -->
 </template>
 
 <script>
@@ -75,7 +72,7 @@ import { useFrontStore } from "../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
-    
+
     return {
       frontStore,
     };

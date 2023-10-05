@@ -84,7 +84,7 @@ export default {
       success.value = true;
       uname.value = "";
       password.value = "";
-      // router.push("/my-profile");
+      // router.push("/profile");
     };
     const closeDialog = () => {
       success.value = false;

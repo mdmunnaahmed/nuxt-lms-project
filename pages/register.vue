@@ -39,7 +39,7 @@
       <template #actions>
         <div class="text-center">
           <NuxtLink
-            to="/my-profile"
+            to="/profile"
             class="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 h-auto"
             @click="closeDialog"
           >
@@ -50,12 +50,12 @@
     </UIBaseDialog>
 
     <!-- START LOGIN AND REGISTER -->
-    <section class="login_register section-padding mt-10">
+    <section class="login_register section-padding">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 offset-lg-3 col-xs-12">
             <form @submit.prevent="submitForm" class="register">
-              <h4 class="login_register_title">Create a new account:</h4>
+              <h4 class="login_register_title">Create a new account</h4>
               <div class="form-group mb-3">
                 <label for="">Username</label>
                 <input
