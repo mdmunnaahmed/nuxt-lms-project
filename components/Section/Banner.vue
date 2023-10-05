@@ -33,12 +33,12 @@
           <div class="home_me_img">
             <img :src="b.thumb" class="img-fluid" alt="" />
             <div class="home_ps">
-              <img src="images/icon/user2.svg" alt="" />
+              <img src="@/images/icon/user2.svg" alt="" />
               <h2>{{ authStore.studentAccounts.length }} +</h2>
               <span>Active students</span>
             </div>
             <div class="home_ps2">
-              <img src="images/icon/file2.svg" alt="" />
+              <img src="@/images/icon/file2.svg" alt="" />
               <h2>4500+</h2>
               <span>Online Courses</span>
             </div>

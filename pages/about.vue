@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2>This is from About</h2>
+    <div class="pt-10"></div>
+    <SectionAbout/>
   </div>
 </template>
 

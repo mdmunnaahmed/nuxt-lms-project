@@ -17,7 +17,7 @@
         >
           <div class="single-team-home">
             <div class="img">
-              <img src="images/all-img/team1.jpg" class="img-fluid" alt="" />
+              <img src="@/images/all-img/team1.jpg" class="img-fluid" alt="" />
             </div>
             <div class="team-content-home">
               <h3>Marina Mojo</h3>
@@ -49,7 +49,7 @@
         >
           <div class="single-team-home">
             <div class="img">
-              <img src="images/all-img/team2.jpg" class="img-fluid" alt="" />
+              <img src="@/images/all-img/team2.jpg" class="img-fluid" alt="" />
             </div>
             <div class="team-content-home">
               <h3>Ayoub Fennouni</h3>
@@ -81,7 +81,7 @@
         >
           <div class="single-team-home">
             <div class="img">
-              <img src="images/all-img/team3.jpg" class="img-fluid" alt="" />
+              <img src="@/images/all-img/team3.jpg" class="img-fluid" alt="" />
             </div>
             <div class="team-content-home">
               <h3>Mark Linomi</h3>
@@ -113,7 +113,7 @@
         >
           <div class="single-team-home">
             <div class="img">
-              <img src="images/all-img/team4.jpg" class="img-fluid" alt="" />
+              <img src="@/images/all-img/team4.jpg" class="img-fluid" alt="" />
             </div>
             <div class="team-content-home">
               <h3>Amira Yerden</h3>

@@ -32,7 +32,7 @@
             <div class="single_agent">
               <div class="single_agent_image">
                 <img
-                  src="images/all-img/team-details.png"
+                  src="@/images/all-img/team-details.png"
                   class="img-fluid"
                   alt=""
                 />
@@ -63,22 +63,22 @@
                 <ul class="list-inline flex gap-2">
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="images/icon/fb.svg" alt=""
+                      ><img src="@/images/icon/fb.svg" alt=""
                     /></a>
                   </li>
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="images/icon/tw.svg" alt=""
+                      ><img src="@/images/icon/tw.svg" alt=""
                     /></a>
                   </li>
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="images/icon/pn.svg" alt=""
+                      ><img src="@/images/icon/pn.svg" alt=""
                     /></a>
                   </li>
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="images/icon/ins.svg" alt=""
+                      ><img src="@/images/icon/ins.svg" alt=""
                     /></a>
                   </li>
                 </ul>
@@ -184,7 +184,7 @@
           >
             <div class="course-slide">
               <div class="course-img">
-                <img src="images/all-img/c1.png" alt="" />
+                <img src="@/images/all-img/c1.png" alt="" />
                 <div class="course-date">
                   <span class="month">$49</span>
                 </div>
@@ -216,7 +216,7 @@
           >
             <div class="course-slide">
               <div class="course-img">
-                <img src="images/all-img/c2.png" alt="" />
+                <img src="@/images/all-img/c2.png" alt="" />
                 <div class="course-date">
                   <span class="month">$39</span>
                 </div>
@@ -248,7 +248,7 @@
           >
             <div class="course-slide">
               <div class="course-img">
-                <img src="images/all-img/c3.png" alt="" />
+                <img src="@/images/all-img/c3.png" alt="" />
                 <div class="course-date">
                   <span class="month">$29</span>
                 </div>
@@ -280,7 +280,7 @@
           >
             <div class="course-slide">
               <div class="course-img">
-                <img src="images/all-img/c4.png" alt="" />
+                <img src="@/images/all-img/c4.png" alt="" />
                 <div class="course-date">
                   <span class="month">$59</span>
                 </div>
@@ -312,7 +312,7 @@
           >
             <div class="course-slide">
               <div class="course-img">
-                <img src="images/all-img/c5.png" alt="" />
+                <img src="@/images/all-img/c5.png" alt="" />
                 <div class="course-date">
                   <span class="month">$69</span>
                 </div>
@@ -344,7 +344,7 @@
           >
             <div class="course-slide">
               <div class="course-img">
-                <img src="images/all-img/c6.png" alt="" />
+                <img src="@/images/all-img/c6.png" alt="" />
                 <div class="course-date">
                   <span class="month">$99</span>
                 </div>

@@ -28,7 +28,7 @@
     </div>
     <div class="testi_pic_title tpt_one">
       <div class="pic">
-        <img src="images/all-img/t1.png" alt="" />
+        <img src="@/images/all-img/t1.png" alt="" />
       </div>
       <h4>James Clayton</h4>
       <small class="post">- Design Expert</small>
