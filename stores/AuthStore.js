@@ -17,6 +17,14 @@ export const useAuthStore = defineStore("authStore", {
       this.authUser = JSON.parse(localStorage.getItem("user"));
       this.isLoggedIn = localStorage.getItem("isLoggedIn");
     },
+    // async getIdUser(id) {
+    //   const res = await fetch("http://localhost:3000/studentAccounts/" + id);
+    //   const data = await res.json();
+    //   console.log(data);
+    //   if(data) {
+    //     this.state.authUser = data;
+    //   }
+    // },
     async addAccount(account) {
       this.loading = true;
       this.studentAccounts.push(account);
@@ -28,6 +36,41 @@ export const useAuthStore = defineStore("authStore", {
       this.authUser = account;
       this.isLoggedIn = true;
       localStorage.setItem("user", JSON.stringify(account));
+      localStorage.setItem("isLoggedIn", true);
+      if (res.error) {
+        this.serverError = res.error;
+      }
+      this.loading = false;
+    },
+    async addAccountInfo(accountInfo) {
+      const authId = this.authUser.id;
+      console.log(authId);
+      this.loading = true;
+      Object.assign(this.studentAccounts[authId - 1], accountInfo);
+
+      const res = await fetch("http://localhost:3000/studentAccounts/" + [authId], {
+        method: "PUT",
+        body: JSON.stringify(accountInfo),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      // this.authUser = accountInfo;
+      if (res.error) {
+        this.serverError = res.error;
+      }
+      this.loading = false;
+    },
+    async updateAccount(updateData, id) {
+      this.loading = true;
+      this.studentAccounts.push(updateData);
+      const res = await fetch("http://localhost:3000/studentAccounts" + id, {
+        method: "POST",
+        body: JSON.stringify(updateData),
+        headers: { "Content-Type": "application/json" },
+      });
+      this.authUser = updateData;
+      this.isLoggedIn = true;
+      localStorage.setItem("user", JSON.stringify(updateData));
       localStorage.setItem("isLoggedIn", true);
       if (res.error) {
         this.serverError = res.error;

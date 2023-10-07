@@ -24,6 +24,24 @@
     </section>
     <!-- END SECTION TOP -->
 
+    <UIModal :show="modal" title="Edit Profile Info" @close="clsoeDialog">
+      <form @submit.prevent="submitForm">
+        <div class="mb-2">
+          <label class="mb-1 text-dark opacity-75">Name</label>
+          <input v-model="name" type="text" class="form-control" />
+        </div>
+        <div class="mb-2">
+          <label class="mb-1 text-dark opacity-75">Profession</label>
+          <input v-model="profession" type="text" class="form-control" />
+        </div>
+        <div class="mb-2">
+          <label class="mb-1 text-dark opacity-75">Short Bio</label>
+          <textarea v-model="shortbio" rows="4" class="form-control"></textarea>
+        </div>
+        <button class="btn_one w-100 mt-3">Submit</button>
+      </form>
+    </UIModal>
+
     <!-- START AGENT PROFILE -->
     <section class="template_agent section-padding">
       <div class="container">
@@ -38,8 +56,13 @@
                 />
               </div>
               <div class="single_agent_content">
-                <h4>{{ authStore.authUser.name }}</h4>
-                <h5>Digital Marketer</h5>
+                <div class="flex justify-between items-center">
+                  <h4>{{ authStore.authUser.name }}</h4>
+                  <button @click="showModal" class="text-green-600">
+                    Edit Info
+                  </button>
+                </div>
+                <h5>{{ authStore.authUser.profession }}</h5>
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
@@ -378,12 +401,43 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { useAuthStore } from "../stores/AuthStore";
 export default {
   setup() {
+    const modal = ref(true);
     const authStore = useAuthStore();
+    const name = ref(authStore.authUser.name);
+    const profession = ref(authStore.authUser.profession);
+    const shortBio = ref(authStore.authUser.shortBio);
+    const submitForm = () => {
+      if (
+        authStore.authUser.profession === "" ||
+        authStore.authUser.shortBio === ""
+      ) {
+      }
+      authStore.addAccountInfo({
+        profession: profession.value,
+        shortBio: shortBio.value,
+      });
+
+      // success.value = true;
+    };
+    const showModal = () => {
+      modal.value = true;
+    };
+    const clsoeDialog = () => {
+      modal.value = false;
+    };
     return {
       authStore,
+      modal,
+      showModal,
+      clsoeDialog,
+      submitForm,
+      name,
+      profession,
+      shortBio,
     };
   },
 };
