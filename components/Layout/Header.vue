@@ -94,11 +94,6 @@
                         >Course Sidebar</NuxtLink
                       >
                     </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/single_course"
-                        >Course details</NuxtLink
-                      >
-                    </li>
                   </ul>
                 </li>
                 <li>
@@ -110,17 +105,7 @@
                       <NuxtLink class="nav-link" to="/shop">Shop</NuxtLink>
                     </li>
                     <li>
-                      <NuxtLink class="nav-link" to="/single_shop"
-                        >Single Shop</NuxtLink
-                      >
-                    </li>
-                    <li>
                       <NuxtLink class="nav-link" to="/cart">Cart Page</NuxtLink>
-                    </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/checkout"
-                        >Checkout page</NuxtLink
-                      >
                     </li>
                   </ul>
                 </li>
@@ -131,11 +116,6 @@
                   <ul>
                     <li>
                       <NuxtLink class="nav-link" to="/blog">Blog List</NuxtLink>
-                    </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/blog_single"
-                        >Single Blog</NuxtLink
-                      >
                     </li>
                   </ul>
                 </li>
