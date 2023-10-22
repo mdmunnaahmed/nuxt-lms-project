@@ -120,7 +120,7 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     courses: [
       {
-        thumb: "images/all-img/c1.png",
+        thumb: "all-img/c1.png",
         price: "59",
         tag: "Arts & Design",
         title: "Basic Fundamentals Of Interior & Graphics Design",
@@ -130,7 +130,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "30",
       },
       {
-        thumb: "images/all-img/c2.png",
+        thumb: "all-img/c2.png",
         price: "79",
         tag: "Design",
         title: "Increasing Engagement With Instagram & Facebook",
@@ -140,7 +140,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "24",
       },
       {
-        thumb: "images/all-img/c3.png",
+        thumb: "all-img/c3.png",
         price: "28",
         tag: "Arts",
         title: "Introduction To Color Theory & Basic UI/UX",
@@ -150,7 +150,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "120",
       },
       {
-        thumb: "images/all-img/c4.png",
+        thumb: "all-img/c4.png",
         price: "59",
         tag: "Arts & Design",
         title: "Financial Security Thinking And Principles Theory",
@@ -160,7 +160,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "30",
       },
       {
-        thumb: "images/all-img/c5.png",
+        thumb: "all-img/c5.png",
         price: "79",
         tag: "Design",
         title: "Logo Design: From Concept To Presentation",
@@ -170,7 +170,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "82",
       },
       {
-        thumb: "images/all-img/c6.png",
+        thumb: "all-img/c6.png",
         price: "28",
         tag: "Arts",
         title: "Professional Ceramic Moulding For Beginners",

@@ -1,7 +1,7 @@
 <template>
   <div class="course-slide">
     <div class="course-img">
-      <img :src="thumb" alt="" />
+      <img :src="'/images/'+thumb" alt="" />
       <div class="course-date">
         <span class="month">${{ price }}</span>
       </div>

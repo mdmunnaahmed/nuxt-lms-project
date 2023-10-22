@@ -1,10 +1,6 @@
 {
   "studentAccounts": [
     {
-      "uname": "username",
-      "name": "Medge Welch",
-      "email": "vifo@mailinator.com",
-      "password": "username",
       "id": 1
     },
     {

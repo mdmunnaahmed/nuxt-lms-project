@@ -64,7 +64,7 @@ export const useAuthStore = defineStore("authStore", {
       this.loading = true;
       this.studentAccounts.push(updateData);
       const res = await fetch("http://localhost:3000/studentAccounts" + id, {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(updateData),
         headers: { "Content-Type": "application/json" },
       });
