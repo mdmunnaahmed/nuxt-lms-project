@@ -23,8 +23,8 @@
               <h3>Marina Mojo</h3>
               <p>Developer</p>
               <div class="sth_det">
-                <span class="ti-file"> <u>5 Course</u></span>
-                <span class="ti-user"> <u>12 Student</u></span>
+                <span class="ti-file"> <u> 5 Course</u></span>
+                <span class="ti-user"> <u> 12 Student</u></span>
               </div>
               <ul class="social-home">
                 <li>
@@ -55,8 +55,8 @@
               <h3>Ayoub Fennouni</h3>
               <p>Logo Expert</p>
               <div class="sth_det">
-                <span class="ti-file"> <u>5 Course</u></span>
-                <span class="ti-user"> <u>7 Student</u></span>
+                <span class="ti-file"> <u> 5 Course</u></span>
+                <span class="ti-user"> <u> 7 Student</u></span>
               </div>
               <ul class="social-home">
                 <li>
@@ -87,8 +87,8 @@
               <h3>Mark Linomi</h3>
               <p>Marketer</p>
               <div class="sth_det">
-                <span class="ti-file"> <u>9 Course</u></span>
-                <span class="ti-user"> <u>17 Student</u></span>
+                <span class="ti-file"> <u> 9 Course</u></span>
+                <span class="ti-user"> <u> 17 Student</u></span>
               </div>
               <ul class="social-home">
                 <li>
@@ -119,8 +119,8 @@
               <h3>Amira Yerden</h3>
               <p>UI/UX Designer</p>
               <div class="sth_det">
-                <span class="ti-file"> <u>15 Course</u></span>
-                <span class="ti-user"> <u>31 Student</u></span>
+                <span class="ti-file"> <u> 15 Course</u></span>
+                <span class="ti-user"> <u> 31 Student</u></span>
               </div>
               <ul class="social-home">
                 <li>
@@ -148,5 +148,3 @@
 <script>
 export default {};
 </script>
-
-<style lang="scss" scoped></style>
