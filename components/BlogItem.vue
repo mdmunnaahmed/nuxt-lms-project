@@ -1,14 +1,12 @@
 <template>
   <div class="single_blog">
-    <img :src="thumb" class="img-fluid" alt="image" />
+    <img :src="'/images/blog/' + thumb" class="img-fluid" alt="image" />
     <div class="content_box">
       <span
         >{{ formattedDate }} | <a href="blog_single.html">{{ tag }}</a></span
       >
       <h2>
-        <NuxtLink :to="slug"
-          >{{ title }}</NuxtLink
-        >
+        <NuxtLink :to="slug">{{ title }}</NuxtLink>
       </h2>
       <NuxtLink :to="slug" class="cta d-inline-flex align-items-center"
         ><span class="mb-0">READ MORE</span>
@@ -27,7 +25,10 @@ export default {
   setup(props) {
     const title = ref(props.title);
     const date = ref(props.date);
-    const stitle = title.value.toLowerCase().replaceAll(/[^\w\s]/gi, "");
+    const stitle = title.value
+      .trim()
+      .toLowerCase()
+      .replaceAll(/[^\w\s]/gi, "");
     const slug = stitle.replaceAll(" ", "-").replaceAll("--", "-");
     function formatDate(inputDate) {
       const parts = inputDate.split("/");

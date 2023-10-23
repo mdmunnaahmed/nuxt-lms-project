@@ -268,22 +268,69 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     posts: [
       {
-        thumb: "images/blog/2.png",
+        thumb: "2.png",
         title: "Professional Mobile Painting and Sculpting",
+        pera: "I immediately shared the results with a friend who couldn’t believe it was written by an AI. is worth every penny and then some. Describe my business along with my business name. generated two variants of copy each with several paragraphs of professional sounding copy. I immediately shared the results with a friend who couldn’t believe it was written by an AI. is worth every penny and then some!",
         date: "05/06/2023",
         tag: "Education",
       },
       {
-        thumb: "images/blog/1.png",
+        thumb: "1.png",
         title: "Education Is About Create Leaders For Tomorrow ",
+        pera: "I immediately shared the results with a friend who couldn’t believe it was written by an AI. is worth every penny and then some. Describe my business along with my business name. generated two variants of copy each with several paragraphs of professional sounding copy. I immediately shared the results with a friend who couldn’t believe it was written by an AI. is worth every penny and then some!",
         date: "05/08/2023",
         tag: "Education",
       },
       {
-        thumb: "images/blog/3.png",
+        thumb: "3.png",
         title: "Professional Ceramic Moulding for Beginner",
+        pera: "I immediately shared the results with a friend who couldn’t believe it was written by an AI. is worth every penny and then some. Describe my business along with my business name. generated two variants of copy each with several paragraphs of professional sounding copy. I immediately shared the results with a friend who couldn’t believe it was written by an AI. is worth every penny and then some!",
         date: "05/12/2023",
         tag: "Education",
+      },
+    ],
+    postComments: [
+      {
+        cid: "professional-ceramic-moulding-for-beginner",
+        name: "",
+        email: "",
+        message: "",
+        id: 2,
+      },
+      {
+        cid: "professional-ceramic-moulding-for-beginner",
+        name: "",
+        email: "",
+        message: "",
+        id: 1,
+      },
+      {
+        cid: "professional-ceramic-moulding-for-beginner",
+        name: "",
+        email: "",
+        message: "",
+        id: 2,
+      },
+      {
+        cid: "professional-ceramic-moulding-for-beginner",
+        name: "",
+        email: "",
+        message: "",
+        id: 3,
+      },
+      {
+        cid: "professional-ceramic-moulding-for-beginner",
+        name: "",
+        email: "",
+        message: "",
+        id: 4,
+      },
+      {
+        cid: "professional-ceramic-mouldier",
+        name: "",
+        email: "",
+        message: "",
+        id: 5,
       },
     ],
   }),
@@ -302,6 +349,36 @@ export const useFrontStore = defineStore("frontStore", {
       await new Promise((resolve) => setTimeout(resolve, 500));
       this.loading = false;
     },
+    getIdPost(id) {
+      return this.posts.find((p) => {
+        return (
+          p.title
+            .trim()
+            .toLowerCase()
+            .replaceAll(/[^\w\s]/gi, "")
+            .replaceAll(" ", "-")
+            .replaceAll("--", "-") === id
+        );
+      });
+    },
+    async addComment(comment) {
+      this.loading = true;
+      this.postComments.push(comment);
+      const res = await fetch("http://localhost:3000/postComments", {
+        method: "POST",
+        body: JSON.stringify(comment),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (res.error) {
+        this.serverError = res.error;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      this.loading = false;
+    },
   },
-  getters: {},
+  getters: {
+    getIdComment() {
+      return this.postComments;
+    },
+  },
 });
