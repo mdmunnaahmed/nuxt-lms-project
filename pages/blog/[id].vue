@@ -82,14 +82,18 @@
                   <div class="form-group col-md-12">
                     <textarea
                       rows="6"
-                      class="form-control"
+                      class="form-control mb-3"
                       placeholder="Your Message"
                       v-model.trim="message"
                     ></textarea>
                   </div>
                   <div class="col-md-12">
-                    <small class="text-danger" v-if="error"
+                    <UISpinner v-if="loading" />
+                    <small class="text-danger mb-2 inline-block" v-if="error"
                       >Please input all the fields</small
+                    >
+                    <small class="text-success mb-2 inline-block" v-if="success"
+                      >Comment published</small
                     >
                     <div class="actions">
                       <button class="btn btn_one">Submit Comment</button>
@@ -202,45 +206,57 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useFrontStore } from "../../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
     const route = useRoute();
-    // const loading = frontStore.loading;
+    const loading = frontStore.loading;
     const error = ref(false);
+    const success = ref(false);
 
     const slug = route.params.id;
     const post = frontStore.getIdPost(slug);
-    const comments = frontStore.getIdComment.filter((c) => c.cid === slug);
+    const comments = computed(() =>
+      frontStore.getIdComment.filter((c) => c.cid === slug)
+    );
 
     const name = ref("");
     const email = ref("");
     const message = ref("");
 
-    const submitForm = () => {
+    const submitForm = async () => {
       if (name.value === "" || email.value === "" || message.value === "") {
         error.value = true;
         return;
       }
       error.value = false;
-      console.log(name.value);
-      frontStore.addComment({
+      await frontStore.addComment({
         cid: slug,
         name: name.value,
         email: email.value,
         message: message.value,
       });
+      name.value = "";
+      email.value = "";
+      message.value = "";
+      success.value = true;
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      success.value = false;
     };
-
     return {
       frontStore,
       post,
+      loading,
       error,
+      success,
       slug,
       comments,
       submitForm,
+      name,
+      email,
+      message,
     };
   },
 };

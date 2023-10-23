@@ -291,46 +291,25 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     postComments: [
       {
-        cid: "professional-ceramic-moulding-for-beginner",
-        name: "",
-        email: "",
-        message: "",
-        id: 2,
-      },
-      {
-        cid: "professional-ceramic-moulding-for-beginner",
-        name: "",
-        email: "",
-        message: "",
+        cid: "education-is-about-create-leaders-for-tomorrow",
+        name: "Igor Anderson",
+        email: "bofynamydu@mailinator.com",
+        message: "Minim et dolore fugi",
         id: 1,
       },
       {
-        cid: "professional-ceramic-moulding-for-beginner",
-        name: "",
-        email: "",
-        message: "",
+        cid: "education-is-about-create-leaders-for-tomorrow",
+        name: "Laith Moon",
+        email: "pekugumeho@mailinator.com",
+        message: "Eum in sequi corrupt",
         id: 2,
       },
       {
-        cid: "professional-ceramic-moulding-for-beginner",
-        name: "",
-        email: "",
-        message: "",
+        cid: "education-is-about-create-leaders-for-tomorrow",
+        name: "Laith Moon",
+        email: "pekugumeho@mailinator.com",
+        message: "Eum in sequi corrupt",
         id: 3,
-      },
-      {
-        cid: "professional-ceramic-moulding-for-beginner",
-        name: "",
-        email: "",
-        message: "",
-        id: 4,
-      },
-      {
-        cid: "professional-ceramic-mouldier",
-        name: "",
-        email: "",
-        message: "",
-        id: 5,
       },
     ],
   }),
@@ -372,7 +351,6 @@ export const useFrontStore = defineStore("frontStore", {
       if (res.error) {
         this.serverError = res.error;
       }
-      await new Promise((resolve) => setTimeout(resolve, 500));
       this.loading = false;
     },
   },

@@ -6,7 +6,7 @@
         >{{ formattedDate }} | <a href="blog_single.html">{{ tag }}</a></span
       >
       <h2>
-        <NuxtLink :to="slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="'/blog/' + slug">{{ title }}</NuxtLink>
       </h2>
       <NuxtLink :to="slug" class="cta d-inline-flex align-items-center"
         ><span class="mb-0">READ MORE</span>
