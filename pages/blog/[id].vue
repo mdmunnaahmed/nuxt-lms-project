@@ -50,7 +50,7 @@
               :key="index"
             >
               <!-- <img src="/images/blog/c1.jpg" alt="" /> -->
-              <h4>{{ comment.cid }}</h4>
+              <h4>{{ comment.name }}</h4>
               <p>
                 {{ comment.message }}
               </p>
@@ -88,7 +88,9 @@
                     ></textarea>
                   </div>
                   <div class="col-md-12">
-                    <small class="text-danger" v-if="error">Please input all the fields</small>
+                    <small class="text-danger" v-if="error"
+                      >Please input all the fields</small
+                    >
                     <div class="actions">
                       <button class="btn btn_one">Submit Comment</button>
                     </div>
@@ -133,7 +135,7 @@
             <div class="sidebar_title"><h4>Popular post</h4></div>
             <div class="single_popular">
               <a href="single_blog.html"
-                ><img src="assets/images/blog/blog-1.png" alt=""
+                ><img src="/images/blog/blog-1.png" alt=""
               /></a>
               <h5>
                 <a href="single_blog.html"
@@ -183,10 +185,7 @@
             <div class="sidebar_title"><h4>Ad Banner</h4></div>
             <div class="sidebar-banner">
               <a href="#"
-                ><img
-                  src="assets/images/blog/banner.jpg"
-                  class="img-fluid"
-                  alt=""
+                ><img src="/images/blog/banner.jpg" class="img-fluid" alt=""
               /></a>
             </div>
             <!-- END SOCIAL MEDIA POST -->
@@ -209,7 +208,7 @@ export default {
   setup() {
     const frontStore = useFrontStore();
     const route = useRoute();
-    const loading = frontStore.loading;
+    // const loading = frontStore.loading;
     const error = ref(false);
 
     const slug = route.params.id;
@@ -219,9 +218,11 @@ export default {
     const name = ref("");
     const email = ref("");
     const message = ref("");
+
     const submitForm = () => {
       if (name.value === "" || email.value === "" || message.value === "") {
         error.value = true;
+        return;
       }
       error.value = false;
       console.log(name.value);
@@ -235,8 +236,8 @@ export default {
 
     return {
       frontStore,
-      loading,
       post,
+      error,
       slug,
       comments,
       submitForm,
