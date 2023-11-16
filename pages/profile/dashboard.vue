@@ -31,7 +31,7 @@
             <div class="single_agent">
               <div class="single_agent_image">
                 <img
-                  src="@/images/all-img/team-details.png"
+                  src="/images/all-img/team-details.png"
                   class="img-fluid"
                   alt=""
                 />
@@ -67,22 +67,22 @@
                 <ul class="list-inline flex gap-2">
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="@/images/icon/fb.svg" alt=""
+                      ><img src="/images/icon/fb.svg" alt=""
                     /></a>
                   </li>
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="@/images/icon/tw.svg" alt=""
+                      ><img src="/images/icon/tw.svg" alt=""
                     /></a>
                   </li>
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="@/images/icon/pn.svg" alt=""
+                      ><img src="/images/icon/pn.svg" alt=""
                     /></a>
                   </li>
                   <li>
                     <a href="#" class="top_f_facebook"
-                      ><img src="@/images/icon/ins.svg" alt=""
+                      ><img src="/images/icon/ins.svg" alt=""
                     /></a>
                   </li>
                 </ul>

@@ -10,7 +10,7 @@
         <div class="col-lg-2 col-md-3 col-sm-4">
           <div class="site-logo">
             <NuxtLink to="/"
-              ><img src="@/images/all-img/logo.png" alt="" class="mt-0"
+              ><img src="/images/all-img/logo.png" alt="" class="mt-0"
             /></NuxtLink>
           </div>
         </div>

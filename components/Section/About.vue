@@ -16,7 +16,7 @@
           >
             <div class="ab_img">
               <img
-                src="@/images/all-img/about2.png"
+                src="/images/all-img/about2.png"
                 class="img-fluid"
                 alt="image"
               />
@@ -109,7 +109,7 @@
           <div class="col-lg-6 col-sm-6 col-xs-12">
             <div class="pt_faq">
               <img
-                src="@/images/all-img/faq.png"
+                src="/images/all-img/faq.png"
                 class="img-fluid"
                 alt="image"
               />

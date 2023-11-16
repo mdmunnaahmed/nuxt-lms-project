@@ -29,7 +29,7 @@
         <img
           class="mx-auto"
           style="width: 60px; object-fit: contain"
-          src="icon/check.png"
+          src="/icon/check.png"
           alt="icon"
         />
       </template>

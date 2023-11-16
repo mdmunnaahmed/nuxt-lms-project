@@ -17,7 +17,7 @@
         >
           <div class="our-team">
             <div class="team_img">
-              <img src="@/images/all-img/team5.png" alt="team-image" />
+              <img src="/images/all-img/team5.png" alt="team-image" />
               <ul class="social">
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>
@@ -52,7 +52,7 @@
         >
           <div class="our-team">
             <div class="team_img">
-              <img src="@/images/all-img/team6.png" alt="team-image" />
+              <img src="/images/all-img/team6.png" alt="team-image" />
               <ul class="social">
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>
@@ -87,7 +87,7 @@
         >
           <div class="our-team">
             <div class="team_img">
-              <img src="@/images/all-img/team7.png" alt="team-image" />
+              <img src="/images/all-img/team7.png" alt="team-image" />
               <ul class="social">
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>
@@ -122,7 +122,7 @@
         >
           <div class="our-team">
             <div class="team_img">
-              <img src="@/images/all-img/team8.png" alt="team-image" />
+              <img src="/images/all-img/team8.png" alt="team-image" />
               <ul class="social">
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>
@@ -159,7 +159,7 @@
         >
           <div class="our-team">
             <div class="team_img">
-              <img src="@/images/all-img/team9.png" alt="team-image" />
+              <img src="/images/all-img/team9.png" alt="team-image" />
               <ul class="social">
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>
@@ -194,7 +194,7 @@
         >
           <div class="our-team">
             <div class="team_img">
-              <img src="@/images/all-img/team10.png" alt="team-image" />
+              <img src="/images/all-img/team10.png" alt="team-image" />
               <ul class="social">
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>

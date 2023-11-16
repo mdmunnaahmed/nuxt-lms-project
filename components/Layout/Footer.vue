@@ -5,7 +5,7 @@
 			<div class="row">						
 				<div class="col-lg-3 col-sm-6 col-xs-12">
 					<div class="single_footer">
-						<NuxtLink to="/"><img src="@/images/all-img/logo2.png" alt=""></NuxtLink>         
+						<NuxtLink to="/"><img src="/images/all-img/logo2.png" alt=""></NuxtLink>         
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae risus nec dui venenatis dignissim.</p>
 					</div>
 					<div class="foot_social">
