@@ -79,22 +79,32 @@
                       v-model.trim="email"
                     />
                   </div>
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-12 pb-1">
                     <textarea
                       rows="6"
-                      class="form-control mb-3"
+                      class="form-control mb-1"
                       placeholder="Your Message"
                       v-model.trim="message"
                     ></textarea>
+                    <small :class="{ 'text-danger': commentLength > 200 }"
+                      >{{ commentLength }} of 200</small
+                    >
                   </div>
                   <div class="col-md-12">
                     <UISpinner v-if="loading" />
-                    <small class="text-danger mb-2 inline-block" v-if="error"
+                    <small
+                      class="text-danger mb-2 inline-block"
+                      v-if="error && !error2"
                       >Please input all the fields</small
                     >
-                    <small class="text-success mb-2 inline-block" v-if="success"
+                    <small
+                      class="text-success mb-2 inline-block"
+                      v-if="success && !error2"
                       >Comment published</small
                     >
+                    <small class="text-danger mb-2 inline-block" v-if="error2"
+                      >Message must be less than the specified letter
+                    </small>
                     <div class="actions">
                       <button class="btn btn_one">Submit Comment</button>
                     </div>
@@ -137,14 +147,16 @@
           <!-- END SINGLE POST -->
           <div class="sidebar-post">
             <div class="sidebar_title"><h4>Popular post</h4></div>
-            <div class="single_popular">
-              <a href="single_blog.html"
-                ><img src="/images/blog/blog-1.png" alt=""
-              /></a>
+            <div
+              class="single_popular"
+              v-for="(pp, index) in popularPost"
+              :key="index"
+            >
+              <NuxtLink to="single_blog.html"
+                ><img :src="'/images/blog/' + pp.thumb" alt=""
+              /></NuxtLink>
               <h5>
-                <a href="single_blog.html"
-                  >Supercharging Your SEO Game with AI Writing Assistants</a
-                >
+                <a href="single_blog.html">{{ pp.title }}</a>
               </h5>
             </div>
             <!-- END SINGLE POPULAR POST -->
@@ -214,6 +226,7 @@ export default {
     const route = useRoute();
     const loading = frontStore.loading;
     const error = ref(false);
+    const error2 = ref(false);
     const success = ref(false);
 
     const slug = route.params.id;
@@ -226,12 +239,24 @@ export default {
     const email = ref("");
     const message = ref("");
 
+    const commentLength = computed(() => {
+      return message.value.length;
+    });
     const submitForm = async () => {
-      if (name.value === "" || email.value === "" || message.value === "") {
+      if (
+        name.value === "" ||
+        email.value === "" ||
+        message.value === "" ||
+        message.value.length > 200
+      ) {
         error.value = true;
+        if (message.value.length > 200) {
+          error2.value = true;
+        }
         return;
       }
       error.value = false;
+      error2.value = false;
       await frontStore.addComment({
         cid: slug,
         name: name.value,
@@ -245,11 +270,14 @@ export default {
       await new Promise((resolve) => setTimeout(resolve, 5000));
       success.value = false;
     };
+    const arrayC = [...frontStore.posts]
+    const popularPost = arrayC.sort(() => Math.random() - 0.5).slice(0, 1);
     return {
       frontStore,
       post,
       loading,
       error,
+      error2,
       success,
       slug,
       comments,
@@ -257,6 +285,8 @@ export default {
       name,
       email,
       message,
+      commentLength,
+      popularPost,
     };
   },
 };
