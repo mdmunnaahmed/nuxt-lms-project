@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import { onBeforeMount } from "vue";
+import { onMounted } from "vue";
 
 import { useAuthStore } from "../stores/AuthStore";
 export default {
   setup() {
     const authStore = useAuthStore();
     authStore.getAccounts();
-    onBeforeMount(() => {
+    onMounted(() => {
       authStore.getAuthUser();
     });
     return {

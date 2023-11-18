@@ -7,7 +7,6 @@ export const useAuthStore = defineStore("authStore", {
     serverError: null,
     isLoggedIn: false,
     loading: false,
-    courseInstructor: null,
   }),
   actions: {
     async getAccounts() {
@@ -18,14 +17,6 @@ export const useAuthStore = defineStore("authStore", {
     getAuthUser() {
       this.authUser = JSON.parse(localStorage.getItem("user"));
       this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    },
-    async getIdInstructor(id) {
-      const res = await fetch("http://localhost:3000/instructors/" + id);
-      const data = await res.json();
-      if (data) {
-        this.courseInstructor = data;
-      }
-      console.log(this.courseInstructor);
     },
     async addAccount(account) {
       this.loading = true;

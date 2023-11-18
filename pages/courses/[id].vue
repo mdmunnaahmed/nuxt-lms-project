@@ -107,20 +107,28 @@
                   <div class="overview text-center">
                     <div class="instructor-item">
                       <div class="instructor-thumb">
-                        <a href="#0"
+                        <a :href="frontStore.courseInstructor.username"
                           ><img
-                            src="/images/all-img/ins-details.png"
+                            :src="
+                              '/images/all-img/' +
+                              frontStore.courseInstructor.thumb
+                            "
                             alt="instructor"
                         /></a>
                       </div>
                       <div class="instructor-content">
                         <h6 class="title">
-                          <a href="#0">{{ courseInstructor.name }}</a>
+                          <NuxtLink
+                            :to="frontStore.courseInstructor.username"
+                            >{{ frontStore.courseInstructor.name }}</NuxtLink
+                          >
                         </h6>
-                        <span class="details">{{ courseInstructor.designation }}</span>
+                        <span class="details">{{
+                          frontStore.courseInstructor.designation
+                        }}</span>
                       </div>
                     </div>
-                    <p>{{ courseInstructor.bio }}</p>
+                    <p>{{ frontStore.courseInstructor.bio }}</p>
                     <div class="details-buttons-area">
                       <ul class="social-icons justify-content-center w-100">
                         <li>
@@ -147,133 +155,102 @@
                     <div class="review-comments">
                       <h6 class="review-title">Reviews (03)</h6>
                       <ul class="review-contents">
-                        <li>
-                          <div class="thumb">
-                            <img
-                              src="/images/all-img/client04.png"
-                              alt="course"
-                            />
-                          </div>
-                          <div class="cont">
-                            <h6 class="subtitle">Robot Smith</h6>
-                            <div class="ratings cl-theme">
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                            </div>
-                            <p>
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Enim unde et culpa voluptatibus repellat
-                              voluptates aliquid minima
-                            </p>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="thumb">
-                            <img
-                              src="/images/all-img/client02.png"
-                              alt="course"
-                            />
-                          </div>
-                          <div class="cont">
-                            <h6 class="subtitle">Nicolas Anelca</h6>
-                            <div class="ratings cl-theme">
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span class="cl-theme-light"
-                                ><i class="fa fa-star"></i
-                              ></span>
-                            </div>
-                            <p>
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Enim unde et culpa voluptatibus repellat
-                              voluptates aliquid minima
-                            </p>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="thumb">
-                            <img
-                              src="/images/all-img/client03.png"
-                              alt="course"
-                            />
-                          </div>
-                          <div class="cont">
-                            <h6 class="subtitle">Harry Johnshon</h6>
-                            <div class="ratings cl-theme">
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                            </div>
-                            <p>
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Enim unde et culpa voluptatibus repellat
-                              voluptates aliquid minima
-                            </p>
-                          </div>
-                        </li>
+                        <CourseReviewItem
+                          v-for="(r, index) in reviews"
+                          :key="index"
+                          :name="r.name"
+                          :rating="r.rating"
+                          :comment="r.comment"
+                        />
                       </ul>
                     </div>
                     <div class="review-form">
                       <h6 class="review-title">Add a Review</h6>
-                      <form class="row client-form align-items-center">
-                        <div class="col-md-4 col-12">
+                      <form
+                        class="row client-form align-items-center"
+                        @submit.prevent="addReview"
+                      >
+                        <div class="col-6">
                           <input
                             type="text"
-                            name="name"
                             placeholder="Full Name"
+                            class="w-100"
+                            v-model="name"
                           />
                         </div>
-                        <div class="col-md-4 col-12">
-                          <input
-                            type="text"
-                            name="email"
-                            placeholder="Email Adress"
-                          />
-                        </div>
-                        <div class="col-md-4 col-12">
-                          <div class="rating">
-                            <span class="rating-title">Your Rating : </span>
-                            <ul class="ratings">
-                              <li>
-                                <a href="#0" title="Give Me One Star"
-                                  ><i class="fa fa-star"></i
-                                ></a>
-                              </li>
-                              <li>
-                                <a href="#0" title="Give Me Two Star"
-                                  ><i class="fa fa-star"></i
-                                ></a>
-                              </li>
-                              <li>
-                                <a href="#0" title="Give Me Three Star"
-                                  ><i class="fa fa-star"></i
-                                ></a>
-                              </li>
-                              <li>
-                                <a href="#0" title="Give Me Four Star"
-                                  ><i class="fa fa-star"></i
-                                ></a>
-                              </li>
-                              <li>
-                                <a href="#0" title="Give Me Five Star"
-                                  ><i class="fa fa-star"></i
-                                ></a>
-                              </li>
-                            </ul>
-                          </div>
+                        <div class="col-6">
+                          <fieldset>
+                            <span class="rating-title">Your Rating :</span>
+                            <div class="rating">
+                              <ul
+                                class="ratings text-xl flex align-baseline gap-2 h-auto"
+                              >
+                                <li @click="setRate(1)">
+                                  <input
+                                    type="radio"
+                                    name="rating"
+                                    id="rating-1"
+                                    value="1"
+                                  />
+                                  <!-- <label for="rating-1">1 Star</label> -->
+                                </li>
+                                <li @click="setRate(2)">
+                                  <input
+                                    type="radio"
+                                    name="rating"
+                                    id="rating-2"
+                                    value="2"
+                                  />
+                                  <!-- <label for="rating-2">2 Stars</label> -->
+                                </li>
+                                <li @click="setRate(3)">
+                                  <input
+                                    type="radio"
+                                    name="rating"
+                                    id="rating-3"
+                                    value="3"
+                                  />
+                                  <!-- <label for="rating-3">3 Stars</label> -->
+                                </li>
+                                <li @click="setRate(4)">
+                                  <input
+                                    type="radio"
+                                    name="rating"
+                                    id="rating-4"
+                                    value="4"
+                                  />
+                                  <!-- <label for="rating-4">4 Stars</label> -->
+                                </li>
+                                <li @click="setRate(5)">
+                                  <input
+                                    type="radio"
+                                    name="rating"
+                                    id="rating-5"
+                                    value="5"
+                                  />
+                                  <!-- <label for="rating-5">5 Stars</label> -->
+                                </li>
+                              </ul>
+                            </div>
+                          </fieldset>
                         </div>
                         <div class="col-md-12 col-12 d-inline-flex">
                           <textarea
                             rows="5"
                             placeholder="Type Here Message"
+                            v-model="comment"
                           ></textarea>
+                        </div>
+                        <div class="col-12">
+                          <small class="text-danger" v-if="notLogIn"
+                            >Please Login to Comment</small
+                          >
+                          <small class="text-danger" v-if="error"
+                            >Please fill all the form</small
+                          >
+                          <small class="text-danger" v-if="error2"
+                            >Comment should be more than 20 char</small
+                          >
                         </div>
                         <div class="col-12">
                           <button type="submit" class="custom-button rounded">
@@ -320,7 +297,7 @@
               <h4>Price - {{ course.price }}$</h4>
             </div>
             <div class="event_info_register">
-              <a class="btn_one hover" href="#">Buy this Course</a>
+              <button class="btn_one hover w-100 bg-secondary">Buy this Course</button>
             </div>
             <div class="related_course">
               <h3>Related Course</h3>
@@ -466,7 +443,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useFrontStore } from "../../stores/frontStore";
 import { useAuthStore } from "../../stores/AuthStore";
 export default {
@@ -493,23 +470,99 @@ export default {
       cTab.value = tab;
     };
 
-    const getInstructor = async () => {
-      await authStore.getIdInstructor(course.instructorId);
-    };
-    getInstructor();
+    onMounted(() => {
+      frontStore.getIdInstructor(course.instructorId);
+    });
 
-    const courseInstructor = authStore.courseInstructor;
+    const reviews = frontStore.courseReviews;
+
+    const name = ref("");
+    const comment = ref("");
+    const rate = ref("");
+    const setRate = (value) => {
+      rate.value = value;
+    };
+
+    const notLogIn = ref(false);
+    const error = ref(false);
+    const error2 = ref(false);
+    const addReview = () => {
+      if (!authStore.isLoggedIn) {
+        notLogIn.value = true;
+        return;
+      }
+      if (name.value == "" || rate.value == "" || comment.value == "") {
+        error.value = true;
+        return;
+      }
+      if (comment.value.length < 20 && comment.value) {
+        error2.value = true;
+        return;
+      }
+      error.value = false;
+      error2.value = false;
+      notLogIn.value = false;
+      frontStore.addCourseReview({
+        name: name.value,
+        username: "username",
+        rating: rate.value,
+        comment: comment.value,
+      });
+      console.log(name);
+    };
+    // addToCart() {
+
+    // }
 
     return {
+      frontStore,
       course,
       convertedTime,
       changeTab,
       cTab,
-      courseInstructor,
-      getInstructor,
+      reviews,
+      addReview,
+      name,
+      comment,
+      rate,
+      setRate,
+      notLogIn,
+      error,
+      error2,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+fieldset {
+  label {
+    width: 0;
+    overflow: hidden;
+  }
+  /* You can style inputs directly thanks to appearance:none! */
+  input {
+    appearance: none;
+    text-align: center;
+    cursor: pointer;
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 2px 6px !important;
+
+    &::after {
+      content: "☆";
+      font-size: calc(var(--size) * 3 / 4);
+      line-height: var(--size);
+      color: red;
+    }
+    &:is(:checked, :hover)::after,
+    &:has(~ input:is(:checked, :hover))::after {
+      content: "★";
+    }
+    &:hover ~ input::after {
+      content: "☆";
+    }
+  }
+}
+</style>

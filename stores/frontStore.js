@@ -438,6 +438,15 @@ export const useFrontStore = defineStore("frontStore", {
       },
     ],
     searchTerm: "",
+    courseInstructor: "",
+    courseReviews: [
+      {
+        name: "Cannu Boltu",
+        username: "biltu",
+        rating: "4.9",
+        comment: "the course was super easy to do. i learned a lot from this course",
+      },
+    ],
   }),
   actions: {
     async addSubscription(email) {
@@ -453,6 +462,12 @@ export const useFrontStore = defineStore("frontStore", {
       }
       await new Promise((resolve) => setTimeout(resolve, 500));
       this.loading = false;
+    },
+    async getIdInstructor(id) {
+      console.log(id);
+      const res = await fetch("http://localhost:3000/instructors/" + id);
+      const data = await res.json();
+      this.courseInstructor = data;
     },
     getIdPost(id) {
       return this.posts.find((p) => {
@@ -494,6 +509,19 @@ export const useFrontStore = defineStore("frontStore", {
     setSearchTerm(term) {
       this.searchTerm = term;
     },
+    async addCourseReview(review) {
+      this.courseReviews.push(review);
+      this.loading = true;
+      const res = await fetch("http://localhost:3000/courseReviews", {
+        method: "POST",
+        body: JSON.stringify(review),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (res.error) {
+        this.serverError = res.error;
+      }
+      this.loading = false;
+    },
   },
   getters: {
     getIdComment() {
@@ -501,6 +529,9 @@ export const useFrontStore = defineStore("frontStore", {
     },
     filteredSearchData() {
       return this.posts.filter((item) => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    },
+    getCourseReviews() {
+      return this.courseReviews;
     },
   },
 });

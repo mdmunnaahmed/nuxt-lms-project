@@ -8,8 +8,8 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
   },
-
   devtools: {
     enabled: false,
   },
+
 });

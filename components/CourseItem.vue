@@ -9,7 +9,7 @@
     <div class="course-content">
       <NuxtLink class="c_btn" to="">{{ tag }}</NuxtLink>
       <h3>
-        <NuxtLink :to="slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="'courses/' + slug">{{ title }}</NuxtLink>
       </h3>
       <span><i class="fa fa-calendar"></i>{{ lesson }} Lessons</span>
       <span
