@@ -1,7 +1,7 @@
 <template>
   <div class="course-slide">
     <div class="course-img">
-      <img :src="'/images/'+thumb" alt="" />
+      <img :src="'/images/all-img/' + thumb" alt="" />
       <div class="course-date">
         <span class="month">${{ price }}</span>
       </div>
@@ -12,7 +12,10 @@
         <NuxtLink :to="slug">{{ title }}</NuxtLink>
       </h3>
       <span><i class="fa fa-calendar"></i>{{ lesson }} Lessons</span>
-      <span><i class="fa fa-clock-o"></i>4h 15m</span>
+      <span
+        ><i class="fa fa-clock-o"></i>{{ convertedTime.hours }}h
+        {{ convertedTime.minutes }}m</span
+      >
       <span><i class="fa fa-star"></i>{{ rating }}</span>
       <span
         ><i class="fa fa-table"></i
@@ -36,10 +39,21 @@ export default {
     "seats",
   ],
   setup(props) {
+    const totalM = ref(props.duration);
+
     const title = ref(props.title);
     const stitle = title.value.toLowerCase().replaceAll(/[^\w\s]/gi, "");
     const slug = stitle.replaceAll(" ", "-").replaceAll("--", "-");
-    return { slug };
+
+    const convertedTime = computed(() => {
+      const hours = Math.floor(totalM.value / 60);
+      const minutes = totalM.value % 60;
+      return {
+        minutes,
+        hours,
+      };
+    });
+    return { slug, totalM, convertedTime };
   },
 };
 </script>

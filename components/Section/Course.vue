@@ -2,11 +2,9 @@
   <!--START COURSE -->
   <div class="best-cpurse section-padding">
     <div class="container">
-      <div class="section-title">
-        <h2>Popular Courses</h2>
-        <p>
-          Choose Our <span><u>Top Courses</u></span>
-        </p>
+      <div class="section-title" v-if="sectionTitle || sectionSubtitle">
+        <h2 v-if="sectionTitle">{{ sectionTitle }}</h2>
+        <p>{{ sectionSubtitle }}</p>
       </div>
       <div class="row">
         <div
@@ -20,7 +18,7 @@
             :tag="c.tag"
             :title="c.title"
             :lesson="c.lesson"
-            :durtion="c.duration"
+            :duration="c.duration"
             :rating="c.rating"
             :seats="c.seats"
           />
@@ -40,6 +38,7 @@
 <script>
 import { useFrontStore } from "../stores/frontStore";
 export default {
+  props: ["sectionTitle", "sectionSubtitle"],
   setup() {
     const frontStore = useFrontStore();
     return {

@@ -1,27 +1,19 @@
 <template>
-  <div class="single_blog">
-    <img :src="'/images/blog/' + thumb" class="img-fluid" alt="image" />
-    <div class="content_box">
+  <NuxtLink :to="'/blog/' + slug" class="single_blog mb-3 border-b">
+    <div class="content_box p-4">
       <span
-        >{{ formattedDate }} | <a href="">{{ tag }}</a></span
+        >{{ formattedDate }} | {{ tag }}</span
       >
-      <h2>
-        <NuxtLink :to="'/blog/' + slug">{{ title }}</NuxtLink>
-      </h2>
-      <NuxtLink :to="slug" class="cta d-inline-flex align-items-center"
-        ><span class="mb-0">READ MORE</span>
-        <svg width="13px" height="10px" viewBox="0 0 13 10">
-          <path d="M1,5 L11,5"></path>
-          <polyline points="8 1 12 5 8 9"></polyline>
-        </svg>
-      </NuxtLink>
+      <h6>
+        {{ title }}
+      </h6>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script>
 export default {
-  props: ["date", "thumb", "title", "tag"],
+  props: ["date", "title", "tag"],
   setup(props) {
     const title = ref(props.title);
     const date = ref(props.date);

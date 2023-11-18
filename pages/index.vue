@@ -5,7 +5,7 @@
   <SectionCounter />
   <SectionPartner />
   <SectionWhyChoose />
-  <SectionCourse />
+  <SectionCourse sectionSubtitle="Choose Our Top Courses" sectionTitle="Browse our Courses"  />
   <SectionCoursePromotion />
   <SectionNewslatter />
   <SectionTopic />

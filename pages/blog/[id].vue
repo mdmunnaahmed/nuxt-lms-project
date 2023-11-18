@@ -122,26 +122,20 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Type & Press Enter"
+                placeholder="Type your keyword"
+                v-model="searchTerm"
+                @input="updateSearch"
               />
-            </div>
-          </div>
-          <!-- END SINGLE POST -->
-          <div class="sidebar-post">
-            <div class="newsletter-form">
-              <h4>Subscribe for get updates</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent ultricies quam nisi my business
-              </p>
-              <form action="#" class="subscribe">
-                <input
-                  type="text"
-                  class="subscribe__input"
-                  placeholder="Email Address"
-                />
-                <button type="button" class="sub_btn">Subscribe</button>
-              </form>
+              <ul v-if="searchTerm">
+                <li v-for="(b, index) in filteredSearchData" :key="index">
+                  <BlogSearchItem
+                    :title="b.title"
+                    :thumb="b.thumb"
+                    :tag="b.tag"
+                    :date="b.date"
+                  />
+                </li>
+              </ul>
             </div>
           </div>
           <!-- END SINGLE POST -->
@@ -152,34 +146,17 @@
               v-for="(pp, index) in popularPost"
               :key="index"
             >
-              <NuxtLink to="single_blog.html"
+              <NuxtLink to=""
                 ><img :src="'/images/blog/' + pp.thumb" alt=""
               /></NuxtLink>
               <h5>
-                <a href="single_blog.html">{{ pp.title }}</a>
+                <a href="">{{ pp.title }}</a>
               </h5>
             </div>
             <!-- END SINGLE POPULAR POST -->
           </div>
           <!-- END SIDEBAR POST -->
-          <div class="sidebar-post">
-            <div class="sidebar_title"><h4>Follow us</h4></div>
-            <div class="single_social">
-              <ul>
-                <li>
-                  <div class="social_item b_facebook">
-                    <a href="#" title="facebook"
-                      ><i class="fa fa-facebook"></i
-                      ><span class="item-list">150K Likes</span></a
-                    >
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <!-- END SOCIAL MEDIA POST -->
-          </div>
-          <!-- END SIDEBAR POST -->
-          <div class="sidebar-post">
+          <!-- <div class="sidebar-post">
             <div class="sidebar_title"><h4>CATEGORIES</h4></div>
             <div class="single_category">
               <ul>
@@ -188,25 +165,13 @@
                 </li>
               </ul>
             </div>
-            <!-- END SOCIAL MEDIA POST -->
-          </div>
-          <!-- END SIDEBAR POST -->
-          <div class="sidebar-post">
+          </div> -->
+          <!-- <div class="sidebar-post">
             <div class="tag">
               <div class="sidebar_title"><h4>Popular Tag</h4></div>
               <a href="#">Education</a>
             </div>
-          </div>
-          <div class="sidebar-post">
-            <div class="sidebar_title"><h4>Ad Banner</h4></div>
-            <div class="sidebar-banner">
-              <a href="#"
-                ><img src="/images/blog/banner.jpg" class="img-fluid" alt=""
-              /></a>
-            </div>
-            <!-- END SOCIAL MEDIA POST -->
-          </div>
-          <!-- END SIDEBAR POST -->
+          </div> -->
         </div>
         <!--- END COL -->
       </div>
@@ -228,6 +193,7 @@ export default {
     const error = ref(false);
     const error2 = ref(false);
     const success = ref(false);
+    const searchTerm = ref("");
 
     const slug = route.params.id;
     const post = frontStore.getIdPost(slug);
@@ -270,8 +236,17 @@ export default {
       await new Promise((resolve) => setTimeout(resolve, 5000));
       success.value = false;
     };
-    const arrayC = [...frontStore.posts]
+    const arrayC = [...frontStore.posts];
     const popularPost = arrayC.sort(() => Math.random() - 0.5).slice(0, 1);
+
+    // search post
+    const updateSearch = (event) => {
+      frontStore.setSearchTerm(event.target.value);
+    };
+    const filteredSearchData = computed(() => {
+      return frontStore.filteredSearchData.slice(0, 4);
+    });
+
     return {
       frontStore,
       post,
@@ -287,6 +262,10 @@ export default {
       message,
       commentLength,
       popularPost,
+      updateSearch,
+      searchTerm: frontStore.searchTerm,
+      filteredSearchData,
+      searchTerm,
     };
   },
 };

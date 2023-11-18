@@ -120,7 +120,7 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     courses: [
       {
-        thumb: "all-img/c1.png",
+        thumb: "c1.png",
         price: "59",
         tag: "Arts & Design",
         title: "Basic Fundamentals Of Interior & Graphics Design",
@@ -128,9 +128,19 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "240",
         rating: "5.0",
         seats: "30",
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
-        thumb: "all-img/c2.png",
+        thumb: "c2.png",
         price: "79",
         tag: "Design",
         title: "Increasing Engagement With Instagram & Facebook",
@@ -138,9 +148,19 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "140",
         rating: "4.8",
         seats: "24",
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
-        thumb: "all-img/c3.png",
+        thumb: "c3.png",
         price: "28",
         tag: "Arts",
         title: "Introduction To Color Theory & Basic UI/UX",
@@ -148,9 +168,20 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "190",
         rating: "4.9",
         seats: "120",
+
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
-        thumb: "all-img/c4.png",
+        thumb: "c4.png",
         price: "59",
         tag: "Arts & Design",
         title: "Financial Security Thinking And Principles Theory",
@@ -158,9 +189,20 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "240",
         rating: "5.0",
         seats: "30",
+
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
-        thumb: "all-img/c5.png",
+        thumb: "c5.png",
         price: "79",
         tag: "Design",
         title: "Logo Design: From Concept To Presentation",
@@ -168,9 +210,20 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "440",
         rating: "4.8",
         seats: "82",
+
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
-        thumb: "all-img/c6.png",
+        thumb: "c6.png",
         price: "28",
         tag: "Arts",
         title: "Professional Ceramic Moulding For Beginners",
@@ -178,6 +231,78 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "790",
         rating: "4.7",
         seats: "65",
+
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
+      },
+      {
+        thumb: "c4.png",
+        price: "59",
+        tag: "Arts & Design",
+        title: "Financial Security Thinking And Principles Theory",
+        lessons: "3",
+        duration: "240",
+        rating: "5.0",
+        seats: "30",
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
+      },
+      {
+        thumb: "c5.png",
+        price: "79",
+        tag: "Design",
+        title: "Logo Design: From Concept To Presentation",
+        lessons: "5",
+        duration: "440",
+        rating: "4.8",
+        seats: "82",
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
+      },
+      {
+        thumb: "c6.png",
+        price: "28",
+        tag: "Arts",
+        title: "Professional Ceramic Moulding For Beginners",
+        lessons: "200",
+        duration: "790",
+        rating: "4.7",
+        seats: "65",
+
+        publishDate: "12/21/2022",
+        enrolled: "75900",
+        instructorId: "1",
+        certificate: false,
+        overview: {
+          description: "this is the demo overview text",
+          videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
+        },
+        description:
+          'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
     ],
     promotion: {
@@ -312,6 +437,7 @@ export const useFrontStore = defineStore("frontStore", {
         id: 3,
       },
     ],
+    searchTerm: "",
   }),
   actions: {
     async addSubscription(email) {
@@ -340,6 +466,18 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
+    getIdCourse(id) {
+      return this.courses.find((c) => {
+        return (
+          c.title
+            .trim()
+            .toLowerCase()
+            .replaceAll(/[^\w\s]/gi, "")
+            .replaceAll(" ", "-")
+            .replaceAll("--", "-") === id
+        );
+      });
+    },
     async addComment(comment) {
       this.loading = true;
       this.postComments.push(comment);
@@ -353,10 +491,16 @@ export const useFrontStore = defineStore("frontStore", {
       }
       this.loading = false;
     },
+    setSearchTerm(term) {
+      this.searchTerm = term;
+    },
   },
   getters: {
     getIdComment() {
       return this.postComments;
+    },
+    filteredSearchData() {
+      return this.posts.filter((item) => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
     },
   },
 });

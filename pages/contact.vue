@@ -54,7 +54,7 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="">Name</label>
-                    <input v-model="name" type="text" class="form-control" />
+                    <input v-model="name" type="text" class="form-control name" />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="">Your Email</label>

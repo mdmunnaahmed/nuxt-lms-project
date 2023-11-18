@@ -2,10 +2,12 @@ export const useAuthStore = defineStore("authStore", {
   state: () => ({
     name: "Munna",
     studentAccounts: [],
+    // instructors: [],
     authUser: [],
     serverError: null,
     isLoggedIn: false,
     loading: false,
+    courseInstructor: null,
   }),
   actions: {
     async getAccounts() {
@@ -17,14 +19,14 @@ export const useAuthStore = defineStore("authStore", {
       this.authUser = JSON.parse(localStorage.getItem("user"));
       this.isLoggedIn = localStorage.getItem("isLoggedIn");
     },
-    // async getIdUser(id) {
-    //   const res = await fetch("http://localhost:3000/studentAccounts/" + id);
-    //   const data = await res.json();
-    //   console.log(data);
-    //   if(data) {
-    //     this.state.authUser = data;
-    //   }
-    // },
+    async getIdInstructor(id) {
+      const res = await fetch("http://localhost:3000/instructors/" + id);
+      const data = await res.json();
+      if (data) {
+        this.courseInstructor = data;
+      }
+      console.log(this.courseInstructor);
+    },
     async addAccount(account) {
       this.loading = true;
       this.studentAccounts.push(account);

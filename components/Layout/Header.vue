@@ -28,7 +28,7 @@
                     <li>
                       <NuxtLink class="nav-link" to="/">Home 01</NuxtLink>
                     </li>
-                    <li>
+                    <!-- <li>
                       <NuxtLink class="nav-link" to="/index-two"
                         >Home 02</NuxtLink
                       >
@@ -37,7 +37,7 @@
                       <NuxtLink class="nav-link" to="/index-three"
                         >Home 03</NuxtLink
                       >
-                    </li>
+                    </li> -->
                   </ul>
                 </li>
                 <li>
@@ -75,22 +75,22 @@
                   ></NuxtLink>
                   <ul>
                     <li>
-                      <NuxtLink class="nav-link" to="/course"
+                      <NuxtLink class="nav-link" to="/courses"
                         >Courses 01</NuxtLink
                       >
                     </li>
                     <li>
-                      <NuxtLink class="nav-link" to="/course-two"
+                      <NuxtLink class="nav-link" to="/courses-two"
                         >Courses 02</NuxtLink
                       >
                     </li>
                     <li>
-                      <NuxtLink class="nav-link" to="/course-three"
+                      <NuxtLink class="nav-link" to="/courses-three"
                         >Courses 03</NuxtLink
                       >
                     </li>
                     <li>
-                      <NuxtLink class="nav-link" to="/course-sidebar"
+                      <NuxtLink class="nav-link" to="/courses-sidebar"
                         >Course Sidebar</NuxtLink
                       >
                     </li>
