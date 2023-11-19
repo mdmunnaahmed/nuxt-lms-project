@@ -297,49 +297,20 @@
               <h4>Price - {{ course.price }}$</h4>
             </div>
             <div class="event_info_register">
-              <button class="btn_one hover w-100 bg-secondary">Buy this Course</button>
+              <button class="btn_one hover w-100 bg-secondary">
+                Buy this Course
+              </button>
             </div>
             <div class="related_course">
               <h3>Related Course</h3>
-              <div class="single_rc">
-                <div class="rc_img">
-                  <img src="/images/all-img/rc-1.png" alt="" />
-                </div>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h4><a href="#">UI/UX Design and...</a></h4>
-                <span>$42.00</span>
-              </div>
-              <!--- END SINGLE RELATED COURSE -->
-              <div class="single_rc">
-                <div class="rc_img">
-                  <img src="/images/all-img/rc-2.png" alt="" />
-                </div>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h4><a href="#">Greatest Passion In...</a></h4>
-                <span>$37.00</span>
-              </div>
-              <!--- END SINGLE RELATED COURSE -->
-              <div class="single_rc">
-                <div class="rc_img">
-                  <img src="/images/all-img/rc-3.png" alt="" />
-                </div>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <h4><a href="#">incorporate your art ...</a></h4>
-                <span>$21.00</span>
-              </div>
-              <!--- END SINGLE RELATED COURSE -->
+              <RelatedCourse
+                v-for="(rc, index) in relatedCourse"
+                :key="index"
+                :title="rc.title"
+                :thumb="rc.thumb"
+                :price="rc.price"
+                :rating="rc.rating"
+              />
             </div>
             <!--- END RELATED COURSE -->
             <div class="sidebar-post d-none">
@@ -495,11 +466,11 @@ export default {
         error.value = true;
         return;
       }
+      error.value = false;
       if (comment.value.length < 20 && comment.value) {
         error2.value = true;
         return;
       }
-      error.value = false;
       error2.value = false;
       notLogIn.value = false;
       frontStore.addCourseReview({
@@ -510,9 +481,9 @@ export default {
       });
       console.log(name);
     };
-    // addToCart() {
 
-    // }
+    const arrayC = [...frontStore.courses];
+    const relatedCourse = arrayC.sort(() => Math.random() - 0.5).slice(0, 3);
 
     return {
       frontStore,
@@ -529,6 +500,7 @@ export default {
       notLogIn,
       error,
       error2,
+      relatedCourse,
     };
   },
 };
