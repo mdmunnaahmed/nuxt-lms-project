@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-
 export const useFrontStore = defineStore("frontStore", {
   state: () => ({
     loading: false,
     serverError: null,
+    error: null,
     banner: [
       {
         title: "Better Learning Future Starts With Mun's",
@@ -129,6 +129,7 @@ export const useFrontStore = defineStore("frontStore", {
         rating: "5.0",
         seats: "30",
         publishDate: "12/21/2022",
+        uCode: "f1f2f1",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -149,6 +150,7 @@ export const useFrontStore = defineStore("frontStore", {
         rating: "4.8",
         seats: "24",
         publishDate: "12/21/2022",
+        uCode: "f1f2f2",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -170,6 +172,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "120",
 
         publishDate: "12/21/2022",
+        uCode: "f1f2f3",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -191,6 +194,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "30",
 
         publishDate: "12/21/2022",
+        uCode: "f1f2f4",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -212,6 +216,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "82",
 
         publishDate: "12/21/2022",
+        uCode: "f1f2f5",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -233,6 +238,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "65",
 
         publishDate: "12/21/2022",
+        uCode: "f1f2f6",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -253,6 +259,7 @@ export const useFrontStore = defineStore("frontStore", {
         rating: "5.0",
         seats: "30",
         publishDate: "12/21/2022",
+        uCode: "f1f2f7",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -273,6 +280,7 @@ export const useFrontStore = defineStore("frontStore", {
         rating: "4.8",
         seats: "82",
         publishDate: "12/21/2022",
+        uCode: "f1f2f8",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -294,6 +302,7 @@ export const useFrontStore = defineStore("frontStore", {
         seats: "65",
 
         publishDate: "12/21/2022",
+        uCode: "f1f2f9",
         enrolled: "75900",
         instructorId: "1",
         certificate: false,
@@ -447,6 +456,31 @@ export const useFrontStore = defineStore("frontStore", {
         comment: "the course was super easy to do. i learned a lot from this course",
       },
     ],
+    cart: [
+      {
+        name: "Sara Mercado",
+        username: "username",
+        rating: 4,
+        comment: "Dolorem expedita et  asdfasdf",
+        id: 1,
+      },
+    ],
+    cart: [
+      {
+        uname: "username",
+        thumb: "c5.png",
+        title: "Logo Design: From Concept To Presentation",
+        price: "79",
+        id: 1,
+      },
+      {
+        uname: "username",
+        thumb: "c5.png",
+        title: "Logo Design: From Concept To Presentation",
+        price: "79",
+        id: 2,
+      },
+    ],
   }),
   actions: {
     async addSubscription(email) {
@@ -464,7 +498,6 @@ export const useFrontStore = defineStore("frontStore", {
       this.loading = false;
     },
     async getIdInstructor(id) {
-      console.log(id);
       const res = await fetch("http://localhost:3000/instructors/" + id);
       const data = await res.json();
       this.courseInstructor = data;
@@ -522,6 +555,28 @@ export const useFrontStore = defineStore("frontStore", {
       }
       this.loading = false;
     },
+    async addToCart(cart) {
+      this.loading = true;
+      if (!this.cart.some((i) => i.uCode === cart.uCode)) {
+        this.cart.push(cart);
+        const res = await fetch("http://localhost:3000/cart", {
+          method: "POST",
+          body: JSON.stringify(cart),
+          headers: { "Content-Type": "application/json" },
+        });
+        if (res.error) {
+          this.serverError = res.error;
+        }
+      } else {
+        this.error = "already in the cart";
+      }
+      this.loading = false;
+    },
+    async fetchCart(uname) {
+      const res = await fetch("http://localhost:3000/cart/" + "username");
+      const data = await res.json();
+      this.cart = data;
+    },
   },
   getters: {
     getIdComment() {
@@ -532,6 +587,9 @@ export const useFrontStore = defineStore("frontStore", {
     },
     getCourseReviews() {
       return this.courseReviews;
+    },
+    getUCarts() {
+      return this.cart;
     },
   },
 });

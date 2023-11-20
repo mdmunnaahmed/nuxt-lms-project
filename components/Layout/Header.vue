@@ -139,7 +139,7 @@
             </NuxtLink>
             <NuxtLink to="/cart" class="hlc">
               <i class="ti-shopping-cart-full"></i>
-              <span class="gactive">2</span>
+              <span class="gactive">{{ cartCount }}</span>
             </NuxtLink>
             <NuxtLink class="btn_one text-white" to="/profile"
               >Profile</NuxtLink
@@ -156,11 +156,14 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useAuthStore } from "~/stores/AuthStore";
+import { useFrontStore } from "~/stores/frontStore";
 export default {
   setup() {
     const authStore = useAuthStore();
+    const frontStore = useFrontStore();
+
     const isScrolled = ref(false);
 
     const handleScroll = () => {
@@ -176,10 +179,16 @@ export default {
       window.removeEventListener("scroll", handleScroll);
     });
 
+    const cartCount = computed(() => {
+      return frontStore.cart.length;
+    });
+
     return {
+      frontStore,
       authStore,
       isScrolled,
       handleScroll,
+      cartCount,
     };
   },
 };

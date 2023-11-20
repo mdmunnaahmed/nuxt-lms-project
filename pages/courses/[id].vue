@@ -297,9 +297,19 @@
               <h4>Price - {{ course.price }}$</h4>
             </div>
             <div class="event_info_register">
-              <button class="btn_one hover w-100 bg-secondary">
+              <button class="btn_one hover w-100" @click="addToCart">
                 Buy this Course
               </button>
+              <small
+                class="text-danger block text-center"
+                v-if="frontStore.error"
+                >{{ frontStore.error }}</small
+              >
+              <small
+                class="text-success block text-center"
+                v-if="success && !frontStore.error"
+                >added to cart</small
+              >
             </div>
             <div class="related_course">
               <h3>Related Course</h3>
@@ -479,11 +489,21 @@ export default {
         rating: rate.value,
         comment: comment.value,
       });
-      console.log(name);
     };
 
     const arrayC = [...frontStore.courses];
     const relatedCourse = arrayC.sort(() => Math.random() - 0.5).slice(0, 3);
+    const success = ref(false);
+    const addToCart = async () => {
+      await frontStore.addToCart({
+        uname: authStore.authUser.uname,
+        thumb: course.thumb,
+        title: course.title,
+        price: course.price,
+        uCode: course.uCode,
+      });
+      success.value = true;
+    };
 
     return {
       frontStore,
@@ -501,6 +521,8 @@ export default {
       error,
       error2,
       relatedCourse,
+      addToCart,
+      success
     };
   },
 };
