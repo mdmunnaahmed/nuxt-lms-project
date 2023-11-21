@@ -458,27 +458,11 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     cart: [
       {
-        name: "Sara Mercado",
-        username: "username",
-        rating: 4,
-        comment: "Dolorem expedita et  asdfasdf",
-        id: 1,
-      },
-    ],
-    cart: [
-      {
         uname: "username",
-        thumb: "c5.png",
+        thumb: "c2.png",
         title: "Logo Design: From Concept To Presentation",
         price: "79",
         id: 1,
-      },
-      {
-        uname: "username",
-        thumb: "c5.png",
-        title: "Logo Design: From Concept To Presentation",
-        price: "79",
-        id: 2,
       },
     ],
   }),
@@ -559,24 +543,24 @@ export const useFrontStore = defineStore("frontStore", {
       this.loading = true;
       if (!this.cart.some((i) => i.uCode === cart.uCode)) {
         this.cart.push(cart);
-        const res = await fetch("http://localhost:3000/cart", {
-          method: "POST",
-          body: JSON.stringify(cart),
-          headers: { "Content-Type": "application/json" },
-        });
-        if (res.error) {
-          this.serverError = res.error;
-        }
+        // const res = await fetch("http://localhost:3000/cart", {
+        //   method: "POST",
+        //   body: JSON.stringify(cart),
+        //   headers: { "Content-Type": "application/json" },
+        // });
+        // if (res.error) {
+        //   this.serverError = res.error;
+        // }
       } else {
         this.error = "already in the cart";
       }
       this.loading = false;
     },
-    async fetchCart(uname) {
-      const res = await fetch("http://localhost:3000/cart/" + "username");
-      const data = await res.json();
-      this.cart = data;
-    },
+    // async fetchCart(uname) {
+    //   const res = await fetch("http://localhost:3000/cart/" + "username");
+    //   const data = await res.json();
+    //   this.cart = data;
+    // },
   },
   getters: {
     getIdComment() {

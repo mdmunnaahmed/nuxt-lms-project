@@ -25,6 +25,8 @@
                   v-for="(c, index) in uCart"
                   :key="index"
                   :title="c.title"
+                  :price="c.price"
+                  :thumb="c.thumb"
                 />
               </tbody>
             </table>
@@ -83,9 +85,6 @@ import { useFrontStore } from "../../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
-    frontStore.fetchCart();
-
-    console.log(frontStore.cart);
 
     const uCart = frontStore.getUCarts;
 
