@@ -465,6 +465,29 @@ export const useFrontStore = defineStore("frontStore", {
         id: 1,
       },
     ],
+    coupons: [
+      {
+        uniqueId: "mun123",
+        discount: "130",
+        startDate: "05/25/2023",
+        endDate: "05/25/2024",
+        minSpend: "350",
+      },
+      {
+        uniqueId: "mun124",
+        discount: "130",
+        startDate: "05/25/2023",
+        endDate: "05/25/2024",
+        minSpend: "350",
+      },
+      {
+        uniqueId: "mun125",
+        discount: "130",
+        startDate: "05/25/2023",
+        endDate: "05/25/2024",
+        minSpend: "350",
+      },
+    ],
   }),
   actions: {
     async addSubscription(email) {
@@ -561,6 +584,9 @@ export const useFrontStore = defineStore("frontStore", {
     //   const data = await res.json();
     //   this.cart = data;
     // },
+    applyCoupon(data) {
+      
+    }
   },
   getters: {
     getIdComment() {

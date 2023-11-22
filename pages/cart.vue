@@ -41,16 +41,13 @@
                 <div class="col-lg-8 col-md-5 col-12">
                   <div class="left">
                     <div class="coupon">
-                      <form action="#" target="_blank">
-                        <input name="Coupon" placeholder="Enter Your Coupon" />
+                      <form>
+                        <input
+                          placeholder="Enter Your Coupon"
+                          v-model="coupon"
+                        />
                         <button class="btn">Apply</button>
                       </form>
-                    </div>
-                    <div class="checkbox">
-                      <label class="checkbox-inline" for="2"
-                        ><input name="news" id="2" type="checkbox" /> Shipping
-                        (+10$)</label
-                      >
                     </div>
                   </div>
                 </div>
@@ -85,11 +82,13 @@ import { useFrontStore } from "../../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
-
     const uCart = frontStore.getUCarts;
+
+    const coupon = ref("");
 
     return {
       uCart,
+      coupon,
     };
   },
 };
