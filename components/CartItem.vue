@@ -40,18 +40,23 @@
       <!--/ End Input Order -->
     </td>
     <td class="total-amount">
-      <span ref="totalP">${{ totalPrice }}</span>
+      $<span ref="paragraphRefs">{{ totalPrice }}</span>
     </td>
     <td class="action" data-title="Remove">
       <button><i class="ti-trash remove-icon"></i></button>
     </td>
   </tr>
+  <!-- <p v-for="(paragraph, index) in subItems" :key="index" ref="paragraphRefs">
+    {{ paragraph }}
+  </p> -->
+  {{ subtotal }}
+  <button @click="getAllSubs">Get Texts and Add</button>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
 export default {
-  props: ["thumb", "title", "price"],
+  props: ["thumb", "title", "price", "ind"],
   setup(props) {
     const price = ref(props.price);
     const qty = ref(1);
@@ -78,9 +83,34 @@ export default {
       }
       qtyLimit.value = "";
     };
+
+    const instance = getCurrentInstance();
+    const subtotal = ref(0);
+    const subItems = ref([
+      "This is item 1.",
+      "This is item 2.",
+      "This is item 3.",
+    ]);
+    const getAllSubs = () => {
+      let sum = 0;
+      subItems.value.forEach((paragraph, index) => {
+        const paragraphRef = instance.refs.paragraphRefs[index];
+        console.log(paragraphRef);
+        if (paragraphRef && paragraphRef.innerText) {
+          const text = paragraphRef.innerText;
+          console.log(text);
+          const match = text.match(/\d+/);
+          const number = match ? parseInt(match[0], 10) || 0 : 0;
+          sum += number;
+        }
+      });
+      subtotal.value = sum;
+    };
+
     const totalPrice = computed(() => {
       return qty.value * price.value;
     });
+
     return {
       price,
       qty,
@@ -89,10 +119,16 @@ export default {
       qtyLimit,
       checkLimit,
       totalPrice,
+      subtotal,
+      subItems,
+      getAllSubs,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.total-amount {
+  width: 100px;
+}
 </style>

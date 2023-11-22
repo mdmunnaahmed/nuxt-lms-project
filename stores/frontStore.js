@@ -4,6 +4,7 @@ export const useFrontStore = defineStore("frontStore", {
     loading: false,
     serverError: null,
     error: null,
+    success: null,
     banner: [
       {
         title: "Better Learning Future Starts With Mun's",
@@ -467,27 +468,21 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     coupons: [
       {
-        uniqueId: "mun123",
+        uniqueId: "munna",
         discount: "130",
         startDate: "05/25/2023",
         endDate: "05/25/2024",
         minSpend: "350",
       },
       {
-        uniqueId: "mun124",
-        discount: "130",
-        startDate: "05/25/2023",
-        endDate: "05/25/2024",
-        minSpend: "350",
-      },
-      {
-        uniqueId: "mun125",
-        discount: "130",
-        startDate: "05/25/2023",
-        endDate: "05/25/2024",
-        minSpend: "350",
+        uniqueId: "munns",
+        discount: "230",
+        startDate: "01/15/2023",
+        endDate: "12/31/2025",
+        minSpend: "830",
       },
     ],
+    appliedCoupon: [],
   }),
   actions: {
     async addSubscription(email) {
@@ -585,8 +580,11 @@ export const useFrontStore = defineStore("frontStore", {
     //   this.cart = data;
     // },
     applyCoupon(data) {
-      
-    }
+      if (this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase())) {
+        this.appliedCoupon = this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase());
+        // this.success = "you got " + this.appliedCoupon.discount + "discount";
+      }
+    },
   },
   getters: {
     getIdComment() {

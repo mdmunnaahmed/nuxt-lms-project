@@ -27,6 +27,7 @@
                   :title="c.title"
                   :price="c.price"
                   :thumb="c.thumb"
+                  :ind="index + 1"
                 />
               </tbody>
             </table>
@@ -41,13 +42,16 @@
                 <div class="col-lg-8 col-md-5 col-12">
                   <div class="left">
                     <div class="coupon">
-                      <form>
+                      <form @submit.prevent="discount">
                         <input
                           placeholder="Enter Your Coupon"
                           v-model="coupon"
                         />
                         <button class="btn">Apply</button>
                       </form>
+                      <small v-if="frontStore.success">{{
+                        frontStore.success
+                      }}</small>
                     </div>
                   </div>
                 </div>
@@ -56,6 +60,9 @@
                     <ul>
                       <li>Cart Subtotal<span>$330.00</span></li>
                       <li>Shipping<span>Free</span></li>
+                      <li v-for="(c, index) in getCoupon" :key="index">
+                        Coupon<span>${{ c.discount }}</span>
+                      </li>
                       <li>You Save<span>$20.00</span></li>
                       <li class="last">You Pay<span>$310.00</span></li>
                     </ul>
@@ -77,18 +84,37 @@
 
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useFrontStore } from "../../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
     const uCart = frontStore.getUCarts;
+    const couponApplied = computed(() => {
+      return frontStore.appliedCoupon;
+    });
 
-    const coupon = ref("");
+    const coupon = ref("munna");
+    const discount = () => {
+      if (!coupon.value == "") {
+        frontStore.applyCoupon({
+          coupon: coupon.value,
+        });
+      }
+    };
+
+    const getCoupon = computed(() => {
+      return frontStore.appliedCoupon;
+    });
 
     return {
+      frontStore,
       uCart,
       coupon,
+      coupon,
+      discount,
+      couponApplied,
+      getCoupon,
     };
   },
 };
