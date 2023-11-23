@@ -598,7 +598,7 @@ export const useFrontStore = defineStore("frontStore", {
       if (this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase())) {
         this.appliedCoupon = this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase());
         if (this.appliedCoupon[0].minSpend > data.spend) {
-          this.error = "this coupon requires min spend of" + this.appliedCoupon[0].minSpend;
+          this.error = "this coupon requires min spend of " + this.appliedCoupon[0].minSpend;
           this.appliedCoupon = [];
           return
         }

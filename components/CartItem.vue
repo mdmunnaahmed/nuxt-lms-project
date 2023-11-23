@@ -18,7 +18,11 @@
       <!-- Input Order -->
       <div class="input-group">
         <div class="button minus">
-          <button type="button" class="btn btn-primary btn-number" @click="dec(ind)">
+          <button
+            type="button"
+            class="btn btn-primary btn-number"
+            @click="dec(ind)"
+          >
             <i class="ti-minus"></i>
           </button>
         </div>
@@ -26,13 +30,17 @@
           type="tel"
           class="input-number"
           v-model="qty"
-          @input="checkLimit"
+          @input="checkLimit(ind)"
         />
         <small class="text-xs text-danger" v-if="qtyLimit">{{
           qtyLimit
         }}</small>
         <div class="button plus">
-          <button type="button" class="btn btn-primary btn-number" @click="inc(ind)">
+          <button
+            type="button"
+            class="btn btn-primary btn-number"
+            @click="inc(ind)"
+          >
             <i class="ti-plus"></i>
           </button>
         </div>
@@ -40,7 +48,7 @@
       <!--/ End Input Order -->
     </td>
     <td class="total-amount">
-      $<span ref="paragraphRefs">{{ totalPrice }}</span>
+      $<span>{{ totalPrice }}</span>
     </td>
     <td class="action" data-title="Remove">
       <button><i class="ti-trash remove-icon"></i></button>
@@ -73,19 +81,29 @@ export default {
         frontStore.updateQuantity(id, qty.value);
       }
     };
-    const checkLimit = () => {
+    const checkLimit = (id) => {
       if (qty.value > 10) {
         qty.value = "10";
       }
       if (qty.value < 1) {
         qty.value = 1;
       }
+      frontStore.updateQuantity(id, qty.value);
       qtyLimit.value = "";
     };
 
     const totalPrice = computed(() => {
       return qty.value * price.value;
     });
+    const onSubtotalChange = () => {
+      if (frontStore.appliedCoupon.length) {
+        if (totalPrice.value < frontStore.appliedCoupon[0].minSpend) {
+          frontStore.clearCoupon();
+        }
+      }
+    };
+
+    watch(totalPrice, onSubtotalChange);
 
     return {
       frontStore,
