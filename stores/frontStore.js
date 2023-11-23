@@ -122,7 +122,7 @@ export const useFrontStore = defineStore("frontStore", {
     courses: [
       {
         thumb: "c1.png",
-        price: "59",
+        price: 59,
         tag: "Arts & Design",
         title: "Basic Fundamentals Of Interior & Graphics Design",
         lessons: "3",
@@ -143,7 +143,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c2.png",
-        price: "79",
+        price: 79,
         tag: "Design",
         title: "Increasing Engagement With Instagram & Facebook",
         lessons: "5",
@@ -164,7 +164,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c3.png",
-        price: "28",
+        price: 28,
         tag: "Arts",
         title: "Introduction To Color Theory & Basic UI/UX",
         lessons: "120",
@@ -186,7 +186,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c4.png",
-        price: "59",
+        price: 59,
         tag: "Arts & Design",
         title: "Financial Security Thinking And Principles Theory",
         lessons: "3",
@@ -208,7 +208,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c5.png",
-        price: "79",
+        price: 79,
         tag: "Design",
         title: "Logo Design: From Concept To Presentation",
         lessons: "5",
@@ -230,7 +230,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c6.png",
-        price: "28",
+        price: 28,
         tag: "Arts",
         title: "Professional Ceramic Moulding For Beginners",
         lessons: "200",
@@ -252,7 +252,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c4.png",
-        price: "59",
+        price: 59,
         tag: "Arts & Design",
         title: "Financial Security Thinking And Principles Theory",
         lessons: "3",
@@ -273,7 +273,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c5.png",
-        price: "79",
+        price: 79,
         tag: "Design",
         title: "Logo Design: From Concept To Presentation",
         lessons: "5",
@@ -294,7 +294,7 @@ export const useFrontStore = defineStore("frontStore", {
       },
       {
         thumb: "c6.png",
-        price: "28",
+        price: 28,
         tag: "Arts",
         title: "Professional Ceramic Moulding For Beginners",
         lessons: "200",
@@ -462,8 +462,17 @@ export const useFrontStore = defineStore("frontStore", {
         uname: "username",
         thumb: "c2.png",
         title: "Logo Design: From Concept To Presentation",
-        price: "79",
+        price: 79,
         id: 1,
+        quantity: 1,
+      },
+      {
+        uname: "username",
+        thumb: "c3.png",
+        title: "we are here on this special day",
+        price: 29,
+        id: 2,
+        quantity: 1,
       },
     ],
     coupons: [
@@ -472,14 +481,14 @@ export const useFrontStore = defineStore("frontStore", {
         discount: "130",
         startDate: "05/25/2023",
         endDate: "05/25/2024",
-        minSpend: "350",
+        minSpend: "450",
       },
       {
         uniqueId: "munns",
-        discount: "230",
+        discount: "170",
         startDate: "01/15/2023",
         endDate: "12/31/2025",
-        minSpend: "830",
+        minSpend: "330",
       },
     ],
     appliedCoupon: [],
@@ -574,6 +583,12 @@ export const useFrontStore = defineStore("frontStore", {
       }
       this.loading = false;
     },
+    updateQuantity(id, quantity) {
+      const item = this.cart.find((item) => item.id === id);
+      if (item) {
+        item.quantity = quantity;
+      }
+    },
     // async fetchCart(uname) {
     //   const res = await fetch("http://localhost:3000/cart/" + "username");
     //   const data = await res.json();
@@ -582,8 +597,16 @@ export const useFrontStore = defineStore("frontStore", {
     applyCoupon(data) {
       if (this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase())) {
         this.appliedCoupon = this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase());
-        // this.success = "you got " + this.appliedCoupon.discount + "discount";
+        if (this.appliedCoupon[0].minSpend > data.spend) {
+          this.error = "this coupon requires min spend of" + this.appliedCoupon[0].minSpend;
+          this.appliedCoupon = [];
+          return
+        }
+        this.error = ''
       }
+    },
+    clearCoupon() {
+      this.appliedCoupon = [];
     },
   },
   getters: {
@@ -598,6 +621,9 @@ export const useFrontStore = defineStore("frontStore", {
     },
     getUCarts() {
       return this.cart;
+    },
+    totalPrice: (state) => {
+      return state.cart.reduce((total, item) => total + item.price * item.quantity, 0);
     },
   },
 });

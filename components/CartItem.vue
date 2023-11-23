@@ -18,7 +18,7 @@
       <!-- Input Order -->
       <div class="input-group">
         <div class="button minus">
-          <button type="button" class="btn btn-primary btn-number" @click="dec">
+          <button type="button" class="btn btn-primary btn-number" @click="dec(ind)">
             <i class="ti-minus"></i>
           </button>
         </div>
@@ -32,7 +32,7 @@
           qtyLimit
         }}</small>
         <div class="button plus">
-          <button type="button" class="btn btn-primary btn-number" @click="inc">
+          <button type="button" class="btn btn-primary btn-number" @click="inc(ind)">
             <i class="ti-plus"></i>
           </button>
         </div>
@@ -46,32 +46,31 @@
       <button><i class="ti-trash remove-icon"></i></button>
     </td>
   </tr>
-  <!-- <p v-for="(paragraph, index) in subItems" :key="index" ref="paragraphRefs">
-    {{ paragraph }}
-  </p> -->
-  {{ subtotal }}
-  <button @click="getAllSubs">Get Texts and Add</button>
 </template>
 
 <script>
-import { ref, getCurrentInstance } from "vue";
+import { ref } from "vue";
+import { useFrontStore } from "~/stores/frontStore";
 export default {
-  props: ["thumb", "title", "price", "ind"],
+  props: ["thumb", "title", "price", "quantity", "ind"],
   setup(props) {
+    const frontStore = useFrontStore();
     const price = ref(props.price);
     const qty = ref(1);
     const qtyLimit = ref("");
-    const inc = () => {
+    const inc = (id) => {
       if (qty.value < 10) {
         qty.value += 1;
+        frontStore.updateQuantity(id, qty.value);
       } else if (qty.value == 10) {
         qtyLimit.value = "you can't buy more than 10";
       }
     };
-    const dec = () => {
+    const dec = (id) => {
       if (qty.value > 1) {
         qty.value -= 1;
         qtyLimit.value = "";
+        frontStore.updateQuantity(id, qty.value);
       }
     };
     const checkLimit = () => {
@@ -84,34 +83,12 @@ export default {
       qtyLimit.value = "";
     };
 
-    const instance = getCurrentInstance();
-    const subtotal = ref(0);
-    const subItems = ref([
-      "This is item 1.",
-      "This is item 2.",
-      "This is item 3.",
-    ]);
-    const getAllSubs = () => {
-      let sum = 0;
-      subItems.value.forEach((paragraph, index) => {
-        const paragraphRef = instance.refs.paragraphRefs[index];
-        console.log(paragraphRef);
-        if (paragraphRef && paragraphRef.innerText) {
-          const text = paragraphRef.innerText;
-          console.log(text);
-          const match = text.match(/\d+/);
-          const number = match ? parseInt(match[0], 10) || 0 : 0;
-          sum += number;
-        }
-      });
-      subtotal.value = sum;
-    };
-
     const totalPrice = computed(() => {
       return qty.value * price.value;
     });
 
     return {
+      frontStore,
       price,
       qty,
       inc,
@@ -119,9 +96,6 @@ export default {
       qtyLimit,
       checkLimit,
       totalPrice,
-      subtotal,
-      subItems,
-      getAllSubs,
     };
   },
 };
