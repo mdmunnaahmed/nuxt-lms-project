@@ -51,7 +51,9 @@
       $<span>{{ totalPrice }}</span>
     </td>
     <td class="action" data-title="Remove">
-      <button><i class="ti-trash remove-icon"></i></button>
+      <button @click="removeItem(id)">
+        <i class="ti-trash remove-icon"></i>
+      </button>
     </td>
   </tr>
 </template>
@@ -60,7 +62,7 @@
 import { ref } from "vue";
 import { useFrontStore } from "~/stores/frontStore";
 export default {
-  props: ["thumb", "title", "price", "quantity", "ind"],
+  props: ["thumb", "title", "price", "quantity", "ind", "id"],
   setup(props) {
     const frontStore = useFrontStore();
     const price = ref(props.price);
@@ -105,6 +107,13 @@ export default {
 
     watch(totalPrice, onSubtotalChange);
 
+    const removeItem = (item) => {
+      const confirmed = window.confirm('Are you sure you want to delete the item?');
+      if(confirmed) {
+        frontStore.removeItem(item);
+      }
+    };
+
     return {
       frontStore,
       price,
@@ -114,6 +123,7 @@ export default {
       qtyLimit,
       checkLimit,
       totalPrice,
+      removeItem,
     };
   },
 };

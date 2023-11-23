@@ -16,7 +16,7 @@
                   <th class="text-center">QUANTITY</th>
                   <th class="text-center">TOTAL</th>
                   <th class="text-center">
-                    <i class="ti-trash remove-icon"></i>
+                    <i @click="clearCart" class="ti-trash remove-icon"></i>
                   </th>
                 </tr>
               </thead>
@@ -28,13 +28,14 @@
                   :price="c.price"
                   :thumb="c.thumb"
                   :ind="index + 1"
+                  :id="c.id"
                 />
               </tbody>
             </table>
             <!--/ End Shopping Summery -->
           </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="frontStore.cart.length">
           <div class="col-12">
             <!-- Total Amount -->
             <div class="total-amount">
@@ -100,6 +101,12 @@
             <!--/ End Total Amount -->
           </div>
         </div>
+        <div v-else class="text-center">
+          <span class="text-center">your cart is empty</span>
+          <NuxtLink to="/courses" class="ms-1 text-decoration-underline"
+            >Go to Courses</NuxtLink
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -112,9 +119,11 @@ import { useFrontStore } from "../../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
-    const uCart = frontStore.getUCarts;
+    const uCart = computed(() => {
+      return frontStore.getUCarts;
+    });
 
-    const coupon = ref("munna");
+    const coupon = ref("munns");
     const discount = () => {
       if (!coupon.value == "") {
         frontStore.applyCoupon({
@@ -131,6 +140,15 @@ export default {
 
     const clearCoup = () => {
       frontStore.clearCoupon();
+    };
+
+    const clearCart = () => {
+      const confirmed = window.confirm(
+        "Are you sure you want to clear the entire cart?"
+      );
+      if (confirmed) {
+        frontStore.clearCart();
+      }
     };
 
     const youPay = computed(() => {
@@ -152,6 +170,7 @@ export default {
       youPay,
       discountAmount,
       clearCoup,
+      clearCart,
     };
   },
 };

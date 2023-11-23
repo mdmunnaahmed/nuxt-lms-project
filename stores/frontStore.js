@@ -121,6 +121,7 @@ export const useFrontStore = defineStore("frontStore", {
     ],
     courses: [
       {
+        id: 1,
         thumb: "c1.png",
         price: 59,
         tag: "Arts & Design",
@@ -142,6 +143,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 2,
         thumb: "c2.png",
         price: 79,
         tag: "Design",
@@ -163,6 +165,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 3,
         thumb: "c3.png",
         price: 28,
         tag: "Arts",
@@ -185,6 +188,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 4,
         thumb: "c4.png",
         price: 59,
         tag: "Arts & Design",
@@ -207,6 +211,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 5,
         thumb: "c5.png",
         price: 79,
         tag: "Design",
@@ -229,6 +234,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 6,
         thumb: "c6.png",
         price: 28,
         tag: "Arts",
@@ -251,6 +257,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 7,
         thumb: "c4.png",
         price: 59,
         tag: "Arts & Design",
@@ -272,6 +279,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 8,
         thumb: "c5.png",
         price: 79,
         tag: "Design",
@@ -293,6 +301,7 @@ export const useFrontStore = defineStore("frontStore", {
           'Hi there, myself Munna Ahmed. I am fond of coding with javascript. as a javascript lover. after completing my graduation I was admitted to the admirable company "ThemeBracket" as an intern in 2018. after completing 3 months of the intern period I was proposed for playing the role of a frontend developer there. as a rising talent, my job career started then in the same year.',
       },
       {
+        id: 9,
         thumb: "c6.png",
         price: 28,
         tag: "Arts",
@@ -600,13 +609,23 @@ export const useFrontStore = defineStore("frontStore", {
         if (this.appliedCoupon[0].minSpend > data.spend) {
           this.error = "this coupon requires min spend of " + this.appliedCoupon[0].minSpend;
           this.appliedCoupon = [];
-          return
+          return;
         }
-        this.error = ''
+        this.error = "";
       }
     },
     clearCoupon() {
       this.appliedCoupon = [];
+    },
+    removeItem(item) {
+      const index = this.cart.findIndex((cartItem) => cartItem.id === item);
+      console.log(item);
+      if (index !== -1) {
+        this.cart.splice(index, 1);
+      }
+    },
+    clearCart() {
+      this.cart = [];
     },
   },
   getters: {

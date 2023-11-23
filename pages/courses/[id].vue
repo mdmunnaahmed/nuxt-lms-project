@@ -501,6 +501,8 @@ export default {
         title: course.title,
         price: course.price,
         uCode: course.uCode,
+        quantity: 1,
+        id: course.id,
       });
       success.value = true;
     };
@@ -522,7 +524,7 @@ export default {
       error2,
       relatedCourse,
       addToCart,
-      success
+      success,
     };
   },
 };

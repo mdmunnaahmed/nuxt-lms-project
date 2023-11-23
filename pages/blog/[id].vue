@@ -141,18 +141,14 @@
           <!-- END SINGLE POST -->
           <div class="sidebar-post">
             <div class="sidebar_title"><h4>Popular post</h4></div>
-            <div
+            <SinglePopular
               class="single_popular"
               v-for="(pp, index) in popularPost"
               :key="index"
+              :title="pp.title"
+              :thumb="pp.thumb"
             >
-              <NuxtLink to=""
-                ><img :src="'/images/blog/' + pp.thumb" alt=""
-              /></NuxtLink>
-              <h5>
-                <a href="">{{ pp.title }}</a>
-              </h5>
-            </div>
+            </SinglePopular>
             <!-- END SINGLE POPULAR POST -->
           </div>
           <!-- END SIDEBAR POST -->
@@ -237,7 +233,7 @@ export default {
       success.value = false;
     };
     const arrayC = [...frontStore.posts];
-    const popularPost = arrayC.sort(() => Math.random() - 0.5).slice(0, 1);
+    const popularPost = arrayC.sort(() => Math.random() - 0.5).slice(0, 5);
 
     // search post
     const updateSearch = (event) => {

@@ -8,7 +8,7 @@
       <h2>
         <NuxtLink :to="'/blog/' + slug">{{ title }}</NuxtLink>
       </h2>
-      <NuxtLink :to="slug" class="cta d-inline-flex align-items-center"
+      <NuxtLink :to="'blog/'+slug" class="cta d-inline-flex align-items-center"
         ><span class="mb-0">READ MORE</span>
         <svg width="13px" height="10px" viewBox="0 0 13 10">
           <path d="M1,5 L11,5"></path>
@@ -20,16 +20,13 @@
 </template>
 
 <script>
+import useSlug from "~/composables/useSlug";
 export default {
   props: ["date", "thumb", "title", "tag"],
   setup(props) {
     const title = ref(props.title);
     const date = ref(props.date);
-    const stitle = title.value
-      .trim()
-      .toLowerCase()
-      .replaceAll(/[^\w\s]/gi, "");
-    const slug = stitle.replaceAll(" ", "-").replaceAll("--", "-");
+    const { slug } = useSlug(title.value);
     function formatDate(inputDate) {
       const parts = inputDate.split("/");
       const day = parseInt(parts[0], 10);
