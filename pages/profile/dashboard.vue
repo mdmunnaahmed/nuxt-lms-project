@@ -31,9 +31,10 @@
             <div class="single_agent">
               <div class="single_agent_image">
                 <img
-                  src="/images/all-img/team-details.png"
+                  :src="'/images/all-img/'+ authStore.authUser.thumb"
                   class="img-fluid"
                   alt=""
+                  style="border-radius: 50%;"
                 />
               </div>
               <div class="single_agent_content">
@@ -98,7 +99,7 @@
     <!-- END COUNTER -->
 
     <!--START COURSE -->
-    <SectionCourse />
+    <!-- <SectionCourse /> -->
   </div>
 </template>
 
@@ -148,3 +149,12 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+.single_agent_image img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}
+</style>

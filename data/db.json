@@ -1,12 +1,53 @@
 {
   "studentAccounts": [
     {
-      "cart": [],
       "uname": "username",
       "name": "Keiko Campos",
       "email": "xeji@mailinator.com",
       "password": "username",
       "id": 2
+    },
+    {
+      "uname": "username",
+      "name": "Nina Villarreal",
+      "email": "halodifo@mailinator.com",
+      "password": "username",
+      "id": 3
+    },
+    {
+      "uname": "sawekovumo",
+      "name": "Wilma Dalton",
+      "email": "gahul@mailinator.com",
+      "password": "username",
+      "id": 4
+    },
+    {
+      "uname": "woqyhycek",
+      "name": "Megan Beasley",
+      "email": "tuqyg@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 5
+    },
+    {
+      "uname": "bafisylala",
+      "name": "Sade Buckley",
+      "email": "luki@mailinator.com",
+      "password": "username",
+      "id": 6
+    },
+    {
+      "uname": "vulunecep",
+      "name": "Portia Carey",
+      "email": "zyqyjygum@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 7
+    },
+    {
+      "uname": "besybo",
+      "name": "Vera Mcintyre",
+      "email": "zyced@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 8
     }
   ],
   "subsMail": [

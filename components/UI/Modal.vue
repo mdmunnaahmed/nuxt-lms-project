@@ -59,7 +59,7 @@ export default {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 10000;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 
 dialog {
@@ -101,10 +101,11 @@ dialog {
 .dialog-leave-to {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.8);
+  transition: .5s;
 }
 
 .dialog-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .dialog-leave-active {
@@ -115,6 +116,7 @@ dialog {
 .dialog-leave-from {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
+  transition: .5s;
 }
 
 @media (min-width: 768px) {

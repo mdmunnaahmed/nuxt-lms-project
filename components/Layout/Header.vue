@@ -59,14 +59,6 @@
                     <li>
                       <NuxtLink class="nav-link" to="/event">Event</NuxtLink>
                     </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/login">Login</NuxtLink>
-                    </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/register"
-                        >Register</NuxtLink
-                      >
-                    </li>
                   </ul>
                 </li>
                 <li>

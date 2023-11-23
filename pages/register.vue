@@ -134,7 +134,7 @@ export default {
     const email = ref("");
     const password = ref("");
 
-    authStore.getAccounts();
+    // authStore.getAccounts();
     definePageMeta({
       middleware: ["auth"],
     });

@@ -74,8 +74,8 @@ export default {
     const router = useRouter();
     const authStore = useAuthStore();
     const success = ref(false);
-    const uname = ref("");
-    const password = ref("");
+    const uname = ref("username");
+    const password = ref("username");
     definePageMeta({
       middleware: ["auth"],
     });
@@ -87,7 +87,7 @@ export default {
       success.value = true;
       uname.value = "";
       password.value = "";
-      // router.push("/profile");
+      router.push("/profile");
     };
     const closeDialog = () => {
       success.value = false;
