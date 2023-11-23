@@ -1,10 +1,8 @@
 <template>
   <div>
     <SectionInnerBanner title="About" slug="about" />
-
     <SectionOverview />
     <SectionAbout />
-
     <SectionWhyChoose />
     <SectionCounter />
     <SectionTeamTwo />
@@ -67,6 +65,7 @@
       <!--- END CONTAINER -->
     </section>
     <!-- END FAQ -->
+    
     <SectionPartner />
   </div>
 </template>
