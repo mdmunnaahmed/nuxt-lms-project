@@ -29,11 +29,12 @@ export const useAuthStore = defineStore("authStore", {
     async addAccount(account) {
       this.loading = true;
       this.studentAccounts.push(account);
-      const res = await fetch("http://localhost:3000/studentAccounts", {
-        method: "POST",
-        body: JSON.stringify(account),
-        headers: { "Content-Type": "application/json" },
-      });
+      // const res = await fetch("http://localhost:3000/studentAccounts", {
+      //   method: "POST",
+      //   body: JSON.stringify(account),
+      //   headers: { "Content-Type": "application/json" },
+      // });
+      
       this.authUser = account;
       this.isLoggedIn = true;
       // localStorage.setItem("user", JSON.stringify(account));
