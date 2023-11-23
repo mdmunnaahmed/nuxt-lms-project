@@ -6,7 +6,6 @@
     <SectionWhyChoose />
     <SectionCounter />
     <SectionTeamTwo />
-
     <!-- START FAQ -->
     <section class="faq_area section-padding">
       <div class="container">
@@ -65,7 +64,6 @@
       <!--- END CONTAINER -->
     </section>
     <!-- END FAQ -->
-    
     <SectionPartner />
   </div>
 </template>
