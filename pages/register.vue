@@ -188,9 +188,9 @@ export default {
         name: name.value,
         email: email.value,
         password: password.value,
+        thumb: "munns.jpg",
       });
       success.value = true;
-      console.log(success.value);
       uname.value = "";
       name.value = "";
       email.value = "";
