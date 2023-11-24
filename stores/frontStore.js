@@ -501,6 +501,8 @@ export const useFrontStore = defineStore("frontStore", {
       },
     ],
     appliedCoupon: [],
+    searchCourse: "",
+    searchPrice: "",
   }),
   actions: {
     async addSubscription(email) {
@@ -627,6 +629,12 @@ export const useFrontStore = defineStore("frontStore", {
     clearCart() {
       this.cart = [];
     },
+    searchCourses(term) {
+      this.searchCourse = term;
+    },
+    searchCoursesByPrice(price) {
+      this.searchPrice = price;
+    },
   },
   getters: {
     getIdComment() {
@@ -643,6 +651,11 @@ export const useFrontStore = defineStore("frontStore", {
     },
     totalPrice: (state) => {
       return state.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    },
+    filteredSearchCourses() {
+      return this.courses.filter((item) => {
+        return item.title.toLowerCase().includes(this.searchCourse.toLowerCase()) && (!this.searchPrice || item.price <= this.searchPrice);
+      });
     },
   },
 });

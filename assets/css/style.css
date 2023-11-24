@@ -4959,11 +4959,10 @@ blockquote::before,
 }
 
 .range-slider input[type="range"] {
-	background: transparent;
+	background: #acacac;
 	width: 100%;
 	height: 8px;
 	outline: none;
-	border: 2px solid #2eca7f;
 	border-radius: 10px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -4971,6 +4970,7 @@ blockquote::before,
 	position: relative;
 	z-index: 1;
 	transition: all 0.3s ease;
+	
 }
 
 .range-slider input[type="range"]::-webkit-slider-thumb {
@@ -4986,11 +4986,11 @@ blockquote::before,
 
 .range-slider input[type="range"]:active::-webkit-slider-thumb,
 .range-slider input[type="range"]::-webkit-slider-thumb:hover {
-	transform: rotate(45deg);
+	transform: rotate(-135deg);
 	border-radius: 50% 0 50% 50%;
 }
 
-.range-slider input[type="range"]:active::-webkit-slider-thumb {
+.range-slider input[type="range"]::-webkit-slider-thumb {
 	box-shadow: 0 0 0 5px #fff inset, 0 0 5px #2eca7f;
 }
 
@@ -5010,7 +5010,7 @@ blockquote::before,
 	border-radius: 50% 0 50% 50%;
 }
 
-.range-slider input[type="range"]:active::-moz-range-thumb {
+.range-slider input[type="range"]::-moz-range-thumb {
 	box-shadow: 0 0 0 5px #fff inset, 0 0 5px #2eca7f;
 }
 

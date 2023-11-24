@@ -5,10 +5,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            <div class="row">
+            <div class="row" v-if="searchCourses.length">
               <div
                 class="col-lg-6 col-md-6 col-xs-12 wow fadeInUp"
-                v-for="(c, index) in reloadCourses"
+                v-for="(c, index) in searchCourses"
                 :key="index"
               >
                 <CourseItem
@@ -23,21 +23,10 @@
                 />
               </div>
             </div>
+            <p v-else class="text-center">No courses found!</p>
           </div>
           <div class="col-lg-4">
-            <CourseSidebar/>
-          </div>
-          <!--END COL -->
-          <div class="col-lg-12 text-center">
-            <div class="cc_btn">
-              <button
-                v-if="frontStore.courses.length !== reloadCourses.length"
-                @click="showMoreItem"
-                class="btn_one"
-              >
-                View More
-              </button>
-            </div>
+            <CourseSidebar />
           </div>
         </div>
       </div>
@@ -52,17 +41,13 @@ export default {
   props: ["sectionTitle", "sectionSubtitle"],
   setup() {
     const frontStore = useFrontStore();
-    const showItem = ref(6);
-    const reloadCourses = computed(() => {
-      return frontStore.courses.slice(0, Number(showItem.value));
+
+    const searchCourses = computed(() => {
+      return frontStore.filteredSearchCourses;
     });
-    const showMoreItem = () => {
-      showItem.value += 6;
-    };
     return {
       frontStore,
-      reloadCourses,
-      showMoreItem,
+      searchCourses,
     };
   },
 };

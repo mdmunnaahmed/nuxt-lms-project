@@ -5,7 +5,8 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Type &amp; Press Enter"
+          placeholder="Type to search course"
+          @input="updateSearch"
         />
       </div>
     </div>
@@ -13,8 +14,16 @@
     <div class="rs-slider">
       <h4>Price Filter</h4>
       <div class="range-slider">
-        <input type="range" value="500" min="0" max="500" range="true" />
-        <span class="range-value">143</span>
+        <input
+          type="range"
+          step="10"
+          min="0"
+          max="300"
+          range="true"
+          v-model="priceRange"
+          @change="searchByPrice"
+        />
+        <span class="range-value">{{ priceRange }}</span>
       </div>
     </div>
     <!-- END SINGLE POST -->
@@ -173,7 +182,30 @@
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+import { useFrontStore } from "~/stores/frontStore";
+export default {
+  setup() {
+    const frontStore = useFrontStore();
+    // search course
+    const searchCourse = ref("");
+    const updateSearch = (event) => {
+      frontStore.searchCourses(event.target.value.trim());
+    };
+    const priceRange = ref(0);
+    const searchByPrice = (event) => {
+      frontStore.searchCoursesByPrice(event.target.value.trim());
+    };
+    return {
+      frontStore,
+      updateSearch,
+      searchCourse,
+      searchCourse: frontStore.searchCourse,
+      priceRange,
+      searchByPrice,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
