@@ -68,17 +68,12 @@
                   <ul>
                     <li>
                       <NuxtLink class="nav-link" to="/courses"
-                        >Courses 01</NuxtLink
+                        >Courses One</NuxtLink
                       >
                     </li>
                     <li>
                       <NuxtLink class="nav-link" to="/courses-two"
-                        >Courses 02</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/courses-three"
-                        >Courses 03</NuxtLink
+                        >Courses Two</NuxtLink
                       >
                     </li>
                     <li>
