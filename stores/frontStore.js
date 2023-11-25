@@ -230,7 +230,7 @@ export const useFrontStore = defineStore("frontStore", {
         title: "Logo Design: From Concept To Presentation",
         lessons: "5",
         duration: "440",
-        rating: "4.8",
+        rating: "3.8",
         seats: "82",
 
         publishDate: "12/21/2022",
@@ -256,7 +256,7 @@ export const useFrontStore = defineStore("frontStore", {
         title: "Professional Ceramic Moulding For Beginners",
         lessons: "200",
         duration: "790",
-        rating: "4.7",
+        rating: "2.7",
         seats: "65",
 
         publishDate: "12/21/2022",
@@ -307,7 +307,7 @@ export const useFrontStore = defineStore("frontStore", {
         title: "Logo Design: From Concept To Presentation",
         lessons: "5",
         duration: "440",
-        rating: "4.8",
+        rating: "1.8",
         seats: "82",
         publishDate: "12/21/2022",
         uCode: "f1f2f8",
@@ -533,6 +533,7 @@ export const useFrontStore = defineStore("frontStore", {
     searchLang: "",
     searchSkill: "",
     searchCate: "",
+    searchRate: "",
   }),
   actions: {
     async addSubscription(email) {
@@ -674,6 +675,9 @@ export const useFrontStore = defineStore("frontStore", {
     searchCoursesByCate(cate) {
       this.searchCate = cate;
     },
+    searchCoursesByRate(rate) {
+      this.searchRate = rate;
+    },
   },
   getters: {
     getIdComment() {
@@ -698,7 +702,8 @@ export const useFrontStore = defineStore("frontStore", {
           (!this.searchPrice || item.price <= this.searchPrice) &&
           (!this.searchLang || this.searchLang == item.language.replace(/[\s\W]/g, "").toLowerCase()) &&
           (item.skillLevel.toLowerCase() == this.searchSkill.toLowerCase() || !this.searchSkill) &&
-          (item.category.toLowerCase().trim() == this.searchCate || !this.searchCate)
+          (item.category.toLowerCase().trim() == this.searchCate || !this.searchCate) &&
+          ((Math.floor(item.rating) >= this.searchRate && Math.floor(item.rating) < this.searchRate + 1) || !this.searchRate)
         );
       });
     },

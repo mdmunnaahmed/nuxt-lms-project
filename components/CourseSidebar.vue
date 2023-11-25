@@ -101,29 +101,29 @@
     </div>
     <!-- END SIDEBAR POST -->
     <div class="sidebar-post">
-      <div class="sidebar_title"><h4>Rating by</h4></div>
+      <div class="sidebar_title"><h4>Rating by</h4> <button>Clear Rating</button></div>
       <label class="single_rat d-flex align-items-center gap-2 mb-3">
-        <input type="checkbox" />
+        <input type="radio" name="rating" @change="selectRating(5)" />
         <img src="/images/icon/rating-1.svg" alt="" />
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_rat d-flex align-items-center gap-2 mb-3">
-        <input type="checkbox" />
+        <input type="radio" name="rating" @change="selectRating(4)" />
         <img src="/images/icon/rating-2.svg" alt="" />
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_rat d-flex align-items-center gap-2 mb-3">
-        <input type="checkbox" />
+        <input type="radio" name="rating" @change="selectRating(3)" />
         <img src="/images/icon/rating-3.svg" alt="" />
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_rat d-flex align-items-center gap-2 mb-3">
-        <input type="checkbox" />
+        <input type="radio" name="rating" @change="selectRating(2)" />
         <img src="/images/icon/rating-4.svg" alt="" />
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_rat d-flex align-items-center gap-2 mb-3">
-        <input type="checkbox" />
+        <input type="radio" name="rating" @change="selectRating(1)" />
         <img src="/images/icon/rating-5.svg" alt="" />
       </label>
       <!-- END SINGLE LANGU -->
@@ -182,6 +182,9 @@ export default {
       selectedCate.value = cate.toLowerCase().trim();
       frontStore.searchCoursesByCate(cate.toLowerCase().trim());
     };
+    const selectRating = (rate) => {
+      frontStore.searchCoursesByRate(rate);
+    };
     return {
       frontStore,
       updateSearch,
@@ -196,6 +199,7 @@ export default {
       selectCate,
       selectedCate,
       cateCount,
+      selectRating,
     };
   },
 };
@@ -208,5 +212,14 @@ export default {
 }
 .cate-item.active {
   color: #2eca7f;
+}
+.sidebar_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  h4 {
+    margin-bottom: 0;
+  }
 }
 </style>
