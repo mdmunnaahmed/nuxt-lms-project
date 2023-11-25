@@ -11,5 +11,9 @@ export default defineNuxtConfig({
   devtools: {
     enabled: false,
   },
+  generate: {
+    // Disable prerendering temporarily
+    exclude: ['/path-to-prerendered-page'],
+  },
 
 });

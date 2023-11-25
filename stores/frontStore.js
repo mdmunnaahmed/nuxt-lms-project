@@ -534,6 +534,24 @@ export const useFrontStore = defineStore("frontStore", {
     searchSkill: "",
     searchCate: "",
     searchRate: "",
+    faqs: [
+      {
+        title: "How does it create content?",
+        pera: "Great value and so easy to use and sto use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. aves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that.",
+      },
+      {
+        title: "Is the content Original?",
+        pera: "Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that.",
+      },
+      {
+        title: "What to do if your bus got an accident?",
+        pera: "Great value and so easy to use ato use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. nd saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that.",
+      },
+      {
+        title: "How do i see myself without mirror?",
+        pera: "Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that.",
+      },
+    ],
   }),
   actions: {
     async addSubscription(email) {

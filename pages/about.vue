@@ -9,46 +9,24 @@
     <!-- START FAQ -->
     <section class="faq_area section-padding">
       <div class="container">
-        <div class="section-title">
-          <h2>Frequently Asked Question</h2>
-          <p>
-            General <span><u>Questions</u></span>
-          </p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button
-                    class="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    What does it take excellent author?
-                  </button>
-                </h2>
-                <div
-                  id="collapseOne"
-                  class="accordion-collapse collapse show"
-                  aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    Great value and so easy to use and saves me so much time! I
-                    was shocked by how much time and brain energy it saved me.
-                    Simple & easy gotta love that. Great value and so easy to
-                    use.
-                  </div>
-                </div>
-              </div>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-7 col-sm-6 col-xs-12">
+            <div class="section-title">
+              <h2>Frequently Asked Question</h2>
+              <p>
+                General <span><u>Questions</u></span>
+              </p>
             </div>
+            <FaqItem
+              v-for="(f, index) in frontStore.faqs"
+              :key="index"
+              :title="f.title"
+              :pera="f.pera"
+              :index="index"
+            />
           </div>
           <!-- END COL  -->
-          <div class="col-lg-6 col-sm-6 col-xs-12">
+          <div class="col-lg-5 col-sm-6 col-xs-12">
             <div class="pt_faq">
               <img
                 src="/images/all-img/faq.png"
@@ -69,12 +47,13 @@
 </template>
 
 <script>
+import { useFrontStore } from "~/stores/frontStore";
 export default {
   setup() {
-    // definePageMeta({
-    //   middleware: ["auth"],
-    //   // or middleware: 'auth'
-    // });
+    const frontStore = useFrontStore();
+    return {
+      frontStore,
+    };
   },
 };
 </script>
