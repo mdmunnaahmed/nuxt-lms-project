@@ -203,7 +203,7 @@ export default {
   color: rgb(26, 65, 109);
 }
 .cate-item.active {
-  font-weight: 700;
+  font-weight: 600;
   color: #2eca7f;
 }
 </style>
