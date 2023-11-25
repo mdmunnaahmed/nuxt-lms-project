@@ -134,6 +134,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f1",
         enrolled: "75900",
         instructorId: "1",
+        category: "education",
+        skillLevel: "beginner",
+        language: "English",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -156,6 +159,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f2",
         enrolled: "75900",
         instructorId: "1",
+        category: "frontend",
+        skillLevel: "beginner",
+        language: "English",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -179,6 +185,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f3",
         enrolled: "75900",
         instructorId: "1",
+        category: "backend",
+        skillLevel: "beginner",
+        language: "German Language",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -202,6 +211,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f4",
         enrolled: "75900",
         instructorId: "1",
+        category: "education",
+        skillLevel: "Intermediate",
+        language: "Bangla Language",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -225,6 +237,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f5",
         enrolled: "75900",
         instructorId: "1",
+        category: "design",
+        skillLevel: "Expert",
+        language: "Spanish Language",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -248,6 +263,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f6",
         enrolled: "75900",
         instructorId: "1",
+        category: "education",
+        skillLevel: "beginner",
+        language: "English (UK)",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -270,6 +288,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f7",
         enrolled: "75900",
         instructorId: "1",
+        category: "hacking",
+        skillLevel: "Expert",
+        language: "English (US)",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -292,6 +313,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f8",
         enrolled: "75900",
         instructorId: "1",
+        category: "frontend",
+        skillLevel: "beginner",
+        language: "Arabic",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -315,6 +339,9 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f9",
         enrolled: "75900",
         instructorId: "1",
+        category: "hacking",
+        skillLevel: "Intermediate",
+        language: "English",
         certificate: false,
         overview: {
           description: "this is the demo overview text",
@@ -503,6 +530,9 @@ export const useFrontStore = defineStore("frontStore", {
     appliedCoupon: [],
     searchCourse: "",
     searchPrice: "",
+    searchLang: "",
+    searchSkill: "",
+    searchCate: "",
   }),
   actions: {
     async addSubscription(email) {
@@ -635,6 +665,15 @@ export const useFrontStore = defineStore("frontStore", {
     searchCoursesByPrice(price) {
       this.searchPrice = price;
     },
+    searchCoursesByLang(lang) {
+      this.searchLang = lang;
+    },
+    searchCoursesBySkill(skill) {
+      this.searchSkill = skill;
+    },
+    searchCoursesByCate(cate) {
+      this.searchCate = cate;
+    },
   },
   getters: {
     getIdComment() {
@@ -654,8 +693,38 @@ export const useFrontStore = defineStore("frontStore", {
     },
     filteredSearchCourses() {
       return this.courses.filter((item) => {
-        return item.title.toLowerCase().includes(this.searchCourse.toLowerCase()) && (!this.searchPrice || item.price <= this.searchPrice);
+        return (
+          item.title.toLowerCase().includes(this.searchCourse.toLowerCase()) &&
+          (!this.searchPrice || item.price <= this.searchPrice) &&
+          (!this.searchLang || this.searchLang == item.language.replace(/[\s\W]/g, "").toLowerCase()) &&
+          (item.skillLevel.toLowerCase() == this.searchSkill.toLowerCase() || !this.searchSkill) &&
+          (item.category.toLowerCase().trim() == this.searchCate || !this.searchCate)
+        );
       });
+    },
+    // Getter to extract all unique languages from courses
+    allLanguages: (state) => {
+      const languages = new Set();
+      state.courses.forEach((course) => {
+        languages.add(course.language);
+      });
+      return Array.from(languages);
+    },
+    allSkills: (state) => {
+      const counts = {};
+      state.courses.forEach((course) => {
+        const skill = course.skillLevel.toLowerCase();
+        counts[skill] = (counts[skill] || 0) + 1;
+      });
+      return counts;
+    },
+    allCategories: (state) => {
+      const counts = {};
+      state.courses.forEach((course) => {
+        const cate = course.category.toLowerCase();
+        counts[cate] = (counts[cate] || 0) + 1;
+      });
+      return counts;
     },
   },
 });

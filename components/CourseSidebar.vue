@@ -26,75 +26,27 @@
         <span class="range-value">{{ priceRange }}</span>
       </div>
     </div>
-    <!-- END SINGLE POST -->
-    <div class="sidebar-post">
-      <div class="sidebar_title"><h4>Follow us</h4></div>
-      <div class="single_social">
-        <ul>
-          <li>
-            <div class="social_item b_facebook">
-              <a href="#" title="facebook"
-                ><i class="fa fa-facebook"></i
-                ><span class="item-list">150K Likes</span></a
-              >
-            </div>
-          </li>
-
-          <li>
-            <div class="social_item b_twitter">
-              <a href="#" title="twitter"
-                ><i class="fa fa-twitter"></i
-                ><span class="item-list">138K Followers</span></a
-              >
-            </div>
-          </li>
-
-          <li>
-            <div class="social_item b_youtube">
-              <a href="#" title="youtube"
-                ><i class="fa fa-youtube"></i
-                ><span class="item-list">90K Subscribers</span></a
-              >
-            </div>
-          </li>
-
-          <li>
-            <div class="social_item b_pinterest">
-              <a href="#" title="pinterest"
-                ><i class="fa fa-pinterest"></i
-                ><span class="item-list">350K Followers</span></a
-              >
-            </div>
-          </li>
-
-          <li>
-            <div class="social_item b_tumblr">
-              <a href="#" title="rss"
-                ><i class="fa fa-tumblr"></i
-                ><span class="item-list">901 Followers</span></a
-              >
-            </div>
-          </li>
-
-          <li>
-            <div class="social_item b_rss">
-              <a href="#" title="rss"
-                ><i class="fa fa-rss"></i
-                ><span class="item-list">411 Followers</span></a
-              >
-            </div>
-          </li>
-        </ul>
-      </div>
-      <!-- END SOCIAL MEDIA POST -->
-    </div>
     <!-- END SIDEBAR POST -->
     <div class="sidebar-post">
       <div class="sidebar_title"><h4>CATEGORIES</h4></div>
       <div class="single_category">
         <ul>
-          <li>
-            <a href="#">Education <sup>11</sup></a>
+          <li @click="selectCate('')">
+            <button
+              class="cate-item text-capitalize"
+              :class="{ active: selectedCate == '' }"
+            >
+              All Categories <sup>{{ cateCount }}</sup>
+            </button>
+          </li>
+          <li v-for="[cate, count] in categories" :key="cate">
+            <button
+              class="cate-item text-capitalize"
+              @click="selectCate(cate)"
+              :class="{ active: selectedCate == cate.trim().toLowerCase() }"
+            >
+              {{ cate }} <sup>{{ count }}</sup>
+            </button>
           </li>
         </ul>
       </div>
@@ -104,23 +56,16 @@
     <div class="sidebar-post">
       <div class="sidebar_title"><h4>Language</h4></div>
       <label class="single_langu d-flex align-items-center gap-2 mb-2">
-        <input type="checkbox" />
-        <span>Spanish Language</span>
+        <input type="radio" name="lang" @change="selectLang('')" checked />
+        <span>All Languages</span>
       </label>
-      <!-- END SINGLE LANGU -->
-      <label class="single_langu d-flex align-items-center gap-2 mb-2">
-        <input type="checkbox" />
-        <span>United Kingdom (UK)</span>
-      </label>
-      <!-- END SINGLE LANGU -->
-      <label class="single_langu d-flex align-items-center gap-2 mb-2">
-        <input type="checkbox" />
-        <span>United States (US)</span>
-      </label>
-      <!-- END SINGLE LANGU -->
-      <label class="single_langu d-flex align-items-center gap-2 mb-2">
-        <input type="checkbox" />
-        <span> Arabic Language</span>
+      <label
+        class="single_langu d-flex align-items-center gap-2 mb-2"
+        v-for="(l, index) in frontStore.allLanguages"
+        :key="index"
+      >
+        <input type="radio" name="lang" @change="selectLang(l)" />
+        <span>{{ l }}</span>
       </label>
       <!-- END SINGLE LANGU -->
     </div>
@@ -128,23 +73,29 @@
     <div class="sidebar-post">
       <div class="sidebar_title"><h4>Skill Level</h4></div>
       <label class="single_langu d-flex gap-2 mb-2">
-        <input type="checkbox" />
-        <span>All Levels (82)</span>
+        <input type="radio" name="skill" checked @change="selectSkill('')" />
+        <span>All Levels ({{ skillCount }})</span>
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_langu d-flex gap-2 mb-2">
-        <input type="checkbox" />
-        <span>Beginner Levels (42)</span>
+        <input type="radio" name="skill" @change="selectSkill('beginner')" />
+        <span>Beginner Levels ({{ frontStore.allSkills.beginner }})</span>
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_langu d-flex gap-2 mb-2">
-        <input type="checkbox" />
-        <span> Intermediate Level (62)</span>
+        <input
+          type="radio"
+          name="skill"
+          @change="selectSkill('intermediate')"
+        />
+        <span>
+          Intermediate Level ({{ frontStore.allSkills.intermediate }})</span
+        >
       </label>
       <!-- END SINGLE LANGU -->
       <label class="single_langu d-flex gap-2 mb-2">
-        <input type="checkbox" />
-        <span> Expert Level (32)</span>
+        <input type="radio" name="skill" @change="selectSkill('expert')" />
+        <span> Expert Level ({{ frontStore.allSkills.expert }})</span>
       </label>
       <!-- END SINGLE LANGU -->
     </div>
@@ -196,6 +147,37 @@ export default {
     const searchByPrice = (event) => {
       frontStore.searchCoursesByPrice(event.target.value.trim());
     };
+    const selectLang = (lang) => {
+      const regex = /[\s\W]/g;
+
+      frontStore.searchCoursesByLang(lang.replace(regex, "").toLowerCase());
+    };
+    const selectSkill = (skill) => {
+      frontStore.searchCoursesBySkill(skill.toLowerCase());
+    };
+    const skillCount = computed(() => {
+      return (
+        parseInt(frontStore.allSkills.beginner) +
+        parseInt(frontStore.allSkills.intermediate) +
+        parseInt(frontStore.allSkills.expert)
+      );
+    });
+    const cateCount = computed(() => {
+      const value = Object.values(frontStore.allCategories);
+      let total = 0;
+      for (let i = 0; i < value.length; i++) {
+        total += value[i];
+      }
+      return total;
+    });
+    const categories = computed(() => {
+      return Object.entries(frontStore.allCategories);
+    });
+    const selectedCate = ref("");
+    const selectCate = (cate) => {
+      selectedCate.value = cate.toLowerCase().trim();
+      frontStore.searchCoursesByCate(cate.toLowerCase().trim());
+    };
     return {
       frontStore,
       updateSearch,
@@ -203,10 +185,25 @@ export default {
       searchCourse: frontStore.searchCourse,
       priceRange,
       searchByPrice,
+      selectLang,
+      skillCount,
+      selectSkill,
+      categories,
+      selectCate,
+      selectedCate,
+      cateCount,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.cate-item {
+  text-decoration: underline;
+  color: rgb(26, 65, 109);
+}
+.cate-item.active {
+  font-weight: 700;
+  color: #2eca7f;
+}
 </style>
