@@ -141,7 +141,11 @@ export default {
     // search course
     const searchCourse = ref("");
     const updateSearch = (event) => {
-      frontStore.searchCourses(event.target.value.trim());
+      if (event.target.value.trim().length >= 3) {
+        frontStore.searchCourses(event.target.value.trim());
+      } else {
+        frontStore.searchCourses("");
+      }
     };
     const priceRange = ref(0);
     const searchByPrice = (event) => {
