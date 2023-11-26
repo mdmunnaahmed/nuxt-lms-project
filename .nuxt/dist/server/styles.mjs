@@ -1,9 +1,9 @@
 const interopDefault = r => r.default || r || []
 export default {
-  "node_modules/nuxt/dist/app/entry.js": () => import('./_nuxt/entry-styles.1d71c137.mjs').then(interopDefault),
-  "pages/courses-sidebar.vue": () => import('./_nuxt/courses-sidebar-styles.d91b44d8.mjs').then(interopDefault),
-  "pages/cart.vue": () => import('./_nuxt/cart-styles.3d5652f4.mjs').then(interopDefault),
+  "node_modules/nuxt/dist/app/entry.js": () => import('./_nuxt/entry-styles.e4a92213.mjs').then(interopDefault),
   "pages/blog/[id].vue": () => import('./_nuxt/_id_-styles.84eb97c1.mjs').then(interopDefault),
+  "pages/cart.vue": () => import('./_nuxt/cart-styles.3d5652f4.mjs').then(interopDefault),
+  "pages/courses-sidebar.vue": () => import('./_nuxt/courses-sidebar-styles.d91b44d8.mjs').then(interopDefault),
   "pages/courses/[id].vue": () => import('./_nuxt/_id_-styles.52c70d58.mjs').then(interopDefault),
   "pages/profile/dashboard.vue": () => import('./_nuxt/dashboard-styles.6c124b43.mjs').then(interopDefault),
   "pages/register.vue": () => import('./_nuxt/register-styles.447c40e4.mjs').then(interopDefault),

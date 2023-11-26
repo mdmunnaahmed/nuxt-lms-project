@@ -1,0 +1,1 @@
+import{J as a,K as t}from"./entry.7fda6bbc.js";import{u as o}from"./AuthStore.198f27f3.js";const f=a((e,i)=>{const r=o().isLoggedIn;if(!r&&e.path!=="/login"&&e.path!=="/register")return t("/login");if(r&&e.path==="/profile")return t("/profile/dashboard");if(r&&(e.path==="/login"||e.path==="/register"))return t("/profile/dashboard")});export{f as default};

@@ -1,0 +1,1 @@
+import{_ as e,s as r,o as s,I as n}from"./entry.7fda6bbc.js";import{u as c}from"./AuthStore.198f27f3.js";const a={setup(){return{authStore:c()}}};function _(t,p,u,f,m,i){const o=n;return s(),r(o)}const h=e(a,[["render",_]]);export{h as default};
