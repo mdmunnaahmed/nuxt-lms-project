@@ -4970,7 +4970,7 @@ blockquote::before,
 	position: relative;
 	z-index: 1;
 	transition: all 0.3s ease;
-	
+
 }
 
 .range-slider input[type="range"]::-webkit-slider-thumb {
@@ -5304,7 +5304,7 @@ blockquote::before,
 .pd_title {
 	color: #2eca7f;
 	display: block;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 700;
 	line-height: 12px;
 	margin-bottom: 30px;
@@ -5313,17 +5313,10 @@ blockquote::before,
 	transition: .5s;
 }
 
-.pd_title:hover {
-	color: #000;
-}
-
 .pd_price_dtls {
-	margin-bottom: 38px;
+	margin-bottom: 18px;
 }
 
-.pd_price {
-	float: left;
-}
 
 .pd_ratng {
 	float: right;
@@ -5340,7 +5333,6 @@ blockquote::before,
 	line-height: 16px;
 	display: block;
 	font-weight: 500;
-	float: left;
 }
 
 .pd_price .old {
@@ -5350,19 +5342,8 @@ blockquote::before,
 	padding: 0 5px 0 4px;
 }
 
-.pd_price .old::before {
-	background: #909090;
-	content: "";
-	height: 1px;
-	left: 0;
-	position: absolute;
-	top: 6px;
-	width: 100%;
-}
-
 .pd_ratng .rtngs i {
 	display: block;
-	float: left;
 	font-size: 15px;
 	margin-right: 3px;
 }
@@ -5374,7 +5355,7 @@ blockquote::before,
 .pd_text h4 {
 	font-size: 14px;
 	font-weight: 500;
-	margin: 0 0 12px;
+	margin: 0 0 6px;
 	text-transform: uppercase;
 }
 
@@ -5390,23 +5371,26 @@ blockquote::before,
 	text-transform: uppercase;
 }
 
-.pd_img_size a {
+.pd_img_size span {
 	border: 1px solid #eeeeee;
 	color: #303030;
-	display: block;
-	float: left;
-	height: 36px;
+	display: inline-block;
+	width: 36px;
+	aspect-ratio: 1;
 	line-height: 36px;
 	margin-right: 10px;
 	text-align: center;
 	text-transform: uppercase;
-	width: 36px;
-	transition: .5s;
+	transition: .3s;
+	cursor: pointer;
+	user-select: none;
 }
 
-.pd_img_size a:hover {
+.pd_img_size span:hover,
+.pd_img_size span.active {
+	background-color: #2eca7f;
 	border: 1px solid #2eca7f;
-	color: #2eca7f;
+	color: white;
 }
 
 .pd_clr_qntty_dtls {
@@ -5425,14 +5409,16 @@ blockquote::before,
 	text-transform: uppercase;
 }
 
-.pd_clr a.active {
-	border: 6px solid #fff;
-	outline: 1px solid #303030;
+.pd_clr span.active {
+	border: 4px solid #fff;
+	outline: 1px solid #ddd;
 	outline-offset: -1px;
 	overflow: hidden;
+	opacity: 1;
 }
 
-.pd_clr a {
+.pd_clr span {
+	opacity: .3;
 	display: block;
 	float: left;
 	height: 36px;

@@ -552,6 +552,83 @@ export const useFrontStore = defineStore("frontStore", {
         pera: "Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that. Great value and so easy to use and saves me so much time! I was shocked by how much time and brain energy it saved me. Simple & easy gotta love that.",
       },
     ],
+    products: [
+      {
+        id: 1,
+        thumb: "1.jpg",
+        thumb2: "2.jpg",
+        title: "Funny Book with Images",
+        price: 59,
+        discountPrice: 25,
+        status: "new",
+        rating: 4.9,
+        sizes: ["s", "m", "l", "xl", "xxl"],
+        totalQty: 156,
+        colors: [
+          {
+            name: "red",
+            colorCode: "#cc3a19",
+          },
+          {
+            name: "blue",
+            colorCode: "#1961cc",
+          },
+          {
+            name: "purple",
+            colorCode: "#cc19c3",
+          },
+          {
+            name: "orange",
+            colorCode: "#cc7e19",
+          },
+          {
+            name: "yellow",
+            colorCode: "#c9cc19",
+          },
+        ],
+        overview:
+          "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
+      },
+      {
+        id: 2,
+        thumb: "3.jpg",
+        thumb2: "4.jpg",
+        title: "Comics with Styles",
+        price: 99,
+        discountPrice: 55,
+        status: "sale",
+        rating: 3.9,
+        sizes: ["s", "m", "l", "xl", "xxl"],
+        overview:
+          "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
+      },
+      {
+        id: 3,
+        thumb: "5.jpg",
+        thumb2: "6.jpg",
+        title: "The Principle of Law",
+        price: 129,
+        discountPrice: 99,
+        status: "fire",
+        rating: 3.9,
+        sizes: ["s", "m", "l", "xl", "xxl"],
+        overview:
+          "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
+      },
+      {
+        id: 3,
+        thumb: "7.jpg",
+        thumb2: "8.jpg",
+        title: "Bad days of the History",
+        price: 129,
+        discountPrice: 99,
+        status: "fire",
+        rating: 3.9,
+        sizes: ["s", "m", "l", "xl", "xxl"],
+        overview:
+          "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
+      },
+    ],
   }),
   actions: {
     async addSubscription(email) {
@@ -575,6 +652,18 @@ export const useFrontStore = defineStore("frontStore", {
     },
     getIdPost(id) {
       return this.posts.find((p) => {
+        return (
+          p.title
+            .trim()
+            .toLowerCase()
+            .replaceAll(/[^\w\s]/gi, "")
+            .replaceAll(" ", "-")
+            .replaceAll("--", "-") === id
+        );
+      });
+    },
+    getIdProduct(id) {
+      return this.products.find((p) => {
         return (
           p.title
             .trim()
