@@ -53,9 +53,17 @@
                     :class="{ active: selectedColor == color }"
                     v-for="(color, index) in product.colors"
                     :key="index"
-                    :style="{ backgroundColor: color.colorCode }"
+                    :style="{
+                      backgroundColor: color.colorCode,
+                      outlineColor: color.colorCode,
+                    }"
                   ></span>
-                  <p style="text-transform: capitalize;" :style="{color: selectedColor.colorCode}">{{ selectedColor.name }}</p>
+                  <p
+                    style="text-transform: capitalize"
+                    :style="{ color: selectedColor.colorCode }"
+                  >
+                    {{ selectedColor.name }}
+                  </p>
                 </div>
                 <div class="pd_qntty_area">
                   <h4>quantity:</h4>
@@ -76,41 +84,20 @@
                 <a class="btn btn-default acc_btn btn_icn"
                   ><i class="fa fa-heart"></i
                 ></a>
-                <a class="btn btn-default acc_btn btn_icn"
-                  ><i class="fa fa-refresh"></i
-                ></a>
-              </div>
-              <div class="pd_share_area fix">
-                <h4>share this on:</h4>
-                <div class="pd_social_icon">
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                  <a href="#"><i class="fa fa-vimeo"></i></a>
-                  <a href="#"><i class="fa fa-google-plus"></i></a>
-                  <a href="#"><i class="fa fa-tumblr"></i></a>
-                  <a href="#"><i class="fa fa-pinterest"></i></a>
-                </div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-xs-12">
             <div class="pd_tab_area fix">
               <ul class="pd_tab_btn nav nav-tabs" role="tablist">
                 <li>
-                  <a
-                    class="active"
-                    href="#description"
-                    role="tab"
-                    data-bs-toggle="tab"
-                    >Description</a
-                  >
+                  <a class="active" href="#description">Description</a>
                 </li>
                 <li>
                   <a href="#information" role="tab" data-bs-toggle="tab"
-                    >Information</a
+                    >Attributes</a
                   >
                 </li>
                 <li>
@@ -120,51 +107,70 @@
 
               <!-- Tab panes -->
               <div class="tab-content">
-                <div
-                  role="tabpanel"
-                  class="tab-pane fade show active"
-                  id="description"
-                >
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </p>
-                  <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur product</li>
-                    <li>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse
-                    </li>
-                    <li>
-                      Excepteur sinted occaecat cupidatat non proident products
-                    </li>
-                    <li>Voluptate velit esse cillum.</li>
-                  </ul>
+                <div class="tab-pane fade show">
+                  {{ product.description }}
                 </div>
 
-                <div role="tabpanel" class="tab-pane fade" id="information">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur.
-                  </p>
+                <div class="tab-pane fade show">
+                  <table class="table table-striped w-50">
+                    <thead>
+                      <tr>
+                        <th>Attributes</th>
+                        <th>Values</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Color:</td>
+                        <td>
+                          <span
+                            class="me-2"
+                            v-for="(c, index) in product.colors"
+                            :key="index"
+                            :style="{
+                              color: c.colorCode,
+                            }"
+                            >{{ c.name }},</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Sizes:</td>
+                        <td>
+                          <span
+                            class="me-2 text-uppercase font-medium"
+                            v-for="(s, index) in product.sizes"
+                            :key="index"
+                            >{{ s }},</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Brand:</td>
+                        <td>
+                          {{ product.brand ? product.brand : "Not Specified" }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Category:</td>
+                        <td>
+                          {{
+                            product.category
+                              ? product.category
+                              : "Not Specified"
+                          }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
-                <div role="tabpanel" class="tab-pane fade" id="reviews">
+                <div class="tab-pane fade show active">
                   <div class="pda_rtng_area fix">
-                    <h4>4.5 <span>(Overall)</span></h4>
-                    <span>Based on 9 Comments</span>
+                    <h2>4.5 <span>(Overall)</span></h2>
+                    <span class="fs-6">Based on 9 Comments</span>
                   </div>
-                  <div class="rtng_cmnt_area fix">
+                  <div class="rtng_cmnt_area mt-5">
                     <div class="single_rtng_cmnt">
                       <div class="rtngs">
                         <i class="fa fa-star"></i>
@@ -472,14 +478,14 @@ export default {
       selectedColor.value = color;
     };
 
-    const pQty = ref(1)
+    const pQty = ref(1);
     return {
       product,
       selectSize,
       selectedSize,
       selectColor,
       selectedColor,
-      pQty
+      pQty,
     };
   },
 };
