@@ -586,8 +586,9 @@ export const useFrontStore = defineStore("frontStore", {
             colorCode: "#c9cc19",
           },
         ],
-        sku: 'AFG012'
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor  amet, consectetur product Duis aute irure dolor in reprehenderit in voluptate velit esse Excepteur sinted occaecat cupidatat non proident products Voluptate velit esse cillum.",
+        sku: "AFG012",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor  amet, consectetur product Duis aute irure dolor in reprehenderit in voluptate velit esse Excepteur sinted occaecat cupidatat non proident products Voluptate velit esse cillum.",
         overview:
           "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
       },
@@ -629,6 +630,16 @@ export const useFrontStore = defineStore("frontStore", {
         sizes: ["s", "m", "l", "xl", "xxl"],
         overview:
           "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
+      },
+    ],
+    buyingHistory: [
+      {
+        id: 1,
+        uname: 'username',
+        thumb: "1.jpg",
+        title: "this is a demo title",
+        sku: "132451r",
+        price: 34,
       },
     ],
   }),

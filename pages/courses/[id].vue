@@ -545,7 +545,9 @@ fieldset {
     width: auto !important;
     margin: 0 !important;
     padding: 2px 6px !important;
-
+    &:focus {
+      border-color: red !important;
+    }
     &::after {
       content: "☆";
       font-size: calc(var(--size) * 3 / 4);

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap');
 
 body {
 	color: #888;
@@ -3980,8 +3980,9 @@ blockquote::before,
 .section-top-title h1 {
 	margin-bottom: 10px;
 	text-transform: capitalize;
-	font-weight: 700;
-	font-size: 50px;
+	font-weight: 600;
+	font-size: 46px;
+	font-family: "Rubik", sans-serif;
 }
 
 .section-top-title ul {
@@ -5521,10 +5522,9 @@ blockquote::before,
 .pd_tab_area {
 	margin-top: 30px;
 	background: #fff none repeat scroll 0 0;
-	border: 1px solid rgba(0, 0, 0, .02);
-	box-shadow: 0 0 4px rgba(0, 0, 0, .02);
 	display: block;
-	padding: 31px 32px;
+	/* border: 1px solid rgba(0, 0, 0, .08);
+	padding: 31px 32px; */
 }
 
 .pd_tab_area p {
@@ -5724,3 +5724,12 @@ blockquote::before,
 }
 
 /*END SHOP CSS*/
+input,
+textarea {
+	border: 1px solid #ddd !important;
+}
+input:focus,
+textarea:focus {
+	outline: none !important;
+	border: 1px solid #2eca7f !important;
+}

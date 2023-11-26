@@ -3,8 +3,8 @@ export const useAuthStore = defineStore("authStore", {
     name: "Munna",
     studentAccounts: [
       {
-        thumb: "munns.jpg",
         uname: "username",
+        thumb: "munns.jpg",
         name: "Munna Ahmed",
         email: "demo@mail.com",
         password: "username",
