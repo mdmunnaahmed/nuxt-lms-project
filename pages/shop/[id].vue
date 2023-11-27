@@ -86,11 +86,19 @@
                     ><i class="fa fa-heart"></i
                   ></a>
                 </div>
-                <small class="text-success fw-semibold" v-if="success && !frontStore.error"
+                <small
+                  class="text-success fw-semibold"
+                  v-if="success && !frontStore.error"
                   >added to cart</small
                 >
                 <small class="text-danger fw-semibold" v-if="frontStore.error"
                   >already in cart</small
+                >
+                <small class="text-danger fw-semibold" v-if="sizeError && !colorError && !success"
+                  >Please select a size</small
+                >
+                <small class="text-danger fw-semibold" v-if="colorError && !success"
+                  >Please select a color</small
                 >
               </div>
             </div>
@@ -546,15 +554,27 @@ export default {
 
     const pQty = ref(1);
     const success = ref(false);
+    const colorError = ref(false);
+    const sizeError = ref(false);
 
     const addToCart = async () => {
+      if (selectedSize.value == "") {
+        sizeError.value = true;
+        return;
+      }
+      if (selectedColor.value == "") {
+        colorError.value = true;
+        return;
+      }
       await frontStore.addProductToCart({
         uname: authStore.authUser.uname,
         thumb: product.thumb,
         title: product.title,
         price: product.price,
         sku: product.sku,
-        quantity: 1,
+        quantity: pQty.value,
+        size: selectedSize.value,
+        color: selectedColor.value,
         id: product.id,
       });
       success.value = true;
@@ -570,6 +590,8 @@ export default {
       pQty,
       addToCart,
       success,
+      sizeError,
+      colorError,
     };
   },
 };
