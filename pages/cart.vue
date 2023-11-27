@@ -92,8 +92,18 @@
                       </li>
                     </ul>
                     <div class="button5">
-                      <a href="#" class="btn">Checkout</a>
-                      <a href="/courses" class="btn">Continue shopping</a>
+                      <NuxtLink @click="navigateToNextPage" class="btn"
+                      :to="{
+                          path: '/checkout',
+                          query: {
+                            cartInfo: JSON.stringify(frontStore.cart),
+                          },
+                        }"
+                        >Checkout</NuxtLink
+                      >
+                      <NuxtLink to="/courses" class="btn"
+                        >Continue shopping</NuxtLink
+                      >
                     </div>
                   </div>
                 </div>
