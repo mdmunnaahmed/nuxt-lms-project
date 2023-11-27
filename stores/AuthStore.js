@@ -22,10 +22,16 @@ export const useAuthStore = defineStore("authStore", {
     //   const data = await res.json();
     //   this.studentAccounts = data;
     // },
-    // getAuthUser() {
-    //   this.authUser = JSON.parse(localStorage.getItem("user"));
-    //   this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    // },
+
+    async checkAuthentication() {
+      // Simulate fetching user data from local storage
+      const userData = await fetchUserDataFromLocalStorage();
+
+      // Set isAuthenticated and user based on the authentication status
+      this.isLoggedIn = !!userData;
+      this.authUser = userData;
+    },
+
     async addAccount(account) {
       this.loading = true;
       this.studentAccounts.push(account);
@@ -34,7 +40,7 @@ export const useAuthStore = defineStore("authStore", {
       //   body: JSON.stringify(account),
       //   headers: { "Content-Type": "application/json" },
       // });
-      
+
       this.authUser = account;
       this.isLoggedIn = true;
       // localStorage.setItem("user", JSON.stringify(account));
@@ -128,3 +134,13 @@ export const useAuthStore = defineStore("authStore", {
   },
   getters: {},
 });
+
+async function fetchUserDataFromLocalStorage() {
+  return new Promise((resolve) => {
+    // Simulate an asynchronous operation, e.g., fetching from local storage
+    setTimeout(() => {
+      const storedUserData = JSON.parse(localStorage.getItem("user"));
+      resolve(storedUserData);
+    }, 0); // Simulating a delay of 500 milliseconds
+  });
+}

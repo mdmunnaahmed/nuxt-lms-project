@@ -29,6 +29,7 @@
                   :thumb="c.thumb"
                   :ind="index + 1"
                   :id="c.id"
+                  :sku="c.sku"
                 />
               </tbody>
             </table>

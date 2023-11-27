@@ -4,7 +4,7 @@
     <!-- Product Details Area  -->
     <div class="prdct_dtls_page_area section-padding">
       <div class="container">
-        <form action="">
+        <form @submit.prevent="addToCart">
           <div class="row">
             <!-- Product Details Image -->
             <div class="col-md-6 col-xs-12">
@@ -80,12 +80,18 @@
                   </div>
                 </div>
                 <!-- Product Action -->
-                <div class="pd_btn fix">
+                <div class="pd_btn fix mb-0">
                   <button class="btn btn-default acc_btn">add to bag</button>
                   <a class="btn btn-default acc_btn btn_icn"
                     ><i class="fa fa-heart"></i
                   ></a>
                 </div>
+                <small class="text-success fw-semibold" v-if="success && !frontStore.error"
+                  >added to cart</small
+                >
+                <small class="text-danger fw-semibold" v-if="frontStore.error"
+                  >already in cart</small
+                >
               </div>
             </div>
           </div>
@@ -517,10 +523,12 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useFrontStore } from "../../stores/frontStore";
+import { useAuthStore } from "~/stores/AuthStore";
 export default {
   setup() {
+    const authStore = useAuthStore();
     const frontStore = useFrontStore();
     const route = useRoute();
     const slug = route.params.id;
@@ -537,27 +545,31 @@ export default {
     };
 
     const pQty = ref(1);
+    const success = ref(false);
 
     const addToCart = async () => {
       await frontStore.addProductToCart({
         uname: authStore.authUser.uname,
-        thumb: course.thumb,
-        title: course.title,
-        price: course.price,
-        uCode: course.uCode,
+        thumb: product.thumb,
+        title: product.title,
+        price: product.price,
+        sku: product.sku,
         quantity: 1,
-        id: course.id,
+        id: product.id,
       });
       success.value = true;
     };
 
     return {
+      frontStore,
       product,
       selectSize,
       selectedSize,
       selectColor,
       selectedColor,
       pQty,
+      addToCart,
+      success,
     };
   },
 };

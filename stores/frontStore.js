@@ -138,6 +138,7 @@ export const useFrontStore = defineStore("frontStore", {
         skillLevel: "beginner",
         language: "English",
         certificate: false,
+        sku: "CS0123",
         overview: {
           description: "this is the demo overview text",
           videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
@@ -163,6 +164,7 @@ export const useFrontStore = defineStore("frontStore", {
         skillLevel: "beginner",
         language: "English",
         certificate: false,
+        sku: "CS0124",
         overview: {
           description: "this is the demo overview text",
           videoLink: "https://www.youtube.com/embed/RXv_uIN6e-Y",
@@ -180,7 +182,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "190",
         rating: "4.9",
         seats: "120",
-
+        sku: "CS0125",
         publishDate: "12/21/2022",
         uCode: "f1f2f3",
         enrolled: "75900",
@@ -206,7 +208,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "240",
         rating: "5.0",
         seats: "30",
-
+        sku: "CS0126",
         publishDate: "12/21/2022",
         uCode: "f1f2f4",
         enrolled: "75900",
@@ -232,7 +234,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "440",
         rating: "3.8",
         seats: "82",
-
+        sku: "CS0127",
         publishDate: "12/21/2022",
         uCode: "f1f2f5",
         enrolled: "75900",
@@ -258,7 +260,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "790",
         rating: "2.7",
         seats: "65",
-
+        sku: "CS0128",
         publishDate: "12/21/2022",
         uCode: "f1f2f6",
         enrolled: "75900",
@@ -284,6 +286,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "240",
         rating: "5.0",
         seats: "30",
+        sku: "CS0129",
         publishDate: "12/21/2022",
         uCode: "f1f2f7",
         enrolled: "75900",
@@ -309,6 +312,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "440",
         rating: "1.8",
         seats: "82",
+        sku: "CS0130",
         publishDate: "12/21/2022",
         uCode: "f1f2f8",
         enrolled: "75900",
@@ -334,7 +338,7 @@ export const useFrontStore = defineStore("frontStore", {
         duration: "790",
         rating: "4.7",
         seats: "65",
-
+        sku: "CS0132",
         publishDate: "12/21/2022",
         uCode: "f1f2f9",
         enrolled: "75900",
@@ -501,6 +505,7 @@ export const useFrontStore = defineStore("frontStore", {
         price: 79,
         id: 1,
         quantity: 1,
+        sku: "CS0123",
       },
       {
         uname: "username",
@@ -509,6 +514,7 @@ export const useFrontStore = defineStore("frontStore", {
         price: 29,
         id: 2,
         quantity: 1,
+        sku: "CS0124",
       },
     ],
     coupons: [
@@ -635,7 +641,7 @@ export const useFrontStore = defineStore("frontStore", {
     buyingHistory: [
       {
         id: 1,
-        uname: 'username',
+        uname: "username",
         thumb: "1.jpg",
         title: "this is a demo title",
         sku: "132451r",
@@ -745,8 +751,17 @@ export const useFrontStore = defineStore("frontStore", {
       }
       this.loading = false;
     },
-    updateQuantity(id, quantity) {
-      const item = this.cart.find((item) => item.id === id);
+    async addProductToCart(cart) {
+      this.loading = true;
+      if (!this.cart.some((i) => i.sku === cart.sku)) {
+        this.cart.push(cart);
+      } else {
+        this.error = "already in the cart";
+      }
+      this.loading = false;
+    },
+    updateQuantity(sku, quantity) {
+      const item = this.cart.find((item) => item.sku === sku);
       if (item) {
         item.quantity = quantity;
       }

@@ -5,14 +5,14 @@
     </td>
     <td class="product-des text-center" data-title="Description">
       <p class="product-name">
-        <a href="#">{{ title }}</a>
+        <NuxtLink :to="'courses/' + slug">{{ title }}</NuxtLink>
       </p>
       <!-- <p class="product-des">
         Maboriosam in a tonto nesciung eget distingy magndapibus.
       </p> -->
     </td>
     <td class="price" data-title="Price">
-      <span>$ {{ price }} </span>
+      <span>${{ price }} </span>
     </td>
     <td class="qty">
       <!-- Input Order -->
@@ -21,7 +21,7 @@
           <button
             type="button"
             class="btn btn-primary btn-number"
-            @click="dec(ind)"
+            @click="dec(sku)"
           >
             <i class="ti-minus"></i>
           </button>
@@ -30,7 +30,7 @@
           type="tel"
           class="input-number"
           v-model="qty"
-          @input="checkLimit(ind)"
+          @input="checkLimit(sku)"
         />
         <small class="text-xs text-danger" v-if="qtyLimit">{{
           qtyLimit
@@ -39,7 +39,7 @@
           <button
             type="button"
             class="btn btn-primary btn-number"
-            @click="inc(ind)"
+            @click="inc(sku)"
           >
             <i class="ti-plus"></i>
           </button>
@@ -60,37 +60,39 @@
 
 <script>
 import { ref } from "vue";
+import useSlug from "~/composables/useSlug";
 import { useFrontStore } from "~/stores/frontStore";
 export default {
-  props: ["thumb", "title", "price", "quantity", "ind", "id"],
+  props: ["thumb", "title", "price", "quantity", "ind", "id", "sku"],
   setup(props) {
     const frontStore = useFrontStore();
+    const { slug } = useSlug(props.title);
     const price = ref(props.price);
     const qty = ref(1);
     const qtyLimit = ref("");
-    const inc = (id) => {
+    const inc = (sku) => {
       if (qty.value < 10) {
         qty.value += 1;
-        frontStore.updateQuantity(id, qty.value);
+        frontStore.updateQuantity(sku, qty.value);
       } else if (qty.value == 10) {
         qtyLimit.value = "you can't buy more than 10";
       }
     };
-    const dec = (id) => {
+    const dec = (sku) => {
       if (qty.value > 1) {
         qty.value -= 1;
         qtyLimit.value = "";
-        frontStore.updateQuantity(id, qty.value);
+        frontStore.updateQuantity(sku, qty.value);
       }
     };
-    const checkLimit = (id) => {
+    const checkLimit = (sku) => {
       if (qty.value > 10) {
         qty.value = "10";
       }
       if (qty.value < 1) {
         qty.value = 1;
       }
-      frontStore.updateQuantity(id, qty.value);
+      frontStore.updateQuantity(sku, qty.value);
       qtyLimit.value = "";
     };
 
@@ -108,8 +110,10 @@ export default {
     watch(totalPrice, onSubtotalChange);
 
     const removeItem = (item) => {
-      const confirmed = window.confirm('Are you sure you want to delete the item?');
-      if(confirmed) {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete the item?"
+      );
+      if (confirmed) {
         frontStore.removeItem(item);
       }
     };
@@ -124,6 +128,7 @@ export default {
       checkLimit,
       totalPrice,
       removeItem,
+      slug,
     };
   },
 };
