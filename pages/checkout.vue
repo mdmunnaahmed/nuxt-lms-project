@@ -164,8 +164,7 @@
     <h2>Checkout</h2>
     <ul>
       {{
-        cartInfo[0] +
-        objectO[0]
+        cartInfo[0]
       }}
     </ul>
     <!-- Add your checkout form and other content -->
