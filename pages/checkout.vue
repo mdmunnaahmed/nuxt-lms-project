@@ -106,9 +106,18 @@
                 <h2>CART TOTALS</h2>
                 <div class="content">
                   <ul>
-                    <li>Sub Total<span>$330.00</span></li>
-                    <li>(+) Shipping<span>$10.00</span></li>
-                    <li class="last">Total<span>$340.00</span></li>
+                    <li>
+                      Sub Total<span>${{ totalPrice.toFixed(2) }}</span>
+                    </li>
+                    <li>(+) Shipping<span>$0.00</span></li>
+                    <li>
+                      (-) Discount<span
+                        >${{ discount ? discount.toFixed(2) : 0 }}</span
+                      >
+                    </li>
+                    <li class="last">
+                      Total<span>${{ youPay.toFixed(2) }}</span>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -116,40 +125,22 @@
               <!-- Order Widget -->
               <div class="single-widget">
                 <h2>Payments</h2>
-                <div class="content">
-                  <div class="checkbox">
-                    <label class="checkbox-inline" for="1"
-                      ><input name="updates" id="1" type="checkbox" /> Check
-                      Payments</label
-                    >
-                    <label class="checkbox-inline" for="2"
-                      ><input name="news" id="2" type="checkbox" /> Cash On
-                      Delivery</label
-                    >
-                    <label class="checkbox-inline" for="3"
-                      ><input name="news" id="3" type="checkbox" />
-                      PayPal</label
-                    >
-                  </div>
+                <div class="content d-flex flex-column px-4 ms-1 mt-3 gap-2">
+                  <label
+                    ><input name="payment-method" type="radio" /> Cash On
+                    Delivery</label
+                  >
+                  <label
+                    ><input name="payment-method" type="radio" /> Bkash</label
+                  >
                 </div>
               </div>
               <!--/ End Order Widget -->
-              <!-- Payment Method Widget -->
-              <div class="single-widget payement">
-                <div class="content">
-                  <img
-                    src="assets/img/payment-method.html"
-                    class="img-fluid"
-                    alt="#"
-                  />
-                </div>
-              </div>
-              <!--/ End Payment Method Widget -->
               <!-- Button Widget -->
               <div class="single-widget get-button">
                 <div class="content">
                   <div class="button">
-                    <a href="#" class="btn">proceed to checkout</a>
+                    <a href="#" class="btn">proceed to payment</a>
                   </div>
                 </div>
               </div>
@@ -163,21 +154,48 @@
   <div>
     <h2>Checkout</h2>
     <ul>
-      {{
-        cartInfo[0]
-      }}
+      <li v-for="(c, index) in cartInfo" :key="index">
+        {{ c }}
+      </li>
     </ul>
     <!-- Add your checkout form and other content -->
   </div>
 </template>
 
 <script>
+import { ref, computed } from "vue";
+import { useFrontStore } from "../../stores/frontStore";
 export default {
   setup() {
+    const frontStore = useFrontStore();
     const route = useRoute();
-    const cartInfo = route.query.cartInfo;
+    const cartInfo = JSON.parse(route.query.cartInfo);
+    const discount = JSON.parse(route.query.discountAmount);
+    // Compute the total price
+    const items = ref(cartInfo);
+    const totalPrice = computed(() => {
+      return items.value.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    });
+    const discountAmount = computed(() => {
+      if (frontStore.appliedCoupon.length) {
+        return frontStore.appliedCoupon[0].discount;
+      }
+    });
+    const youPay = computed(() => {
+      if (discount) {
+        return totalPrice.value - discount;
+      }
+      return totalPrice.value;
+    });
     return {
+      frontStore,
       cartInfo,
+      totalPrice,
+      discountAmount,
+      youPay,
+      discount
     };
   },
 };

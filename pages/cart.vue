@@ -92,11 +92,14 @@
                       </li>
                     </ul>
                     <div class="button5">
-                      <NuxtLink @click="navigateToNextPage" class="btn"
-                      :to="{
+                      <NuxtLink
+                        @click="navigateToNextPage"
+                        class="btn"
+                        :to="{
                           path: '/checkout',
                           query: {
                             cartInfo: JSON.stringify(frontStore.cart),
+                            discountAmount: discountAmount,
                           },
                         }"
                         >Checkout</NuxtLink

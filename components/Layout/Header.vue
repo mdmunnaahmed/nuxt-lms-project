@@ -120,7 +120,7 @@
             v-if="authStore.isLoggedIn"
             class="home_lc d-flex align-items-center justify-content-end mt-0"
           >
-            <NuxtLink to="/wishlist" class="hlc">
+            <NuxtLink to="" class="hlc">
               <i class="ti-heart"></i>
               <span class="gactive">0</span>
             </NuxtLink>
