@@ -99,7 +99,7 @@
                           path: '/checkout',
                           query: {
                             cartInfo: JSON.stringify(frontStore.cart),
-                            discountAmount: discountAmount,
+                            discountAmount: discountAmount ? discountAmount: 0,
                           },
                         }"
                         >Checkout</NuxtLink

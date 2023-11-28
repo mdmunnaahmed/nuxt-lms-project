@@ -2905,8 +2905,7 @@
 }
 .shopping-summery tbody tr img {
 	border-radius: 0;
-	width: 80px;
-	height: 80px;
+	width: 100px;
 }
 .shopping-summery tbody tr:last-child{
 	border:none;

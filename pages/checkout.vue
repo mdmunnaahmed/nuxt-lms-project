@@ -7,29 +7,32 @@
           <div class="col-lg-8 col-12">
             <div class="checkout-form">
               <h2>Make Your Checkout Here</h2>
-              <p>Please register in order to checkout more quickly</p>
+              <p v-if="authStore.isLoggedIn">
+                Your account will be automatically created.
+              </p>
+              <p v-else>You are logged in as...</p>
               <!-- Form -->
-              <form class="form" method="post" action="#">
+              <form class="form">
                 <div class="row">
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
-                      <label>First Name<span>*</span></label>
+                      <label>Full Name<span>*</span></label>
                       <input
                         type="text"
-                        name="name"
-                        placeholder=""
                         required="required"
+                        v-model="name"
+                        :disabled="name"
                       />
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
-                      <label>Last Name<span>*</span></label>
+                      <label>Username<span>*</span></label>
                       <input
                         type="text"
-                        name="name"
-                        placeholder=""
                         required="required"
+                        v-model="uname"
+                        :disabled="uname"
                       />
                     </div>
                   </div>
@@ -38,20 +41,9 @@
                       <label>Email Address<span>*</span></label>
                       <input
                         type="email"
-                        name="email"
-                        placeholder=""
                         required="required"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <div class="form-group">
-                      <label>Phone Number<span>*</span></label>
-                      <input
-                        type="number"
-                        name="number"
-                        placeholder=""
-                        required="required"
+                        v-model="email"
+                        :disabled="email"
                       />
                     </div>
                   </div>
@@ -60,9 +52,8 @@
                       <label>Address Line 1<span>*</span></label>
                       <input
                         type="text"
-                        name="address"
-                        placeholder=""
                         required="required"
+                        v-model="addr1"
                       />
                     </div>
                   </div>
@@ -71,9 +62,8 @@
                       <label>Address Line 2<span>*</span></label>
                       <input
                         type="text"
-                        name="address"
-                        placeholder=""
                         required="required"
+                        v-model="addr2"
                       />
                     </div>
                   </div>
@@ -82,16 +72,19 @@
                       <label>Postal Code<span>*</span></label>
                       <input
                         type="text"
-                        name="post"
-                        placeholder=""
                         required="required"
+                        v-model="postCode"
                       />
                     </div>
                   </div>
                   <div class="col-12">
-                    <div class="form-group create-account">
-                      <input id="cbox" type="checkbox" />
-                      <label>Create an account?</label>
+                    <div class="form-group">
+                      <label>Note to Rider</label>
+                      <textarea
+                        class="w-100 px-3 py-2"
+                        rows="6"
+                        v-model="noteToRider"
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -104,6 +97,38 @@
               <!-- Order Widget -->
               <div class="single-widget">
                 <h2>CART TOTALS</h2>
+                <ul class="px-4 ms-1 mt-3 d-flex flex-col gap-3">
+                  <li v-for="(c, index) in cartInfo" :key="index">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="thumb">
+                        <img
+                          :src="'/images/all-img/' + c.thumb"
+                          alt=""
+                          style="width: 110px; max-width: unset"
+                        />
+                      </div>
+                      <div class="content">
+                        <h6 class="mb-2">
+                          <a href="">{{ c.title }}</a>
+                        </h6>
+                        <div class="d-flex align-items-center gap-3">
+                          <h6>
+                            Price:
+                            <span class="font-bold text-success">{{
+                              c.price
+                            }}</span>
+                          </h6>
+                          <h6>
+                            Quantity:
+                            <span class="font-bold text-success">{{
+                              c.quantity
+                            }}</span>
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
                 <div class="content">
                   <ul>
                     <li>
@@ -127,8 +152,15 @@
                 <h2>Payments</h2>
                 <div class="content d-flex flex-column px-4 ms-1 mt-3 gap-2">
                   <label
-                    ><input name="payment-method" type="radio" /> Cash On
-                    Delivery</label
+                    ><input
+                      name="payment-method"
+                      type="radio"
+                      :disabled="!authStore.isLoggedIn"
+                    />
+                    Cash On Delivery
+                    <span class="text-primary" v-if="!authStore.isLoggedIn"
+                      >(only for account holder)</span
+                    ></label
                   >
                   <label
                     ><input name="payment-method" type="radio" /> Bkash</label
@@ -150,27 +182,72 @@
         </div>
       </div>
     </section>
-  </div>
-  <div>
-    <h2>Checkout</h2>
-    <ul>
-      <li v-for="(c, index) in cartInfo" :key="index">
-        {{ c }}
-      </li>
-    </ul>
-    <!-- Add your checkout form and other content -->
+    <section class="shop-services section home">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-12">
+            <!-- Start Single Service -->
+            <div class="single-service">
+              <i class="ti-rocket"></i>
+              <h4>Free shiping</h4>
+              <p>Orders over $100</p>
+            </div>
+            <!-- End Single Service -->
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <!-- Start Single Service -->
+            <div class="single-service">
+              <i class="ti-reload"></i>
+              <h4>Free Return</h4>
+              <p>Within 30 days</p>
+            </div>
+            <!-- End Single Service -->
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <!-- Start Single Service -->
+            <div class="single-service">
+              <i class="ti-lock"></i>
+              <h4>Sucure Payment</h4>
+              <p>100% secure payment</p>
+            </div>
+            <!-- End Single Service -->
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <!-- Start Single Service -->
+            <div class="single-service">
+              <i class="ti-tag"></i>
+              <h4>Best Price</h4>
+              <p>Guaranteed price</p>
+            </div>
+            <!-- End Single Service -->
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 import { ref, computed } from "vue";
 import { useFrontStore } from "../../stores/frontStore";
+import { useAuthStore } from "~/stores/AuthStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
+    const authStore = useAuthStore();
     const route = useRoute();
     const cartInfo = JSON.parse(route.query.cartInfo);
     const discount = JSON.parse(route.query.discountAmount);
+
+    const authUser = authStore.authUser;
+    const name = ref(authUser.name);
+    const uname = ref(authUser.uname);
+    const email = ref(authUser.email);
+    const addr1 = ref(authUser.addr1);
+    const addr2 = ref(authUser.addr2);
+    const postCode = ref(authUser.postCode);
+    const noteToRider = ref("");
+
     // Compute the total price
     const items = ref(cartInfo);
     const totalPrice = computed(() => {
@@ -190,16 +267,29 @@ export default {
       return totalPrice.value;
     });
     return {
+      authStore,
       frontStore,
+      name,
+      uname,
+      email,
+      addr1,
+      addr2,
+      postCode,
+      noteToRider,
       cartInfo,
       totalPrice,
       discountAmount,
       youPay,
-      discount
+      discount,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+input {
+  &:disabled {
+    background-color: #80808050 !important;
+  }
+}
 </style>
