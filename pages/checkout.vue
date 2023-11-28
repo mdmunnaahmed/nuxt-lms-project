@@ -17,54 +17,34 @@
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
                       <label>Full Name<span>*</span></label>
-                      <input
-                        type="text"
-                        required="required"
-                        v-model="name"
-                        :disabled="name"
-                      />
+                      <input type="text" required="required" v-model="name" />
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-12">
+                  <div
+                    class="col-lg-6 col-md-6 col-12"
+                    v-if="!authStore.authUser"
+                  >
                     <div class="form-group">
                       <label>Username<span>*</span></label>
-                      <input
-                        type="text"
-                        required="required"
-                        v-model="uname"
-                        :disabled="uname"
-                      />
+                      <input type="text" required="required" v-model="uname" />
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
                       <label>Email Address<span>*</span></label>
-                      <input
-                        type="email"
-                        required="required"
-                        v-model="email"
-                        :disabled="email"
-                      />
+                      <input type="email" required="required" v-model="email" />
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
                       <label>Address Line 1<span>*</span></label>
-                      <input
-                        type="text"
-                        required="required"
-                        v-model="addr1"
-                      />
+                      <input type="text" required="required" v-model="addr1" />
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
                       <label>Address Line 2<span>*</span></label>
-                      <input
-                        type="text"
-                        required="required"
-                        v-model="addr2"
-                      />
+                      <input type="text" required="required" v-model="addr2" />
                     </div>
                   </div>
                   <div class="col-lg-6 col-md-6 col-12">
@@ -84,6 +64,7 @@
                         class="w-100 px-3 py-2"
                         rows="6"
                         v-model="noteToRider"
+                        placeholder="your message request to rider..."
                       ></textarea>
                     </div>
                   </div>
@@ -98,36 +79,15 @@
               <div class="single-widget">
                 <h2>CART TOTALS</h2>
                 <ul class="px-4 ms-1 mt-3 d-flex flex-col gap-3">
-                  <li v-for="(c, index) in cartInfo" :key="index">
-                    <div class="d-flex align-items-center gap-3">
-                      <div class="thumb">
-                        <img
-                          :src="'/images/all-img/' + c.thumb"
-                          alt=""
-                          style="width: 110px; max-width: unset"
-                        />
-                      </div>
-                      <div class="content">
-                        <h6 class="mb-2">
-                          <a href="">{{ c.title }}</a>
-                        </h6>
-                        <div class="d-flex align-items-center gap-3">
-                          <h6>
-                            Price:
-                            <span class="font-bold text-success">{{
-                              c.price
-                            }}</span>
-                          </h6>
-                          <h6>
-                            Quantity:
-                            <span class="font-bold text-success">{{
-                              c.quantity
-                            }}</span>
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  <CheckoutItem
+                    v-for="(c, index) in cartInfo"
+                    :key="index"
+                    :thumb="c.thumb"
+                    :title="c.title"
+                    :slug="c.title"
+                    :quantity="c.quantity"
+                    :price="c.price"
+                  ></CheckoutItem>
                 </ul>
                 <div class="content">
                   <ul>
@@ -240,12 +200,12 @@ export default {
     const discount = JSON.parse(route.query.discountAmount);
 
     const authUser = authStore.authUser;
-    const name = ref(authUser.name);
-    const uname = ref(authUser.uname);
-    const email = ref(authUser.email);
-    const addr1 = ref(authUser.addr1);
-    const addr2 = ref(authUser.addr2);
-    const postCode = ref(authUser.postCode);
+    const name = ref(authUser ? authUser.name : "");
+    const uname = ref("");
+    const email = ref(authUser ? authUser.email : "");
+    const addr1 = ref(authUser ? authUser.addr1 : "");
+    const addr2 = ref(authUser ? authUser.addr2 : "");
+    const postCode = ref(authUser ? authUser.postCode : "");
     const noteToRider = ref("");
 
     // Compute the total price
