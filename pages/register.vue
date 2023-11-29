@@ -1,28 +1,6 @@
 <template>
   <div>
-    <!-- START SECTION TOP -->
-    <section class="section-top">
-      <div class="container">
-        <div class="col-lg-10 offset-lg-1 text-center">
-          <div
-            class="section-top-title wow fadeInRight"
-            data-wow-duration="1s"
-            data-wow-delay="0.3s"
-            data-wow-offset="0"
-          >
-            <h1>Register Page</h1>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li>/ Register</li>
-            </ul>
-          </div>
-          <!-- //.HERO-TEXT -->
-        </div>
-        <!--- END COL -->
-      </div>
-      <!--- END CONTAINER -->
-    </section>
-    <!-- END SECTION TOP -->
+    <SectionInnerBanner title="Register your account" slug="register" />
 
     <UIBaseDialog v-if="success">
       <template #ico>
@@ -57,7 +35,28 @@
         <div class="row">
           <div class="col-lg-6 offset-lg-3 col-xs-12">
             <form @submit.prevent="submitForm" class="register">
-              <h4 class="login_register_title">Create a new account</h4>
+              <h4 class="login_register_title">Create account as</h4>
+              <div class="d-flex mb-3">
+                <label class="flex-grow-1">
+                  <input
+                    name="acc"
+                    type="radio"
+                    value="student"
+                    checked
+                    v-model="checkAccountType"
+                  />
+                  <span class="block py-2 px-3 text-center">Student</span>
+                </label>
+                <label class="flex-grow-1">
+                  <input
+                    name="acc"
+                    type="radio"
+                    value="instructor"
+                    v-model="checkAccountType"
+                  />
+                  <span class="block py-2 px-3 text-center">Instructor</span>
+                </label>
+              </div>
               <div class="form-group mb-3">
                 <label for="">Username</label>
                 <input
@@ -139,6 +138,8 @@ export default {
       middleware: ["auth"],
     });
 
+    const checkAccountType = ref('');
+
     const checkUname = () => {
       if (uname.value.length < 6) {
         unameError.value = true;
@@ -204,6 +205,7 @@ export default {
     return {
       authStore,
       submitForm,
+      checkAccountType,
       uname,
       name,
       email,
@@ -227,5 +229,19 @@ export default {
 <style lang="scss" scoped>
 input.error {
   border-color: red;
+}
+
+label {
+  user-select: none;
+  input {
+    display: none;
+    &:checked {
+      & ~ span {
+        background: #2eca7f;
+        color: white;
+        font-weight: 700;
+      }
+    }
+  }
 }
 </style>
