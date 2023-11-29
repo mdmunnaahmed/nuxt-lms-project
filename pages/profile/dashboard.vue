@@ -122,7 +122,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .single_agent_image img {
   width: 360px;
