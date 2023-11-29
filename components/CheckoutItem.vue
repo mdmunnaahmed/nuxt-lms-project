@@ -9,7 +9,7 @@
     </div>
     <div class="content">
       <h6 class="mb-2">
-        <NuxtLink to="slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="'courses/'+slug">{{ title }}</NuxtLink>
       </h6>
       <div class="d-flex align-items-center gap-3">
         <h6>

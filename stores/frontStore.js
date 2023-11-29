@@ -648,6 +648,38 @@ export const useFrontStore = defineStore("frontStore", {
         price: 34,
       },
     ],
+    orders: [
+      {
+        uname: "username",
+        userInfo: { name: "Munna Ahmed", email: "demo@mail.com", addr1: "Kushtia, Khulna", addr2: "Moragacha, Khoksa", postCode: 7020, noteToRider: "" },
+        products: [
+          { uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" },
+          { uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" },
+          { uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 },
+        ],
+        status: "pending",
+      },
+      {
+        uname: "username",
+        userInfo: { name: "Munna Ahmed", email: "demo@mail.com", addr1: "Kushtia, Khulna", addr2: "Moragacha, Khoksa", postCode: 7020, noteToRider: "" },
+        products: [
+          { uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" },
+          { uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" },
+          { uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 },
+        ],
+        status: "cancled",
+      },
+      {
+        uname: "username",
+        userInfo: { name: "Munna Ahmed", email: "demo@mail.com", addr1: "Kushtia, Khulna", addr2: "Moragacha, Khoksa", postCode: 7020, noteToRider: "" },
+        products: [
+          { uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" },
+          { uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" },
+          { uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 },
+        ],
+        status: "delivered",
+      },
+    ],
   }),
   actions: {
     async addSubscription(email) {
@@ -693,18 +725,12 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
-    getIdCourse(id) {
-      return this.courses.find((c) => {
-        return (
-          c.title
-            .trim()
-            .toLowerCase()
-            .replaceAll(/[^\w\s]/gi, "")
-            .replaceAll(" ", "-")
-            .replaceAll("--", "-") === id
-        );
-      });
-    },
+    // getIdOrders(uname) {
+    //   // Flatten the products array from all orders
+    //   // const allProducts = this.orders.flatMap((order) => order.orderInfo.products);
+    //   // Filter products based on the specified username
+    //   return this.orders.filter((order) => order.uname === uname);
+    // },
     async addComment(comment) {
       this.loading = true;
       this.postComments.push(comment);
@@ -813,6 +839,9 @@ export const useFrontStore = defineStore("frontStore", {
     searchCoursesByRate(rate) {
       this.searchRate = rate;
     },
+    checkoutProducts(products) {
+      this.orders.push(products);
+    },
   },
   getters: {
     getIdComment() {
@@ -865,6 +894,9 @@ export const useFrontStore = defineStore("frontStore", {
         counts[cate] = (counts[cate] || 0) + 1;
       });
       return counts;
+    },
+    getUserOrderHistory: (state) => (username) => {
+      return state.orders.filter((order) => order.uname === username);
     },
   },
 });

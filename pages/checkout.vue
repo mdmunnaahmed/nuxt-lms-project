@@ -3,17 +3,22 @@
     <SectionInnerBanner title="Checkout your Products" slug="checkout" />
     <section class="shop checkout section">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-12">
-            <div class="checkout-form">
-              <h2>Make Your Checkout Here</h2>
-              <p v-if="authStore.isLoggedIn">
-                Your account will be automatically created.
-              </p>
-              <p v-else>You are logged in as...</p>
-              <!-- Form -->
-              <form class="form">
+        <form class="form" @submit.prevent="checkout">
+          <div class="row">
+            <div class="col-lg-8 col-12">
+              <div class="checkout-form">
+                <h2>Make Your Checkout Here</h2>
+                <p v-if="authStore.isLoggedIn">
+                  Your account will be automatically created.
+                </p>
+                <p v-else>You are logged in as...</p>
+                <!-- Form -->
                 <div class="row">
+                  <div class="col-12 pb-2">
+                    <small class="text-danger" v-if="error"
+                      >Please fill out the form correctly</small
+                    >
+                  </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
                       <label>Full Name<span>*</span></label>
@@ -69,77 +74,70 @@
                     </div>
                   </div>
                 </div>
-              </form>
-              <!--/ End Form -->
+                <!--/ End Form -->
+              </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-12">
-            <div class="order-details">
-              <!-- Order Widget -->
-              <div class="single-widget">
-                <h2>CART TOTALS</h2>
-                <ul class="px-4 ms-1 mt-3 d-flex flex-col gap-3">
-                  <CheckoutItem
-                    v-for="(c, index) in cartInfo"
-                    :key="index"
-                    :thumb="c.thumb"
-                    :title="c.title"
-                    :slug="c.title"
-                    :quantity="c.quantity"
-                    :price="c.price"
-                  ></CheckoutItem>
-                </ul>
-                <div class="content">
-                  <ul>
-                    <li>
-                      Sub Total<span>${{ totalPrice.toFixed(2) }}</span>
-                    </li>
-                    <li>(+) Shipping<span>$0.00</span></li>
-                    <li>
-                      (-) Discount<span
-                        >${{ discount ? discount.toFixed(2) : 0 }}</span
-                      >
-                    </li>
-                    <li class="last">
-                      Total<span>${{ youPay.toFixed(2) }}</span>
-                    </li>
+            <div class="col-lg-4 col-12">
+              <div class="order-details">
+                <!-- Order Widget -->
+                <div class="single-widget">
+                  <h2>CART TOTALS</h2>
+                  <ul class="px-4 ms-1 mt-3 d-flex flex-col gap-3">
+                    <CheckoutItem
+                      v-for="(c, index) in cartInfo"
+                      :key="index"
+                      :thumb="c.thumb"
+                      :title="c.title"
+                      :slug="c.title"
+                      :quantity="c.quantity"
+                      :price="c.price"
+                    ></CheckoutItem>
                   </ul>
-                </div>
-              </div>
-              <!--/ End Order Widget -->
-              <!-- Order Widget -->
-              <div class="single-widget">
-                <h2>Payments</h2>
-                <div class="content d-flex flex-column px-4 ms-1 mt-3 gap-2">
-                  <label
-                    ><input
-                      name="payment-method"
-                      type="radio"
-                      :disabled="!authStore.isLoggedIn"
-                    />
-                    Cash On Delivery
-                    <span class="text-primary" v-if="!authStore.isLoggedIn"
-                      >(only for account holder)</span
-                    ></label
-                  >
-                  <label
-                    ><input name="payment-method" type="radio" /> Bkash</label
-                  >
-                </div>
-              </div>
-              <!--/ End Order Widget -->
-              <!-- Button Widget -->
-              <div class="single-widget get-button">
-                <div class="content">
-                  <div class="button">
-                    <a href="#" class="btn">proceed to payment</a>
+                  <div class="content">
+                    <ul>
+                      <li>
+                        Sub Total<span>${{ totalPrice.toFixed(2) }}</span>
+                      </li>
+                      <li>(+) Shipping<span>$0.00</span></li>
+                      <li>
+                        (-) Discount<span
+                          >${{ discount ? discount.toFixed(2) : 0 }}</span
+                        >
+                      </li>
+                      <li class="last">
+                        Total<span>${{ youPay.toFixed(2) }}</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
+                <!--/ End Order Widget -->
+                <!-- Order Widget -->
+                <div class="single-widget">
+                  <h2>Payments</h2>
+                  <div class="content d-flex flex-column px-4 ms-1 mt-3 gap-2">
+                    <label
+                      ><input name="payment-method" type="radio" value="cashondelivery" v-model="deliveryOption" /> Cash On
+                      Delivery</label
+                    >
+                    <label
+                      ><input name="payment-method" type="radio" value="bkash" v-model="deliveryOption" /> Bkash</label
+                    >
+                  </div>
+                </div>
+                <!--/ End Order Widget -->
+                <!-- Button Widget -->
+                <div class="single-widget get-button">
+                  <div class="content">
+                    <div class="button">
+                      <button :disabled="!deliveryOption" class="btn">proceed to payment</button>
+                    </div>
+                  </div>
+                </div>
+                <!--/ End Button Widget -->
               </div>
-              <!--/ End Button Widget -->
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </section>
     <section class="shop-services section home">
@@ -184,6 +182,32 @@
         </div>
       </div>
     </section>
+    <UIBaseDialog v-if="success">
+      <template #ico>
+        <img
+          class="mx-auto"
+          style="width: 60px; object-fit: contain"
+          src="/icon/check.png"
+          alt="icon"
+        />
+      </template>
+      <template #default>
+        <p class="text-center mt-0 text-green-600 mb-2">
+          Your order has been successfully placed.
+        </p>
+      </template>
+      <template #actions>
+        <div class="text-center">
+          <NuxtLink
+            to="/profile/myorders"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 h-auto"
+            @click="closeDialog"
+          >
+            Checkout the order
+          </NuxtLink>
+        </div>
+      </template>
+    </UIBaseDialog>
   </div>
 </template>
 
@@ -226,6 +250,58 @@ export default {
       }
       return totalPrice.value;
     });
+
+    const error = ref(false);
+    const success = ref(false);
+    const deliveryOption = ref('')
+    const checkout = () => {
+      if (
+        !name.value ||
+        !email.value ||
+        !addr1.value ||
+        !addr2.value ||
+        !postCode.value
+      ) {
+        error.value = true;
+        return;
+      }
+      if (uname.value) {
+        error.value = true;
+        authStore.addAccount({
+          uname: uname.value,
+          name: name.value,
+          email: email.value,
+          password: password.value,
+          thumb: "munns.jpg",
+        });
+        success.value = true;
+        error.value = false;
+        uname.value = "";
+        name.value = "";
+        email.value = "";
+        password.value = "";
+      }
+      frontStore.checkoutProducts({
+        uname: authStore.authUser.uname,
+        userInfo: {
+          name: name,
+          email: email,
+          addr1: addr1,
+          addr2: addr2,
+          postCode: postCode,
+          noteToRider: noteToRider,
+        },
+        products: cartInfo,
+        status: "pending",
+      });
+      error.value = false;
+      success.value = true;
+      frontStore.cart = [];
+    };
+    // const closeDialog = () => {
+    //   error.value = false;
+    //   success.value = false;
+    // };
     return {
       authStore,
       frontStore,
@@ -241,6 +317,11 @@ export default {
       discountAmount,
       youPay,
       discount,
+      checkout,
+      error,
+      success,
+      deliveryOption
+      // closeDialog
     };
   },
 };
@@ -251,5 +332,9 @@ input {
   &:disabled {
     background-color: #80808050 !important;
   }
+}
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+  background: gray;
+  cursor: no-drop !important;
 }
 </style>

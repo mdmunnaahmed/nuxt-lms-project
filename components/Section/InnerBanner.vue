@@ -12,6 +12,8 @@
           <h1>{{ title }}</h1>
           <ul class="inline-flex gap-2 w-auto">
             <li><a href="/" class="fw-bold">Home</a></li>
+            <li v-if="slugLink">/</li>
+            <li><NuxtLink to="/profile">{{ slugLink }}</NuxtLink></li>
             <li>/</li>
             <li>{{ slug }}</li>
           </ul>
@@ -27,6 +29,6 @@
 
 <script>
 export default {
-  props: ["title", "slug"],
+  props: ["title", "slug", 'slugLink'],
 };
 </script>

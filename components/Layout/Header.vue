@@ -128,9 +128,20 @@
               <i class="ti-shopping-cart-full"></i>
               <span class="gactive">{{ cartCount }}</span>
             </NuxtLink>
-            <NuxtLink class="btn_one text-white" to="/profile"
-              >Profile</NuxtLink
-            >
+            <div class="dropdown">
+              <button class="btn_one dropdown-toggle">Profile</button>
+              <ul class="dropdown-menu">
+                <li>
+                  <NuxtLink to="/profile">Profile</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/profile/myorders">My Orders</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/profile">Profile</NuxtLink>
+                </li>
+              </ul>
+            </div>
           </div>
           <div v-if="!authStore.isLoggedIn" class="call_to_action">
             <NuxtLink class="btn_one text-white" to="/login">Login</NuxtLink>
@@ -190,5 +201,22 @@ export default {
 }
 .navShadow {
   box-shadow: 0 3px 15px #00000015;
+}
+.dropdown-toggle:focus ~ .dropdown-menu,
+.dropdown-toggle:active ~ .dropdown-menu {
+  display: block;
+}
+.dropdown-menu {
+  &:hover {
+    display: block;
+  }
+  a {
+    padding: 2px 15px;
+    display: block;
+    color: #000000af;
+    &:hover {
+      background: #efefef;
+    }
+  }
 }
 </style>
