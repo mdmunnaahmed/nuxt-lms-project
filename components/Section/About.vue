@@ -45,7 +45,7 @@
                   auto-generate catchy</strong
                 >
               </p>
-              <a class="btn_one" href="about.html">Read More us</a>
+              <NuxtLink class="btn_one" to="/about">Read More us</NuxtLink>
             </div>
           </div>
           <!--- END COL -->
