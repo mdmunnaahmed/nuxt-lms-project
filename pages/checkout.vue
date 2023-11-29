@@ -34,6 +34,19 @@
                       <input type="text" required="required" v-model="uname" />
                     </div>
                   </div>
+                  <div
+                    class="col-lg-6 col-md-6 col-12"
+                    v-if="!authStore.authUser"
+                  >
+                    <div class="form-group">
+                      <label>Password<span>*</span></label>
+                      <input
+                        type="password"
+                        required="required"
+                        v-model="password"
+                      />
+                    </div>
+                  </div>
                   <div class="col-lg-6 col-md-6 col-12">
                     <div class="form-group">
                       <label>Email Address<span>*</span></label>
@@ -116,11 +129,22 @@
                   <h2>Payments</h2>
                   <div class="content d-flex flex-column px-4 ms-1 mt-3 gap-2">
                     <label
-                      ><input name="payment-method" type="radio" value="cashondelivery" v-model="deliveryOption" /> Cash On
-                      Delivery</label
+                      ><input
+                        name="payment-method"
+                        type="radio"
+                        value="cashondelivery"
+                        v-model="deliveryOption"
+                      />
+                      Cash On Delivery</label
                     >
                     <label
-                      ><input name="payment-method" type="radio" value="bkash" v-model="deliveryOption" /> Bkash</label
+                      ><input
+                        name="payment-method"
+                        type="radio"
+                        value="bkash"
+                        v-model="deliveryOption"
+                      />
+                      Bkash</label
                     >
                   </div>
                 </div>
@@ -129,7 +153,9 @@
                 <div class="single-widget get-button">
                   <div class="content">
                     <div class="button">
-                      <button :disabled="!deliveryOption" class="btn">proceed to payment</button>
+                      <button :disabled="!deliveryOption" class="btn">
+                        proceed to payment
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -230,6 +256,7 @@ export default {
     const addr1 = ref(authUser ? authUser.addr1 : "");
     const addr2 = ref(authUser ? authUser.addr2 : "");
     const postCode = ref(authUser ? authUser.postCode : "");
+    const password = ref('');
     const noteToRider = ref("");
 
     // Compute the total price
@@ -253,7 +280,7 @@ export default {
 
     const error = ref(false);
     const success = ref(false);
-    const deliveryOption = ref('')
+    const deliveryOption = ref("");
     const checkout = () => {
       if (
         !name.value ||
@@ -281,19 +308,21 @@ export default {
         email.value = "";
         password.value = "";
       }
-      frontStore.checkoutProducts({
-        uname: authStore.authUser.uname,
-        userInfo: {
-          name: name,
-          email: email,
-          addr1: addr1,
-          addr2: addr2,
-          postCode: postCode,
-          noteToRider: noteToRider,
-        },
-        products: cartInfo,
-        status: "pending",
-      });
+      if (!uname.value) {
+        frontStore.checkoutProducts({
+          uname: authStore.authUser.uname,
+          userInfo: {
+            name: name,
+            email: email,
+            addr1: addr1,
+            addr2: addr2,
+            postCode: postCode,
+            noteToRider: noteToRider,
+          },
+          products: cartInfo,
+          status: "pending",
+        });
+      }
       error.value = false;
       success.value = true;
       frontStore.cart = [];
@@ -320,7 +349,7 @@ export default {
       checkout,
       error,
       success,
-      deliveryOption
+      deliveryOption,
       // closeDialog
     };
   },
@@ -333,7 +362,9 @@ input {
     background-color: #80808050 !important;
   }
 }
-.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
   background: gray;
   cursor: no-drop !important;
 }

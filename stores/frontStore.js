@@ -725,6 +725,18 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
+    getIdCourse(id) {
+      return this.courses.find((c) => {
+        return (
+          c.title
+            .trim()
+            .toLowerCase()
+            .replaceAll(/[^\w\s]/gi, "")
+            .replaceAll(" ", "-")
+            .replaceAll("--", "-") === id
+        );
+      });
+    },
     // getIdOrders(uname) {
     //   // Flatten the products array from all orders
     //   // const allProducts = this.orders.flatMap((order) => order.orderInfo.products);

@@ -24,7 +24,7 @@
     </section>
     <!-- END SECTION TOP -->
 
-    <UIBaseDialog v-if="success" @close="closeDialog">
+    <UIBaseDialog v-if="success">
       <template #ico>
         <img
           class="mx-auto"

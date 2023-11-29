@@ -20,21 +20,11 @@ export const useAuthStore = defineStore("authStore", {
     loading: false,
   }),
   actions: {
-    // async getAccounts() {
-    //   const res = await fetch("http://localhost:3000/studentAccounts");
-    //   const data = await res.json();
-    //   this.studentAccounts = data;
-    // },
-
     async checkAuthentication() {
-      // Simulate fetching user data from local storage
       const userData = await fetchUserDataFromLocalStorage();
-
-      // Set isAuthenticated and user based on the authentication status
       this.isLoggedIn = !!userData;
       this.authUser = userData;
     },
-
     async addAccount(account) {
       this.loading = true;
       this.studentAccounts.push(account);
@@ -48,9 +38,6 @@ export const useAuthStore = defineStore("authStore", {
       this.isLoggedIn = true;
       localStorage.setItem("user", JSON.stringify(account));
       localStorage.setItem("isLoggedIn", true);
-      if (res.error) {
-        this.serverError = res.error;
-      }
       this.loading = false;
     },
     async addAccountInfo(accountInfo) {
@@ -109,6 +96,12 @@ export const useAuthStore = defineStore("authStore", {
       new Promise((resolve) => setTimeout(resolve, 300));
       this.loading = false;
     },
+    logout() {
+      this.authUser = [];
+      this.isLoggedIn = false;
+      localStorage.removeItem("user");
+      localStorage.removeItem("isLoggedIn");
+    },
     async deleteTask(id) {
       this.tasks = this.tasks.filter((t) => {
         return t.id !== id;
@@ -135,15 +128,13 @@ export const useAuthStore = defineStore("authStore", {
       }
     },
   },
-  getters: {},
 });
 
 async function fetchUserDataFromLocalStorage() {
   return new Promise((resolve) => {
-    // Simulate an asynchronous operation, e.g., fetching from local storage
     setTimeout(() => {
       const storedUserData = JSON.parse(localStorage.getItem("user"));
       resolve(storedUserData);
-    }, 0); // Simulating a delay of 500 milliseconds
+    }, 0);
   });
 }

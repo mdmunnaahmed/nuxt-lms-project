@@ -39,7 +39,7 @@
             </div>
             <div class="home_ps2">
               <img src="/images/icon/file2.svg" alt="" />
-              <h2>4500+</h2>
+              <h2>{{ frontStore.courses.length }}+</h2>
               <span>Online Courses</span>
             </div>
           </div>

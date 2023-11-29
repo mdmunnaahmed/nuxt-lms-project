@@ -32,6 +32,7 @@
           />
         </tbody>
       </table>
+      <p class="text-center" v-if="!products">No records found</p>
     </div>
   </div>
 </template>
@@ -44,9 +45,7 @@ export default {
   setup() {
     const frontStore = useFrontStore();
     const authStore = useAuthStore();
-    // const products = ref([]);
     const products = frontStore.getUserOrderHistory(authStore.authUser.uname);
-    onMounted(() => {});
     return {
       frontStore,
       authStore,

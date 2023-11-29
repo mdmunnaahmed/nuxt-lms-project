@@ -84,17 +84,7 @@
                   </ul>
                 </li>
                 <li>
-                  <NuxtLink class="nav-link" to="javascript:void(0)"
-                    >Shop <span class="ti-angle-down"></span
-                  ></NuxtLink>
-                  <ul>
-                    <li>
-                      <NuxtLink class="nav-link" to="/shop">Shop</NuxtLink>
-                    </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/cart">Cart Page</NuxtLink>
-                    </li>
-                  </ul>
+                  <NuxtLink class="nav-link" to="/shop">Shop</NuxtLink>
                 </li>
                 <li>
                   <NuxtLink class="nav-link" to="javascript:void(0)"
@@ -116,14 +106,16 @@
         </div>
 
         <div class="col-lg-4 col-md-3 col-sm-8 text-end">
+          <div class="home_lc mt-4">
+            <NuxtLink to="/cart" class="hlc">
+              <i class="ti-shopping-cart-full"></i>
+              <span class="gactive">{{ cartCount }}</span>
+            </NuxtLink>
+          </div>
           <div
             v-if="authStore.isLoggedIn"
             class="home_lc d-flex align-items-center justify-content-end mt-0"
           >
-            <NuxtLink to="" class="hlc">
-              <i class="ti-heart"></i>
-              <span class="gactive">0</span>
-            </NuxtLink>
             <NuxtLink to="/cart" class="hlc">
               <i class="ti-shopping-cart-full"></i>
               <span class="gactive">{{ cartCount }}</span>
@@ -138,7 +130,9 @@
                   <NuxtLink to="/profile/myorders">My Orders</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink class="cursor-pointer">Logout</NuxtLink>
+                  <NuxtLink @click="logoutAccount" class="cursor-pointer"
+                    >Logout</NuxtLink
+                  >
                 </li>
               </ul>
             </div>
@@ -161,6 +155,10 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const frontStore = useFrontStore();
+    const logoutAccount = () => {
+      authStore.logout();
+      window.location.reload();
+    };
 
     const isScrolled = ref(false);
 
@@ -168,12 +166,10 @@ export default {
       isScrolled.value = window.scrollY > 0;
     };
     onMounted(() => {
-      // Attach the scroll event listener when the component is mounted
       window.addEventListener("scroll", handleScroll);
     });
 
     onBeforeUnmount(() => {
-      // Remove the scroll event listener when the component is unmounted
       window.removeEventListener("scroll", handleScroll);
     });
 
@@ -187,6 +183,7 @@ export default {
       isScrolled,
       handleScroll,
       cartCount,
+      logoutAccount,
     };
   },
 };
