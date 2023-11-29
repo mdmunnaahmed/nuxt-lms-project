@@ -106,40 +106,38 @@
         </div>
 
         <div class="col-lg-4 col-md-3 col-sm-8 text-end">
-          <div class="home_lc mt-4">
-            <NuxtLink to="/cart" class="hlc">
-              <i class="ti-shopping-cart-full"></i>
-              <span class="gactive">{{ cartCount }}</span>
-            </NuxtLink>
-          </div>
-          <div
-            v-if="authStore.isLoggedIn"
-            class="home_lc d-flex align-items-center justify-content-end mt-0"
-          >
-            <NuxtLink to="/cart" class="hlc">
-              <i class="ti-shopping-cart-full"></i>
-              <span class="gactive">{{ cartCount }}</span>
-            </NuxtLink>
-            <div class="dropdown">
-              <button class="btn_one dropdown-toggle">Profile</button>
-              <ul class="dropdown-menu">
-                <li>
-                  <NuxtLink to="/profile">Profile</NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink to="/profile/myorders">My Orders</NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink @click="logoutAccount" class="cursor-pointer"
-                    >Logout</NuxtLink
-                  >
-                </li>
-              </ul>
+          <div class="d-flex align-items-center justify-content-end">
+            <div class="home_lc mt-3">
+              <NuxtLink to="/cart" class="hlc">
+                <i class="ti-shopping-cart-full"></i>
+                <span class="gactive">{{ cartCount }}</span>
+              </NuxtLink>
             </div>
-          </div>
-          <div v-if="!authStore.isLoggedIn" class="call_to_action">
-            <NuxtLink class="btn_one text-white" to="/login">Login</NuxtLink>
-            <NuxtLink class="btn_two" to="/register">Sign Up</NuxtLink>
+            <div
+              v-if="authStore.isLoggedIn"
+              class="home_lc d-flex align-items-center justify-content-end mt-0"
+            >
+              <div class="dropdown">
+                <button class="btn_one dropdown-toggle">Profile</button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <NuxtLink to="/profile">Profile</NuxtLink>
+                  </li>
+                  <li>
+                    <NuxtLink to="/profile/myorders">My Orders</NuxtLink>
+                  </li>
+                  <li>
+                    <NuxtLink @click="logoutAccount" class="cursor-pointer"
+                      >Logout</NuxtLink
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div v-if="!authStore.isLoggedIn" class="call_to_action">
+              <NuxtLink class="btn_one text-white" to="/login">Login</NuxtLink>
+              <NuxtLink class="btn_two" to="/register">Sign Up</NuxtLink>
+            </div>
           </div>
         </div>
       </div>

@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
 import { useFrontStore } from "~/stores/frontStore";
 import { useAuthStore } from "~/stores/AuthStore";
 export default {

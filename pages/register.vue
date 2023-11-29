@@ -82,6 +82,19 @@
                   :class="{ error: nameError }"
                 />
               </div>
+              <div
+                class="form-group mb-3"
+                v-if="checkAccountType === 'instructor'"
+              >
+                <label for="">Profession</label>
+                <input
+                  v-model.trim="profession"
+                  type="text"
+                  class="form-control requiredField input-label mb-0"
+                  @blur="checkProfession"
+                  :class="{ error: professionError }"
+                />
+              </div>
               <div class="form-group mb-3">
                 <label for="">Email Address</label>
                 <input
@@ -127,18 +140,18 @@ export default {
     const nameError = ref(false);
     const emailError = ref(false);
     const passwordError = ref(false);
+    const professionError = ref(false);
 
     const uname = ref("");
     const name = ref("");
     const email = ref("");
+    const profession = ref("");
     const password = ref("");
 
     // authStore.getAccounts();
     definePageMeta({
       middleware: ["auth"],
     });
-
-    const checkAccountType = ref('');
 
     const checkUname = () => {
       if (uname.value.length < 6) {
@@ -148,10 +161,17 @@ export default {
       }
     };
     const checkName = () => {
-      if (uname.value.length < 6) {
+      if (!name.value) {
         nameError.value = true;
       } else {
         nameError.value = false;
+      }
+    };
+    const checkProfession = () => {
+      if (!profession.value) {
+        professionError.value = true;
+      } else {
+        professionError.value = false;
       }
     };
     const checkEmail = () => {
@@ -169,34 +189,69 @@ export default {
       }
     };
 
+    const checkAccountType = ref("student");
     const submitForm = () => {
       checkUname();
       checkName();
+      checkProfession();
       checkEmail();
       checkPassword();
-      if (
-        unameError.value ||
-        nameError.value ||
-        emailError.value ||
-        passwordError.value
-      ) {
+      if (checkAccountType.value === "student") {
+        if (
+          unameError.value ||
+          nameError.value ||
+          emailError.value ||
+          passwordError.value
+        ) {
+          error.value = true;
+          return;
+        }
+        authStore.addStudentAccount({
+          uname: uname.value,
+          name: name.value,
+          email: email.value,
+          password: password.value,
+          thumb: "munns.jpg",
+          accountType: "Student",
+        });
+      } else {
         error.value = true;
-        return;
+      }
+      if (checkAccountType.value === "instructor") {
+        if (
+          unameError.value ||
+          nameError.value ||
+          professionError.value ||
+          emailError.value ||
+          passwordError.value
+        ) {
+          error.value = true;
+          return;
+        }
+        authStore.addInstructorAccount({
+          uname: uname.value,
+          name: name.value,
+          profession: profession.value,
+          email: email.value,
+          password: password.value,
+          thumb: "munns.jpg",
+          accountType: "Instructor",
+          addr1: "",
+          addr2: "",
+          postCode: 7020,
+          shortBio: "",
+        });
+      } else {
+        error.value = true;
       }
       error.value = false;
-      authStore.addAccount({
-        uname: uname.value,
-        name: name.value,
-        email: email.value,
-        password: password.value,
-        thumb: "munns.jpg",
-      });
       success.value = true;
       uname.value = "";
       name.value = "";
       email.value = "";
       password.value = "";
     };
+
     const closeDialog = () => {
       error.value = false;
       success.value = false;
@@ -208,6 +263,7 @@ export default {
       checkAccountType,
       uname,
       name,
+      profession,
       email,
       password,
       error,
@@ -221,6 +277,8 @@ export default {
       emailError,
       checkPassword,
       passwordError,
+      checkProfession,
+      professionError,
     };
   },
 };
@@ -228,7 +286,7 @@ export default {
 
 <style lang="scss" scoped>
 input.error {
-  border-color: red;
+  border-color: red !important;
 }
 
 label {

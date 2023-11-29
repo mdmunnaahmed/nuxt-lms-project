@@ -1,8 +1,8 @@
 <template>
   <div>
     <SectionInnerBanner title="My Profile" slug="dashboard" />
-    
-    <UIModal :show="modal" title="Edit Profile Info" @close="clsoeDialog">
+
+    <UIModal :show="modal" title="Edit Profile Info" @close="closeDialog">
       <form @submit.prevent="submitForm">
         <div class="mb-2">
           <label class="mb-1 text-dark opacity-75">Name</label>
@@ -10,11 +10,11 @@
         </div>
         <div class="mb-2">
           <label class="mb-1 text-dark opacity-75">Profession</label>
-          <input v-model="profession" type="text" class="form-control" />
+          <input v-model.trim="profession" type="text" class="form-control" />
         </div>
         <div class="mb-2">
           <label class="mb-1 text-dark opacity-75">Short Bio</label>
-          <textarea v-model="shortbio" rows="4" class="form-control"></textarea>
+          <textarea v-model.trim="shortbio" rows="4" class="form-control"></textarea>
         </div>
         <small class="text-green-600" v-if="success"
           >Your profile data Updated!</small
@@ -24,32 +24,35 @@
     </UIModal>
 
     <!-- START AGENT PROFILE -->
-    <section class="template_agent section-padding">
+    <section class="template_agent pb-5 pt-5">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-sm-12 col-xs-12">
             <div class="single_agent">
               <div class="single_agent_image">
                 <img
-                  :src="'/images/all-img/'+ authStore.authUser.thumb"
+                  :src="'/images/all-img/' + authStore.authUser.thumb"
                   class="img-fluid"
-                  alt=""
-                  style="border-radius: 50%;"
+                  alt="user"
+                  style="border-radius: 50%"
                 />
               </div>
               <div class="single_agent_content">
                 <div class="flex justify-between items-center">
-                  <h4>{{ authStore.authUser.name }}</h4>
+                  <h4>
+                    {{ getAuthUserInfo }}
+                    <span
+                      class="text-green-600 text-xl font-medium"
+                      v-if="authStore.authUser.accountType"
+                      >({{ authStore.authUser.profession }})</span
+                    >
+                  </h4>
                   <button @click="showModal" class="text-green-600">
                     Edit Info
                   </button>
                 </div>
-                <h5>{{ authStore.authUser.profession }}</h5>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever type book.
-                </p>
+                <h5>{{ authStore.authUser.accountType }}</h5>
+                <p>{{ authStore.authUser.shortBio }}</p>
                 <ul>
                   <li>
                     <i class="fa fa-envelope-o"></i
@@ -60,32 +63,6 @@
                     >
                   </li>
                   <li><i class="fa fa-phone"></i>(+123) 123 123 123</li>
-                  <li><i class="fa fa-plane"></i>www.yourdomainname.com</li>
-                  <li><i class="fa fa-skype"></i>skype.address</li>
-                </ul>
-              </div>
-              <div class="agent_social">
-                <ul class="list-inline flex gap-2">
-                  <li>
-                    <a href="#" class="top_f_facebook"
-                      ><img src="/images/icon/fb.svg" alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#" class="top_f_facebook"
-                      ><img src="/images/icon/tw.svg" alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#" class="top_f_facebook"
-                      ><img src="/images/icon/pn.svg" alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#" class="top_f_facebook"
-                      ><img src="/images/icon/ins.svg" alt=""
-                    /></a>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -93,13 +70,7 @@
         </div>
       </div>
     </section>
-
-    <!-- START COUNTER -->
-    <SectionCounter />
-    <!-- END COUNTER -->
-
-    <!--START COURSE -->
-    <!-- <SectionCourse /> -->
+    {{ authStore.instructorAccounts }}
   </div>
 </template>
 
@@ -112,39 +83,41 @@ export default {
     const modal = ref(false);
     const authStore = useAuthStore();
     const name = ref(authStore.authUser.name);
-    const profession = ref(authStore.authUser.profession);
+    const profession = ref('34252345623');
     const shortBio = ref(authStore.authUser.shortBio);
-    const submitForm = async () => {
-      if (
-        authStore.authUser.profession === "" ||
-        authStore.authUser.shortBio === ""
-      ) {
-      }
-      authStore.addAccountInfo({
+
+    const userInfo = computed(() => {
+      return authStore.getAuthUserInfo
+    });
+
+    const submitForm = () => {
+      authStore.updateStudentData({
+        uname: authStore.authUser.uname,
         profession: profession.value,
         shortBio: shortBio.value,
       });
 
       success.value = true;
-      await new Promise((resolve) => setTimeout(resolve, 600));
+      new Promise((resolve) => setTimeout(resolve, 600));
       modal.value = false;
     };
     const showModal = () => {
       modal.value = true;
     };
-    const clsoeDialog = () => {
+    const closeDialog = () => {
       modal.value = false;
     };
     return {
       authStore,
       modal,
       showModal,
-      clsoeDialog,
+      closeDialog,
       submitForm,
       name,
       profession,
       shortBio,
       success,
+      userInfo
     };
   },
 };
@@ -153,8 +126,8 @@ export default {
 
 <style scoped>
 .single_agent_image img {
-  width: 350px;
-  height: 350px;
+  width: 360px;
+  height: 360px;
   object-fit: cover;
 }
 </style>

@@ -737,12 +737,6 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
-    // getIdOrders(uname) {
-    //   // Flatten the products array from all orders
-    //   // const allProducts = this.orders.flatMap((order) => order.orderInfo.products);
-    //   // Filter products based on the specified username
-    //   return this.orders.filter((order) => order.uname === uname);
-    // },
     async addComment(comment) {
       this.loading = true;
       this.postComments.push(comment);

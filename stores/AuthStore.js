@@ -9,9 +9,26 @@ export const useAuthStore = defineStore("authStore", {
         email: "demo@mail.com",
         password: "username",
         id: 1,
-        addr1: 'Kushtia, Khulna',
-        addr2: 'Moragacha, Khoksa',
+        addr1: "Kushtia, Khulna",
+        addr2: "Moragacha, Khoksa",
         postCode: 7020,
+        shortBio:
+          "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components. ",
+      },
+    ],
+    instructorAccounts: [
+      {
+        uname: "username",
+        thumb: "munns.jpg",
+        name: "Munna Ahmed",
+        email: "demo@mail.com",
+        password: "username",
+        id: 1,
+        addr1: "Kushtia, Khulna",
+        addr2: "Moragacha, Khoksa",
+        postCode: 7020,
+        shortBio:
+          "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
       },
     ],
     authUser: [],
@@ -25,38 +42,26 @@ export const useAuthStore = defineStore("authStore", {
       this.isLoggedIn = !!userData;
       this.authUser = userData;
     },
-    async addAccount(account) {
-      this.loading = true;
+    addStudentAccount(account) {
       this.studentAccounts.push(account);
-      // const res = await fetch("http://localhost:3000/studentAccounts", {
-      //   method: "POST",
-      //   body: JSON.stringify(account),
-      //   headers: { "Content-Type": "application/json" },
-      // });
-
       this.authUser = account;
       this.isLoggedIn = true;
       localStorage.setItem("user", JSON.stringify(account));
       localStorage.setItem("isLoggedIn", true);
-      this.loading = false;
     },
-    async addAccountInfo(accountInfo) {
-      const authId = this.authUser.id;
-      console.log(authId);
-      this.loading = true;
-      Object.assign(this.studentAccounts[authId - 1], accountInfo);
-
-      const res = await fetch("http://localhost:3000/studentAccounts/" + [authId], {
-        method: "PUT",
-        body: JSON.stringify(accountInfo),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      // this.authUser = accountInfo;
-      if (res.error) {
-        this.serverError = res.error;
+    addInstructorAccount(account) {
+      this.instructorAccounts.push(account);
+      this.authUser = account;
+      this.isLoggedIn = true;
+      localStorage.setItem("user", JSON.stringify(account));
+      localStorage.setItem("isLoggedIn", true);
+    },
+    updateStudentData(updatedData) {
+      const index = this.instructorAccounts.findIndex((student) => student.uname === updatedData.uname);
+      if (index !== -1) {
+        this.instructorAccounts[index] = { ...this.instructorAccounts[index], ...updatedData };
       }
-      this.loading = false;
+      console.log(this.instructorAccounts);
     },
     async updateAccount(updateData, id) {
       this.loading = true;
@@ -126,6 +131,11 @@ export const useAuthStore = defineStore("authStore", {
       if (res.error) {
         console.log(res.error);
       }
+    },
+  },
+  getters: {
+    getAuthUserInfo:(state) =>{
+      return state.instructorAccounts.filter((ins) => ins.uname === this.authUser.uname);
     },
   },
 });
