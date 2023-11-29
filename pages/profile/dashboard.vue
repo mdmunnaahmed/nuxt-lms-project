@@ -40,7 +40,7 @@
               <div class="single_agent_content">
                 <div class="flex justify-between items-center">
                   <h4>
-                    {{ getAuthUserInfo }}
+                    {{ authStore.authUser.name }}
                     <span
                       class="text-green-600 text-xl font-medium"
                       v-if="authStore.authUser.accountType"
@@ -70,7 +70,6 @@
         </div>
       </div>
     </section>
-    {{ authStore.instructorAccounts }}
   </div>
 </template>
 
