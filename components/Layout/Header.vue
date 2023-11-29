@@ -138,7 +138,7 @@
                   <NuxtLink to="/profile/myorders">My Orders</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/profile">Profile</NuxtLink>
+                  <NuxtLink class="cursor-pointer">Logout</NuxtLink>
                 </li>
               </ul>
             </div>
