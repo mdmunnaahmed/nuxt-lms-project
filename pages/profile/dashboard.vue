@@ -13,8 +13,16 @@
           <input v-model.trim="profession" type="text" class="form-control" />
         </div>
         <div class="mb-2">
+          <label class="mb-1 text-dark opacity-75">Phone</label>
+          <input v-model.trim="phone" type="tel" class="form-control" />
+        </div>
+        <div class="mb-2">
           <label class="mb-1 text-dark opacity-75">Short Bio</label>
-          <textarea v-model.trim="shortbio" rows="4" class="form-control"></textarea>
+          <textarea
+            v-model.trim="shortBio"
+            rows="4"
+            class="form-control"
+          ></textarea>
         </div>
         <small class="text-green-600" v-if="success"
           >Your profile data Updated!</small
@@ -38,7 +46,7 @@
                 />
               </div>
               <div class="single_agent_content">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center ps-2">
                   <h4>
                     {{ authStore.authUser.name }}
                     <span
@@ -51,19 +59,54 @@
                     Edit Info
                   </button>
                 </div>
-                <h5>{{ authStore.authUser.accountType }}</h5>
-                <p>{{ authStore.authUser.shortBio }}</p>
-                <ul>
-                  <li>
-                    <i class="fa fa-envelope-o"></i
-                    ><NuxtLink
-                      :to="'mailto:' + authStore.authUser.email"
-                      class="text-primary"
-                      >{{ authStore.authUser.email }}</NuxtLink
-                    >
-                  </li>
-                  <li><i class="fa fa-phone"></i>(+123) 123 123 123</li>
-                </ul>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h5>{{ authStore.authUser.accountType }}</h5>
+                    <p>{{ authStore.authUser.shortBio }}</p>
+                    <ul>
+                      <li>
+                        <i class="fa fa-envelope-o"></i
+                        ><NuxtLink
+                          :to="'mailto:' + authStore.authUser.email"
+                          class="text-primary"
+                          >{{ authStore.authUser.email }}</NuxtLink
+                        >
+                      </li>
+                      <li>
+                        <i class="fa fa-phone"></i
+                        >{{ authStore.authUser.phone }}
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-12">
+                    <hr>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="d-flex align-items-start justify-between">
+                      <ul>
+                        <li>
+                          <i class="fa fa-address-book"></i>
+                          <span>Address Line 1:</span>
+                          {{ authStore.authUser.addr1 }}
+                        </li>
+                        <li>
+                          <i class="fa fa-address-card"></i>
+                          <span>Address Line 2:</span>
+                          {{ authStore.authUser.addr2 }}
+                        </li>
+                        <li>
+                          <i class="fa fa-file-zip-o"></i>
+                          <span>Address Zipcode:</span>
+                          {{ authStore.authUser.postCode }}
+                        </li>
+                      </ul>
+
+                      <button @click="showModal" class="text-green-600">
+                        Edit Address
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,19 +125,23 @@ export default {
     const modal = ref(false);
     const authStore = useAuthStore();
     const name = ref(authStore.authUser.name);
-    const profession = ref('34252345623');
+    const phone = ref(authStore.authUser.phone);
+    const profession = ref(authStore.authUser.profession);
     const shortBio = ref(authStore.authUser.shortBio);
 
     const userInfo = computed(() => {
-      return authStore.getAuthUserInfo
+      return authStore.getAuthUserInfo;
     });
 
     const submitForm = () => {
-      authStore.updateStudentData({
+      const updatedData = {
         uname: authStore.authUser.uname,
+        name: name.value,
+        phone: phone.value,
         profession: profession.value,
         shortBio: shortBio.value,
-      });
+      };
+      authStore.updateStudentData(updatedData);
 
       success.value = true;
       new Promise((resolve) => setTimeout(resolve, 600));
@@ -113,10 +160,11 @@ export default {
       closeDialog,
       submitForm,
       name,
+      phone,
       profession,
       shortBio,
       success,
-      userInfo
+      userInfo,
     };
   },
 };

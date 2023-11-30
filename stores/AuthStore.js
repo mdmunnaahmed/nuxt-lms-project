@@ -4,29 +4,32 @@ export const useAuthStore = defineStore("authStore", {
     studentAccounts: [
       {
         uname: "username",
-        thumb: "munns.jpg",
         name: "Munna Ahmed",
         email: "demo@mail.com",
         password: "username",
-        id: 1,
-        addr1: "Kushtia, Khulna",
-        addr2: "Moragacha, Khoksa",
-        postCode: 7020,
+        thumb: "munns.jpg",
+        accountType: "Student",
+        addr1: "",
+        addr2: "",
+        postCode: '',
+        phone: "",
         shortBio:
-          "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components. ",
+          "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
       },
     ],
     instructorAccounts: [
       {
         uname: "username",
-        thumb: "munns.jpg",
-        name: "Munna Ahmed",
+        name: "Munns Ahmed",
+        profession: "developer",
         email: "demo@mail.com",
         password: "username",
-        id: 1,
-        addr1: "Kushtia, Khulna",
-        addr2: "Moragacha, Khoksa",
-        postCode: 7020,
+        thumb: "munns.jpg",
+        accountType: "Instructor",
+        addr1: "",
+        addr2: "",
+        postCode: '',
+        phone: "",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
       },
@@ -60,46 +63,30 @@ export const useAuthStore = defineStore("authStore", {
       const index = this.instructorAccounts.findIndex((student) => student.uname === updatedData.uname);
       if (index !== -1) {
         this.instructorAccounts[index] = { ...this.instructorAccounts[index], ...updatedData };
+        this.authUser = { ...this.authUser, ...updatedData };
+        localStorage.setItem("user", JSON.stringify({ ...this.authUser, ...updatedData }));
+        console.log('updated');
       }
-      console.log(this.instructorAccounts);
     },
-    async updateAccount(updateData, id) {
-      this.loading = true;
-      this.studentAccounts.push(updateData);
-      const res = await fetch("http://localhost:3000/studentAccounts" + id, {
-        method: "PUT",
-        body: JSON.stringify(updateData),
-        headers: { "Content-Type": "application/json" },
-      });
-      this.authUser = updateData;
-      this.isLoggedIn = true;
-      // localStorage.setItem("user", JSON.stringify(updateData));
-      // localStorage.setItem("isLoggedIn", true);
-      if (res.error) {
-        this.serverError = res.error;
-      }
-      this.loading = false;
-    },
-    loginAccount(info) {
-      this.loading = true;
-      // const res = await fetch("http://localhost:3000/studentAccounts");
-      // const data = await res.json();
-
+    loginStudentAccount(info) {
       const user = this.studentAccounts.find((u) => (u.uname === info.uname || u.email === info.email) && u.password === info.password);
-
-      // if (res.error) {
-      //   this.serverError = res.error;
-      // }
-
       if (user) {
         this.authUser = user;
         this.isLoggedIn = true;
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("isLoggedIn", true);
       }
-
       new Promise((resolve) => setTimeout(resolve, 300));
-      this.loading = false;
+    },
+    loginInstructorAccount(info) {
+      const user = this.instructorAccounts.find((u) => (u.uname === info.uname || u.email === info.email) && u.password === info.password);
+      if (user) {
+        this.authUser = user;
+        this.isLoggedIn = true;
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("isLoggedIn", true);
+      }
+      new Promise((resolve) => setTimeout(resolve, 300));
     },
     logout() {
       this.authUser = [];
@@ -134,7 +121,7 @@ export const useAuthStore = defineStore("authStore", {
     },
   },
   getters: {
-    getAuthUserInfo:(state) =>{
+    getAuthUserInfo: (state) => {
       return state.instructorAccounts.filter((ins) => ins.uname === this.authUser.uname);
     },
   },

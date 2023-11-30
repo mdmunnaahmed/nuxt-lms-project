@@ -213,6 +213,10 @@ export default {
           password: password.value,
           thumb: "munns.jpg",
           accountType: "Student",
+          addr1: "",
+          addr2: "",
+          postCode: 7020,
+          shortBio: "",
         });
       } else {
         error.value = true;
@@ -240,6 +244,7 @@ export default {
           addr2: "",
           postCode: 7020,
           shortBio: "",
+          phone: "",
         });
       } else {
         error.value = true;

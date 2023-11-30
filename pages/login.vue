@@ -31,6 +31,27 @@
           <div class="col-lg-6 offset-lg-3 col-xs-12">
             <form @submit.prevent="submitForm" class="login">
               <h4 class="login_register_title">Sign in to your account</h4>
+              <div class="d-flex mb-3">
+                <label class="flex-grow-1">
+                  <input
+                    name="acc"
+                    type="radio"
+                    value="student"
+                    checked
+                    v-model="checkAccountType"
+                  />
+                  <span class="block py-2 px-3 text-center">Student</span>
+                </label>
+                <label class="flex-grow-1">
+                  <input
+                    name="acc"
+                    type="radio"
+                    value="instructor"
+                    v-model="checkAccountType"
+                  />
+                  <span class="block py-2 px-3 text-center">Instructor</span>
+                </label>
+              </div>
               <div class="form-group mb-3">
                 <label for="">Username or Email</label>
                 <input
@@ -79,11 +100,21 @@ export default {
     definePageMeta({
       middleware: ["auth"],
     });
+
+    const checkAccountType = ref("student");
     const submitForm = () => {
-      authStore.loginAccount({
-        uname: uname.value,
-        password: password.value,
-      });
+      if (checkAccountType.value === "student") {
+        authStore.loginStudentAccount({
+          uname: uname.value,
+          password: password.value,
+        });
+      }
+      if (checkAccountType.value === "instructor") {
+        authStore.loginInstructorAccount({
+          uname: uname.value,
+          password: password.value,
+        });
+      }
       success.value = true;
       uname.value = "";
       password.value = "";
@@ -99,7 +130,29 @@ export default {
       password,
       success,
       closeDialog,
+      checkAccountType,
     };
   },
 };
 </script>
+
+
+<style lang="scss" scoped>
+input.error {
+  border-color: red !important;
+}
+
+label {
+  user-select: none;
+  input {
+    display: none;
+    &:checked {
+      & ~ span {
+        background: #2eca7f;
+        color: white;
+        font-weight: 700;
+      }
+    }
+  }
+}
+</style>
