@@ -119,7 +119,7 @@
                     {{ authStore.authUser.name }}
                     <span
                       class="text-green-600 text-xl font-medium"
-                      v-if="authStore.authUser.accountType"
+                      v-if="authStore.authUser.profession"
                       >({{ authStore.authUser.profession }})</span
                     >
                   </h4>
