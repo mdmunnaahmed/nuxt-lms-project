@@ -164,7 +164,7 @@
                         />
                       </ul>
                     </div>
-                    <div class="review-form">
+                    <div class="review-form" v-if="itemPurchased.length">
                       <h6 class="review-title">Add a Review</h6>
                       <form
                         class="row client-form align-items-center"
@@ -251,14 +251,29 @@
                           <small class="text-danger" v-if="error2"
                             >Comment should be more than 20 char</small
                           >
+                          <small class="text-danger" v-if="existReview"
+                            >You already made a review.</small
+                          >
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="custom-button rounded">
+                          <button
+                            type="submit"
+                            class="custom-button rounded mt-2"
+                          >
                             Submit Review
                           </button>
                         </div>
                       </form>
                     </div>
+                    <p
+                      v-else-if="!authStore.authUser"
+                      class="fw-bold text-amber-600"
+                    >
+                      Please login to review.
+                    </p>
+                    <p v-else class="fw-bold text-amber-600">
+                      Please purchase the item to review.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -467,11 +482,12 @@ export default {
     const notLogIn = ref(false);
     const error = ref(false);
     const error2 = ref(false);
+    const existReview = ref(false);
     const addReview = () => {
-      if (!authStore.isLoggedIn) {
-        notLogIn.value = true;
-        return;
-      }
+      // if (!authStore.isLoggedIn) {
+      //   notLogIn.value = true;
+      //   return;
+      // }
       if (name.value == "" || rate.value == "" || comment.value == "") {
         error.value = true;
         return;
@@ -483,12 +499,25 @@ export default {
       }
       error2.value = false;
       notLogIn.value = false;
+
+      const ifExist = frontStore.ifExistReview(
+        authStore.authUser ? authStore.authUser.uname : "",
+        course.sku
+      );
+      if (ifExist.length) {
+        existReview.value = true;
+        return;
+      }
       frontStore.addCourseReview({
         name: name.value,
-        username: "username",
+        uname: authStore.authUser.uname,
         rating: rate.value,
         comment: comment.value,
+        sku: course.sku,
       });
+      name.value = "";
+      rating.value = "";
+      comment.value = "";
     };
 
     const arrayC = [...frontStore.courses];
@@ -507,7 +536,13 @@ export default {
       success.value = true;
     };
 
+    const itemPurchased = frontStore.checkForReview(
+      authStore.authUser ? authStore.authUser.uname : "",
+      course.sku
+    );
+
     return {
+      authStore,
       frontStore,
       course,
       convertedTime,
@@ -525,6 +560,8 @@ export default {
       relatedCourse,
       addToCart,
       success,
+      itemPurchased,
+      existReview,
     };
   },
 };

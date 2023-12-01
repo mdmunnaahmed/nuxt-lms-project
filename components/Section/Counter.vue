@@ -43,7 +43,7 @@
             <i style="color: #2eca7f" class="ti-user"></i>
             <div>
               <span class="purecounter">{{
-                authStore.studentAccounts.length
+                authStore.instructorAccounts.length
               }}</span>
               <p>Registered Teachers</p>
             </div>

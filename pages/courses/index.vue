@@ -15,7 +15,7 @@
               :tag="c.tag"
               :title="c.title"
               :lesson="c.lesson"
-              :durtion="c.duration"
+              :duration="c.duration"
               :rating="c.rating"
               :seats="c.seats"
             />

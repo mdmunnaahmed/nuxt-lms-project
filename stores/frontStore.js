@@ -133,7 +133,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f1",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "education",
         skillLevel: "beginner",
         language: "English",
@@ -159,7 +159,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f2",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "frontend",
         skillLevel: "beginner",
         language: "English",
@@ -186,7 +186,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f3",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "backend",
         skillLevel: "beginner",
         language: "German Language",
@@ -212,7 +212,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f4",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "education",
         skillLevel: "Intermediate",
         language: "Bangla Language",
@@ -238,7 +238,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f5",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "design",
         skillLevel: "Expert",
         language: "Spanish Language",
@@ -264,7 +264,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f6",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "education",
         skillLevel: "beginner",
         language: "English (UK)",
@@ -290,7 +290,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f7",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "hacking",
         skillLevel: "Expert",
         language: "English (US)",
@@ -316,7 +316,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f8",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "frontend",
         skillLevel: "beginner",
         language: "Arabic",
@@ -342,7 +342,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f9",
         enrolled: "75900",
-        instructorId: "1",
+        instructorId: 1,
         category: "hacking",
         skillLevel: "Intermediate",
         language: "English",
@@ -490,12 +490,13 @@ export const useFrontStore = defineStore("frontStore", {
     searchTerm: "",
     courseInstructor: "",
     courseReviews: [
-      {
-        name: "Cannu Boltu",
-        username: "biltu",
-        rating: "4.9",
-        comment: "the course was super easy to do. i learned a lot from this course",
-      },
+      // {
+      //   name: "Cannu Boltu",
+      //   uname: "username",
+      //   rating: "4.9",
+      //   comment: "the course was super easy to do. i learned a lot from this course",
+      //   sku: "CS0125",
+      // },
     ],
     cart: [
       {
@@ -644,7 +645,7 @@ export const useFrontStore = defineStore("frontStore", {
         uname: "username",
         thumb: "1.jpg",
         title: "this is a demo title",
-        sku: "132451r",
+        sku: "CS0125",
         price: 34,
       },
     ],
@@ -847,6 +848,17 @@ export const useFrontStore = defineStore("frontStore", {
     },
     checkoutProducts(products) {
       this.orders.push(products);
+    },
+    checkForReview(uname, sku) {
+      return this.buyingHistory.filter((item) => {
+        return item.uname === uname && item.sku === sku;
+      });
+    },
+    ifExistReview(uname, sku) {
+      console.log(uname, sku);
+      return this.courseReviews.filter((item) => {
+        return item.uname === uname && item.sku === sku;
+      });
     },
   },
   getters: {
