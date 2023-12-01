@@ -516,7 +516,7 @@ export default {
         sku: course.sku,
       });
       name.value = "";
-      rating.value = "";
+      rate.value = "";
       comment.value = "";
     };
 
