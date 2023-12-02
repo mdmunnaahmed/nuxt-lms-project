@@ -1418,7 +1418,6 @@ p.section-title-white {
 * ----------------------------------------------------------------------------------------
 */
 .marketing_content_area {
-	background: url(../../images/all-img/section-bg-1.html);
 	padding-bottom: 50px;
 	background-size: cover;
 	background-position: center;
@@ -2941,7 +2940,6 @@ blockquote::before,
 	color: #fff;
 	font-weight: 600;
 	display: block;
-	margin: 15px 0;
 	/* margin: 0 5px; */
 }
 

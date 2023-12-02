@@ -5564,12 +5564,12 @@ const assets = {
     "size": 16327,
     "path": "../public/images/all-img/rc-3.png"
   },
-  "/images/all-img/section-bg-1.html": {
+  "/images/all-img/t1.png": {
     "type": "text/html; charset=utf-8",
     "etag": "\"1035d-VFxEnihTnf51aJ2g2bI9vcCtm9c\"",
     "mtime": "2023-11-26T04:58:56.171Z",
     "size": 66397,
-    "path": "../public/images/all-img/section-bg-1.html"
+    "path": "../public/images/all-img/t1.png"
   },
   "/images/all-img/t1.png": {
     "type": "image/png",

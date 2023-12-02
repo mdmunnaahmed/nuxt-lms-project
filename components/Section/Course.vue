@@ -9,7 +9,7 @@
       <div class="row">
         <div
           class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp"
-          v-for="(c, index) in frontStore.courses"
+          v-for="(c, index) in coursesLimit"
           :key="index"
         >
           <CourseItem
@@ -41,8 +41,10 @@ export default {
   props: ["sectionTitle", "sectionSubtitle"],
   setup() {
     const frontStore = useFrontStore();
+    const coursesLimit = frontStore.courses.slice(0, 6)
     return {
       frontStore,
+      coursesLimit
     };
   },
 };

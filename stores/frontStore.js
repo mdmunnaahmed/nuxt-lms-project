@@ -133,7 +133,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f1",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username2",
         category: "education",
         skillLevel: "beginner",
         language: "English",
@@ -159,7 +159,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f2",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "frontend",
         skillLevel: "beginner",
         language: "English",
@@ -186,7 +186,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f3",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "backend",
         skillLevel: "beginner",
         language: "German Language",
@@ -212,7 +212,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f4",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "education",
         skillLevel: "Intermediate",
         language: "Bangla Language",
@@ -238,7 +238,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f5",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "design",
         skillLevel: "Expert",
         language: "Spanish Language",
@@ -264,7 +264,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f6",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "education",
         skillLevel: "beginner",
         language: "English (UK)",
@@ -290,7 +290,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f7",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "hacking",
         skillLevel: "Expert",
         language: "English (US)",
@@ -316,7 +316,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f8",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "frontend",
         skillLevel: "beginner",
         language: "Arabic",
@@ -342,7 +342,7 @@ export const useFrontStore = defineStore("frontStore", {
         publishDate: "12/21/2022",
         uCode: "f1f2f9",
         enrolled: "75900",
-        instructorId: 1,
+        uname: "username",
         category: "hacking",
         skillLevel: "Intermediate",
         language: "English",
@@ -490,13 +490,13 @@ export const useFrontStore = defineStore("frontStore", {
     searchTerm: "",
     courseInstructor: "",
     courseReviews: [
-      // {
-      //   name: "Cannu Boltu",
-      //   uname: "username",
-      //   rating: "4.9",
-      //   comment: "the course was super easy to do. i learned a lot from this course",
-      //   sku: "CS0125",
-      // },
+      {
+        name: "Cannu Boltu",
+        uname: "username",
+        rating: "4.9",
+        comment: "the course was super easy to do. i learned a lot from this course",
+        sku: "CS0125",
+      },
     ],
     cart: [
       {
@@ -855,9 +855,13 @@ export const useFrontStore = defineStore("frontStore", {
       });
     },
     ifExistReview(uname, sku) {
-      console.log(uname, sku);
       return this.courseReviews.filter((item) => {
         return item.uname === uname && item.sku === sku;
+      });
+    },
+    getUserCourse(uname) {
+      return this.courses.filter((item) => {
+        return item.uname === uname;
       });
     },
   },
