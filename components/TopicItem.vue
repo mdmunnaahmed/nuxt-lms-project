@@ -1,7 +1,7 @@
 <template>
   <div class="single_tca">
-    <img :src="icon" alt="" />
-    <h2>
+    <img :src="'/images/icon/ct' + ind + '.svg'" alt="" />
+    <h2 class="text-capitalize">
       <NuxtLink to="/">{{ title }}</NuxtLink>
     </h2>
     <span>{{ courseCount }} Courses</span>
@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  props: ["icon", "title", "courseCount"],
+  props: ["courseCount", "title", "ind"],
 };
 </script>

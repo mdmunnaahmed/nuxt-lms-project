@@ -11,10 +11,14 @@
       <div class="row">
         <div
           class="col-lg-4 col-sm-6 col-xs-12"
-          v-for="(t, index) in frontStore.topics"
+          v-for="(t, index) in topics"
           :key="index"
         >
-          <TopicItem :icon="t.icon" :title="t.title" :courseCount="t.courseCount" />
+          <TopicItem
+            :title="t[0]"
+            :courseCount="t[1]"
+            :ind="index + 1"
+          />
         </div>
       </div>
       <!-- END ROW -->
@@ -30,8 +34,12 @@ import { useFrontStore } from "../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
+    const topics =  computed(() => {
+      return Object.entries(frontStore.allCategories);
+    });
     return {
       frontStore,
+      topics
     };
   },
 };

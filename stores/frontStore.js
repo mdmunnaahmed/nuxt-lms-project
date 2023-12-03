@@ -134,7 +134,7 @@ export const useFrontStore = defineStore("frontStore", {
         uCode: "f1f2f1",
         enrolled: "75900",
         uname: "username2",
-        category: "education",
+        category: "ui/ux design",
         skillLevel: "beginner",
         language: "English",
         certificate: false,
@@ -363,38 +363,6 @@ export const useFrontStore = defineStore("frontStore", {
       promo: ["9/10 Average Satisfaction Rate", "96% Completitation Rate", "Friendly Environment & Expert Teacher"],
     },
     subsMails: [],
-    topics: [
-      {
-        icon: "images/icon/ct1.svg",
-        title: "UI/UX Design",
-        courseCount: 165,
-      },
-      {
-        icon: "images/icon/ct2.svg",
-        title: "Digital Program",
-        courseCount: 45,
-      },
-      {
-        icon: "images/icon/ct3.svg",
-        title: "Modern Physics",
-        courseCount: 55,
-      },
-      {
-        icon: "images/icon/ct4.svg",
-        title: "Finance",
-        courseCount: 120,
-      },
-      {
-        icon: "images/icon/ct5.svg",
-        title: "Music Production",
-        courseCount: 230,
-      },
-      {
-        icon: "images/icon/ct6.svg",
-        title: "Data Science",
-        courseCount: 405,
-      },
-    ],
     events: [
       {
         thumb: "images/event/e1.png",
