@@ -7,7 +7,7 @@
           Our Expert <span><u>Instructors</u></span>
         </p>
       </div>
-      <div class="row">
+      <div class="row pb-5" style="gap: 60px 0">
         <div
           class="col-lg-3 col-sm-6 col-xs-12"
           v-for="(i, index) in instructorsWithCourses"
@@ -15,8 +15,10 @@
         >
           <TeamItem
             :name="i.name"
+            :thumb="i.thumb"
             :profession="i.profession"
             :info="instructorsWithCourses"
+            :index="index"
           />
         </div>
       </div>

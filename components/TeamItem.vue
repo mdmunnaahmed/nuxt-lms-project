@@ -1,22 +1,16 @@
 <template>
   <div class="single-team-home">
     <div class="img">
-      <img src="/images/all-img/team1.jpg" class="img-fluid" alt="" />
+      <img :src="'/images/all-img/' + thumb" class="img-fluid" alt="team" />
     </div>
     <div class="team-content-home">
       <h3>{{ name }}</h3>
       <p>{{ profession }}</p>
       <div class="sth_det pt-2 pb-2">
-        <span
+        <span class="d-flex align-items-center gap-1 justify-content-center"
           ><i class="ti-file"></i>
-          <span v-for="(c, index) in info[0]" :key="index">{{ c }}</span>
-          {{ courseCount }} Courses</span
-        >
-        <span
-          ><i class="ti-user"></i>
-          <span v-for="(c, index) in info[0]" :key="index">{{ typeof(c) }}</span>
-          {{ studentCount }} Students</span
-        >
+          <span>{{ info[index].courses.length }}</span>
+        </span>
       </div>
       <ul class="social-home flex justify-content-center gap-2">
         <li>
@@ -35,6 +29,6 @@
 
 <script>
 export default {
-  props: ["name", "profession", "courseCount", "studentCount", "info"],
+  props: ["name", "profession", "info", "thumb", "index"],
 };
 </script>

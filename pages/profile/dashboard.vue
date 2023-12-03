@@ -107,10 +107,18 @@
             <div class="single_agent">
               <div class="single_agent_image">
                 <img
+                  v-if="authStore.authUser.thumb"
                   :src="'/images/all-img/' + authStore.authUser.thumb"
                   class="img-fluid"
                   alt="user"
                   style="border-radius: 50%"
+                />
+                <img
+                  v-else
+                  src="/images/user.png"
+                  class="img-fluid"
+                  alt="user"
+                  style="border-radius: 50%; object-fit: contain"
                 />
               </div>
               <div class="single_agent_content">
