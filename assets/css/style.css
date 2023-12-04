@@ -2626,6 +2626,7 @@ blockquote::before,
 	border-radius: 5px;
 	margin-bottom: 30px;
 	cursor: pointer;
+	display: flex;
 }
 
 .single_tca img {
@@ -2637,7 +2638,7 @@ blockquote::before,
 	overflow: hidden;
 }
 
-.single_tca h2 a {
+.single_tca h2 {
 	color: #1a2d62;
 	font-size: 24px;
 	font-weight: 700;

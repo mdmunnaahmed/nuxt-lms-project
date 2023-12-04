@@ -17,7 +17,7 @@
                   :tag="c.tag"
                   :title="c.title"
                   :lesson="c.lesson"
-                  :durtion="c.duration"
+                  :duration="c.duration"
                   :rating="c.rating"
                   :seats="c.seats"
                 />
@@ -45,6 +45,7 @@ export default {
     const searchCourses = computed(() => {
       return frontStore.filteredSearchCourses;
     });
+
     return {
       frontStore,
       searchCourses,

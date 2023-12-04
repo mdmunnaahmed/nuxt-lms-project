@@ -1,12 +1,19 @@
 <template>
   <div>
-    <SectionInnerBanner title="All Courses" slug="courses" />
+    <SectionInnerBanner :title="cateCourses.length? 'Results for '+  searchCate : 'All Courses'" slug="courses" />
     <div class="best-cpurse section-padding">
       <div class="container">
+        <p class="mb-3 text-center" v-if="searchCate.length">
+          Total
+          {{ cateCourses.length ? cateCourses.length : "" }}
+          results found for '{{ searchCate }}'
+        </p>
         <div class="row">
           <div
             class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp"
-            v-for="(c, index) in reloadCourses"
+            v-for="(c, index) in cateCourses.length
+              ? cateCourses
+              : reloadCourses"
             :key="index"
           >
             <CourseItem
@@ -21,15 +28,14 @@
             />
           </div>
           <!--END COL -->
-          <div class="col-lg-12 text-center">
+          <div
+            class="col-lg-12 text-center"
+            v-if="
+              (cateCourses.length ? cateCourses.length : frontStore.courses.length) >= Number(showItem)
+            "
+          >
             <div class="cc_btn">
-              <button
-                v-if="frontStore.courses.length !== reloadCourses.length"
-                @click="showMoreItem"
-                class="btn_one"
-              >
-                View More
-              </button>
+              <button @click="showMoreItem" class="btn_one">View More</button>
             </div>
           </div>
         </div>
@@ -37,6 +43,7 @@
     </div>
   </div>
 </template>
+
 
 
 <script>
@@ -52,10 +59,24 @@ export default {
     const showMoreItem = () => {
       showItem.value += 6;
     };
+
+    const route = useRoute();
+    const searchCate = route.query.searchCate
+      ? JSON.parse(route.query.searchCate)
+      : "";
+    const cateCourses = computed(() => {
+      return frontStore
+        .getCateCourse(searchCate)
+        .slice(0, Number(showItem.value));
+    });
+
     return {
       frontStore,
       reloadCourses,
       showMoreItem,
+      showItem,
+      searchCate,
+      cateCourses,
     };
   },
 };

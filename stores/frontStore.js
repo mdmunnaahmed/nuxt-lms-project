@@ -888,5 +888,9 @@ export const useFrontStore = defineStore("frontStore", {
     getUserOrderHistory: (state) => (username) => {
       return state.orders.filter((order) => order.uname === username);
     },
+
+    getCateCourse: (state) => (cate) => {
+      return state.courses.filter((item) => item.category === cate);
+    },
   },
 });
