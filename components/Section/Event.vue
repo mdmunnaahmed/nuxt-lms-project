@@ -11,7 +11,7 @@
       <div class="row gy-4">
         <div
           class="col-lg-4 col-sm-6 col-xs-12"
-          v-for="(e, index) in frontStore.events"
+          v-for="(e, index) in frontStore.events.slice(0, 3)"
           :key="index"
         >
           <EventItemOne
