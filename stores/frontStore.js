@@ -706,6 +706,18 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
+    getIdEvent(id) {
+      return this.events.find((e) => {
+        return (
+          e.title
+            .trim()
+            .toLowerCase()
+            .replaceAll(/[^\w\s]/gi, "")
+            .replaceAll(" ", "-")
+            .replaceAll("--", "-") === id
+        );
+      });
+    },
     async addComment(comment) {
       this.loading = true;
       this.postComments.push(comment);

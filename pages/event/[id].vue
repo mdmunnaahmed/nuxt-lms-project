@@ -10,32 +10,24 @@
               <img
                 alt=""
                 class="img-responsive"
-                src="/images/event/e1.png"
+                :src="'/' + event.thumb"
               />
               <div class="single_event_text_single">
-                <h4>Architecture Design of International Art Fair 2023</h4>
-                <span><i class="fa fa-calendar"></i>10 Oct 2023</span>
-                <span><i class="fa fa-clock-o"></i>9.00 AM-01.00 PM</span>
+                <h4>{{ event.title }}</h4>
+                <span
+                  ><i class="fa fa-calendar"></i
+                  >{{ day + " " + monthName + ", " + year }}</span
+                >
+                <span><i class="fa fa-clock-o"></i>{{ timeF }}</span>
                 <span
                   ><i class="fa fa-table"></i
-                  ><strong>3783 Columbia Mine Road Shinnston</strong></span
+                  ><strong>{{ event.location }}</strong></span
                 >
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the when an unknown printer.
-                </p>
+                <p>{{ event.pera }}</p>
               </div>
               <div class="single_event_text_single_description">
                 <h3>Event Descriptions</h3>
-                <p>
-                  It has survived not only five centuries, but also the leap
-                  into electronic typesetting, remaining essentially unchanged.
-                  It was popularised in the 1960s with the release of Letraset
-                  sheets containing Lorem Ipsum passages, and more recently with
-                  desktop publishing software like Aldus PageMaker including
-                  versions of Lorem Ipsum.
-                </p>
+                <p>{{ event.description }}</p>
               </div>
             </div>
             <!--- END SINGLE EVENT -->
@@ -82,7 +74,48 @@
 </template>
 
 <script>
-export default {};
+import { ref, computed, onMounted } from "vue";
+import { useFrontStore } from "../../stores/frontStore";
+import { useAuthStore } from "../../stores/AuthStore";
+export default {
+  setup() {
+    const frontStore = useFrontStore();
+    const route = useRoute();
+    const slug = route.params.id;
+    const event = frontStore.getIdEvent(slug);
+
+    const date = ref(event.date);
+    const time = ref(event.time);
+    const timeF = time.value.join(" - ");
+    const parts = date.value.split("/");
+    const day = parseInt(parts[1], 10);
+    const month = parseInt(parts[0], 10);
+    const year = parseInt(parts[2], 10);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthName = monthNames[month - 1];
+
+    return {
+      event,
+      monthName,
+      timeF,
+      day,
+      year,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
