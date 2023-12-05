@@ -367,7 +367,7 @@ export const useFrontStore = defineStore("frontStore", {
       {
         thumb: "images/event/e1.png",
         title: "Electrical Engineering of Batparder new event",
-        location: "At Penn School",
+        location: "At Muns School",
         pera: "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
         description:
           "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
@@ -377,7 +377,7 @@ export const useFrontStore = defineStore("frontStore", {
       {
         thumb: "images/event/e2.png",
         title: "Architecture Design of International Art Fair 2023",
-        location: "At Penn School",
+        location: "At Muns School",
         pera: "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
         description:
           "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
@@ -387,7 +387,7 @@ export const useFrontStore = defineStore("frontStore", {
       {
         thumb: "images/event/e3.png",
         title: "Chiter astana event",
-        location: "At Penn School",
+        location: "At Muns School",
         pera: "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",
         description:
           "Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.Lorem ipsum dolor sit amet magna consectetur adipisicing elit.",

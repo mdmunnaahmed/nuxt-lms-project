@@ -1,5 +1,5 @@
 <template>
-  <div class="event-slide mb-0">
+  <div class="event-slide">
     <div class="event-img">
       <img :src="thumb" alt="" />
       <div class="event-date">
@@ -9,7 +9,7 @@
     </div>
     <div class="event-content">
       <h3>
-        <NuxtLink :to="slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="'event/' + slug">{{ title }}</NuxtLink>
       </h3>
       <span
         ><i class="fa fa-clock-o"></i>
