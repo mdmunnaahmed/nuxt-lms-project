@@ -9,7 +9,7 @@
     </div>
     <div class="event-content">
       <h3>
-        <a href="event.html">{{ title }}</a>
+        <NuxtLink :to="slug">{{ title }}</NuxtLink>
       </h3>
       <span
         ><i class="fa fa-clock-o"></i>
@@ -25,12 +25,15 @@
 
 <script>
 import { ref } from "vue";
+import useSlug from "~/composables/useSlug";
 export default {
   props: ["thumb", "title", "time", "location", "pera", "date", "time"],
   setup(props) {
     const date = ref(props.date);
     const time = ref(props.time);
     const timeF = time.value.join(" - ");
+    const title = ref(props.title);
+    const { slug } = useSlug(title.value);
 
     const parts = date.value.split("/");
     const day = parseInt(parts[1], 10);
@@ -55,6 +58,7 @@ export default {
       day,
       monthName,
       timeF,
+      slug,
     };
   },
 };
