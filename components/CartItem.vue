@@ -27,9 +27,9 @@
           </button>
         </div>
         <input
-          type="tel"
+          type="number"
           class="input-number"
-          v-model="qty"
+          v-model.number="qty"
           @input="checkLimit(sku)"
         />
         <small class="text-xs text-danger" v-if="qtyLimit">{{
