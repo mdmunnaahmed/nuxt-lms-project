@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SectionInnerBanner title="slug" slug="event-details" />
+    <SectionInnerBanner :title="event.title" slug="event-details" />
     <!-- START EVENT -->
     <section class="our_event section-padding">
       <div class="container">
