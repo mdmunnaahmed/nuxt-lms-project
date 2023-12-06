@@ -7,11 +7,7 @@
         <div class="row">
           <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="single_event_single">
-              <img
-                alt=""
-                class="img-responsive"
-                :src="'/' + event.thumb"
-              />
+              <img alt="" class="img-responsive" :src="'/' + event.thumb" />
               <div class="single_event_text_single">
                 <h4>{{ event.title }}</h4>
                 <span
@@ -40,26 +36,29 @@
                 <li>
                   <i class="fa fa-calendar"></i>
                   <h4>Total Seats</h4>
-                  <p>1200</p>
+                  <p>{{ event.totalSeats }}</p>
                 </li>
                 <li>
                   <i class="fa fa-clock-o"></i>
                   <h4>Ticket price</h4>
-                  <p>$50</p>
+                  <p>${{ event.ticketPrice }}</p>
                 </li>
                 <li>
                   <i class="fa fa-phone"></i>
                   <h4>Contact for details</h4>
-                  <p>+88 123 456 789</p>
+                  <p>{{ event.contact }}</p>
                 </li>
                 <li>
                   <i class="fa fa-map"></i>
                   <h4>Event Venue</h4>
-                  <p>3783 Columbia Mine Road Shinnston, WV 26431</p>
+                  <p>{{ event.venue }}</p>
                 </li>
               </ul>
               <div class="event_info_register">
-                <a class="btn_one" href="course.html">Register For book</a>
+                <button class="btn_one w-100">Book a Ticket</button>
+                <div class="text-center">
+                  <small>book a ticket is not dynamic yet.</small>
+                </div>
               </div>
             </div>
           </div>

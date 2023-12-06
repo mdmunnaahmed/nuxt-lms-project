@@ -365,6 +365,10 @@ export const useFrontStore = defineStore("frontStore", {
     subsMails: [],
     events: [
       {
+        totalSeats: 1120,
+        ticketPrice: 150,
+        contact: "+1 123-24353235",
+        venue: "3783 Columbia Mine Road Shinnston, WV 26431",
         thumb: "images/event/e1.png",
         title: "Electrical Engineering of Batparder new event",
         location: "At Muns School",
@@ -375,6 +379,10 @@ export const useFrontStore = defineStore("frontStore", {
         time: ["12:30", "01:50"],
       },
       {
+        totalSeats: 1120,
+        ticketPrice: 150,
+        contact: "+1 123-24353235",
+        venue: "3783 Columbia Mine Road Shinnston, WV 26431",
         thumb: "images/event/e2.png",
         title: "Architecture Design of International Art Fair 2023",
         location: "At Muns School",
@@ -385,6 +393,10 @@ export const useFrontStore = defineStore("frontStore", {
         time: ["12:30", "01:50"],
       },
       {
+        totalSeats: 1120,
+        ticketPrice: 150,
+        contact: "+1 123-24353235",
+        venue: "3783 Columbia Mine Road Shinnston, WV 26431",
         thumb: "images/event/e3.png",
         title: "Chiter astana event",
         location: "At Muns School",
