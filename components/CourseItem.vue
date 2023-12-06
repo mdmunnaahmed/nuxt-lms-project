@@ -9,7 +9,9 @@
     <div class="course-content">
       <NuxtLink class="c_btn" to="">{{ tag }}</NuxtLink>
       <h3>
-        <NuxtLink :to="'courses/' + slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="{ path: '/courses/' + slug, exact: true }">{{
+          title
+        }}</NuxtLink>
       </h3>
       <span><i class="fa fa-calendar"></i>{{ lesson }} Lessons</span>
       <span
@@ -27,6 +29,7 @@
 
 <script>
 import { ref } from "vue";
+import useSlug from "~/composables/useSlug";
 export default {
   props: [
     "thumb",
@@ -42,8 +45,7 @@ export default {
     const totalM = ref(props.duration);
 
     const title = ref(props.title);
-    const stitle = title.value.toLowerCase().replaceAll(/[^\w\s]/gi, "");
-    const slug = stitle.replaceAll(" ", "-").replaceAll("--", "-");
+    const { slug } = useSlug(title.value);
 
     const convertedTime = computed(() => {
       const hours = Math.floor(totalM.value / 60);

@@ -1,7 +1,7 @@
 <template>
   <div class="product-grid">
     <div class="product-image">
-      <NuxtLink :to="'shop/' +slug">
+      <NuxtLink :to="{ path: '/shop/' + slug, exact: true }">
         <img class="pic-1" :src="'/images/shop/' + thumb" alt="product image" />
         <img
           class="pic-2"
@@ -24,12 +24,13 @@
     <TheRating class="mt-2 mb-0" :rating="rating" />
     <div class="product-content">
       <h3 class="title">
-        <NuxtLink :to="'shop/' +slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="{ path: '/shop/' + slug, exact: true }">{{
+          title
+        }}</NuxtLink>
       </h3>
       <div class="price">
         ${{ discountPrice }}<span>${{ price }}</span>
       </div>
-      <a class="add-to-cart" href="#">+ Add To Cart</a>
     </div>
   </div>
 </template>

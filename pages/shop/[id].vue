@@ -355,6 +355,7 @@
             <ProductItem
               :title="p.title"
               :thumb="p.thumb"
+              :thumb2="p.thumb2"
               :price="p.price"
               :discountPrice="p.discountPrice"
               :rating="p.rating"
