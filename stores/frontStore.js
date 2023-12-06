@@ -672,6 +672,7 @@ export const useFrontStore = defineStore("frontStore", {
         status: "delivered",
       },
     ],
+    contactRequests: [],
   }),
   actions: {
     async addSubscription(email) {
@@ -858,6 +859,14 @@ export const useFrontStore = defineStore("frontStore", {
     getUserCourse(uname) {
       return this.courses.filter((item) => {
         return item.uname === uname;
+      });
+    },
+    addContactRequest(data) {
+      this.contactRequests.push(data);
+    },
+    checkIfAlready(data) {
+      return this.contactRequests.filter((item) => {
+        return item.email === data.email;
       });
     },
   },

@@ -10,8 +10,8 @@
               <i class="ti-map"></i>
               <h4>Our Location</h4>
               <p>
-                3481 Melrose Place, Beverly Hills <br />
-                CA 90210
+                R/07 - Khoksha, Kushtia, <br />
+                Khulna, Bangladesh
               </p>
             </div>
           </div>
@@ -29,8 +29,8 @@
             <div class="single_address">
               <i class="ti-email"></i>
               <h4>Send email</h4>
-              <p>msdmunna77@gmail.com</p>
-              <p>msdmunna77@gmail.com</p>
+              <p>munnatpsi21@gmail.com</p>
+              <p>munnatpsi21@gmail.com</p>
             </div>
           </div>
           <!-- END COL -->
@@ -53,52 +53,115 @@
               <form @submit.prevent="submitForm">
                 <div class="row">
                   <div class="form-group col-md-6">
-                    <label for="">Name</label>
-                    <input v-model="name" type="text" class="form-control name" />
+                    <label for="">Full Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      v-model.trim="name"
+                    />
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="">Your Email</label>
-                    <input type="email" class="form-control" />
+                    <label for="">Email Address</label>
+                    <input
+                      type.trim="email"
+                      class="form-control"
+                      v-model="email"
+                    />
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Your Subject</label>
-                    <input type="text" class="form-control" />
+                    <label for="">Subject</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="subject"
+                      v-model.trim="subject"
+                    />
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Your Message</label>
-                    <textarea rows="6" class="form-control"></textarea>
+                    <label for="">Message</label>
+                    <textarea
+                      rows="6"
+                      class="form-control"
+                      v-model.trim="message"
+                    ></textarea>
                   </div>
                   <div class="col-md-12 text-center">
-                    <button class="btn_one">Send Message</button>
+                    <button class="btn_one" :disabled="alreadyError">
+                      Send Message
+                    </button>
+                    <br />
+                    <small class="text-danger fw-bold" v-if="fillError"
+                      >Fill out all the inputs</small
+                    >
+                    <small class="text-danger fw-bold" v-if="alreadyError"
+                      >you already made a request</small
+                    >
+                    <small
+                      class="text-success fw-bold"
+                      v-if="success"
+                      >Successfully Submitted!</small
+                    >
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <!-- END COL  -->
         </div>
-        <!-- END ROW -->
       </div>
-      <!--- END CONTAINER -->
     </div>
-    <!-- END CONTACT -->
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
+import { useAuthStore } from "~/stores/AuthStore";
+import { useFrontStore } from "~/stores/frontStore";
 export default {
   setup() {
+    const authStore = useAuthStore();
+    const frontStore = useFrontStore();
     const name = ref("");
+    const email = ref(authStore.authUser ? authStore.authUser.email : "");
+    const subject = ref("");
+    const message = ref("");
+    const alreadyError = ref(false);
+    const fillError = ref(false);
+    const success = ref(false);
     const submitForm = () => {
-      console.log(name.value);
+      success.value = false;
+      if (!name.value || !email.value || !subject.value || !message.value) {
+        fillError.value = true;
+        return;
+      }
+      fillError.value = false;
+      const data = {
+        name: name.value,
+        email: email.value,
+        subject: subject.value,
+        message: message.value,
+      };
+      const already = frontStore.checkIfAlready(data);
+      if (already.length) {
+        alreadyError.value = true;
+        return;
+      }
+      alreadyError.value = false;
+
+      frontStore.addContactRequest(data);
+      success.value = true;
     };
     return {
+      frontStore,
       submitForm,
+      name,
+      email,
+      subject,
+      message,
+      alreadyError,
+      fillError,
+      success,
     };
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>
