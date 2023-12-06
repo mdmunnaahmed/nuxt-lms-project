@@ -216,12 +216,14 @@
                   :class="{ active: currentActive === 'reviews' }"
                 >
                   <div class="pda_rtng_area fix">
-                    <h2>4.5 <span>(Overall)</span></h2>
-                    <span class="fs-6">Based on 9 Comments</span>
+                    <h2>{{ reviews.length ? (totalRating / reviews.length).toFixed(1) : 0 }} <span>(Overall)</span></h2>
+                    <span class="fs-6"
+                      >Based on {{ reviews.length }} Comments</span
+                    >
                   </div>
                   <div class="rtng_cmnt_area mt-5">
                     <ProductReviewItem
-                      v-for="(r, index) in frontStore.productReviews"
+                      v-for="(r, index) in reviews"
                       :key="index"
                       :name="r.name"
                       :comment="r.comment"
@@ -420,7 +422,17 @@ export default {
       currentActive.value = item;
     };
 
-    const reviews = frontStore.productReviews;
+    const reviews = frontStore.getProductReviews(product.sku);
+
+    const totalRating = ref(0);
+    const calculateTotalRating = () => {
+      totalRating.value = reviews.reduce(
+        (acc, product) => acc + Number(product.rating),
+        0
+      );
+    };
+    calculateTotalRating();
+
     const name = ref("");
     const comment = ref("");
     const rate = ref("");
@@ -524,6 +536,7 @@ export default {
       error2,
       existReview,
       relatedProducts,
+      totalRating
     };
   },
 };

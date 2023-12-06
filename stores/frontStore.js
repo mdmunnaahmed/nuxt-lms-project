@@ -488,6 +488,15 @@ export const useFrontStore = defineStore("frontStore", {
         time: "8:12 pm",
         date: "6 Nov, 2023",
       },
+      {
+        name: "Tpsi Ahmed",
+        uname: "username2",
+        rating: "5",
+        comment: "the book was super. i learned a lot from this book",
+        sku: "AFG012",
+        time: "8:16 pm",
+        date: "6 Nov, 2023",
+      },
     ],
     cart: [
       {
@@ -584,7 +593,7 @@ export const useFrontStore = defineStore("frontStore", {
             colorCode: "#c9cc19",
           },
         ],
-        sku: "AFG012",
+        sku: "AFG011",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor  amet, consectetur product Duis aute irure dolor in reprehenderit in voluptate velit esse Excepteur sinted occaecat cupidatat non proident products Voluptate velit esse cillum.",
         overview:
@@ -662,7 +671,7 @@ export const useFrontStore = defineStore("frontStore", {
             colorCode: "#c9cc19",
           },
         ],
-        sku: "AFG012",
+        sku: "AFG013",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor  amet, consectetur product Duis aute irure dolor in reprehenderit in voluptate velit esse Excepteur sinted occaecat cupidatat non proident products Voluptate velit esse cillum.",
         overview:
@@ -701,7 +710,7 @@ export const useFrontStore = defineStore("frontStore", {
             colorCode: "#c9cc19",
           },
         ],
-        sku: "AFG012",
+        sku: "AFG014",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor  amet, consectetur product Duis aute irure dolor in reprehenderit in voluptate velit esse Excepteur sinted occaecat cupidatat non proident products Voluptate velit esse cillum.",
         overview:
@@ -945,6 +954,11 @@ export const useFrontStore = defineStore("frontStore", {
     checkIfAlready(data) {
       return this.contactRequests.filter((item) => {
         return item.email === data.email;
+      });
+    },
+    getProductReviews(sku) {
+      return this.productReviews.filter((item) => {
+        return item.sku === sku;
       });
     },
   },
