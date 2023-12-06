@@ -345,217 +345,20 @@
         <div class="rp_title text-center"><h3>Related products</h3></div>
 
         <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product-grid">
-              <div class="product-image">
-                <a href="#">
-                  <img
-                    class="pic-1"
-                    src="/images/shop/1.jpg"
-                    alt="Product Image"
-                  />
-                  <img
-                    class="pic-2"
-                    src="/images/shop/2.jpg"
-                    alt="Product Image"
-                  />
-                </a>
-                <ul class="social">
-                  <li>
-                    <a href="#" data-tip="Quick View"
-                      ><i class="ti-zoom-in"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Wishlist"
-                      ><i class="ti-bag"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Cart"
-                      ><i class="ti-shopping-cart"></i
-                    ></a>
-                  </li>
-                </ul>
-                <span class="product-new-label">Sale</span>
-              </div>
-              <ul class="rating">
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-              </ul>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Product Title</a></h3>
-                <div class="price">
-                  $16.00
-                  <span>$20.00</span>
-                </div>
-                <a class="add-to-cart" href="#">+ Add To Cart</a>
-              </div>
-            </div>
+          <div
+            class="col-lg-3 col-md-4 col-sm-6"
+            v-for="(p, index) in relatedProducts"
+            :key="index"
+          >
+            <ProductItem
+              :title="p.title"
+              :thumb="p.thumb"
+              :price="p.price"
+              :discountPrice="p.discountPrice"
+              :rating="p.rating"
+              :status="p.status"
+            />
           </div>
-          <!-- End Col -->
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product-grid">
-              <div class="product-image">
-                <a href="#">
-                  <img
-                    class="pic-1"
-                    src="/images/shop/3.jpg"
-                    alt="Product Image"
-                  />
-                  <img
-                    class="pic-2"
-                    src="/images/shop/4.jpg"
-                    alt="Product Image"
-                  />
-                </a>
-                <ul class="social">
-                  <li>
-                    <a href="#" data-tip="Quick View"
-                      ><i class="ti-zoom-in"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Wishlist"
-                      ><i class="ti-bag"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Cart"
-                      ><i class="ti-shopping-cart"></i
-                    ></a>
-                  </li>
-                </ul>
-                <span class="product-new-label">-20%</span>
-              </div>
-              <ul class="rating">
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-              </ul>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Product Title</a></h3>
-                <div class="price">
-                  $16.00
-                  <span>$20.00</span>
-                </div>
-                <a class="add-to-cart" href="#">+ Add To Cart</a>
-              </div>
-            </div>
-          </div>
-          <!-- End Col -->
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product-grid">
-              <div class="product-image">
-                <a href="#">
-                  <img
-                    class="pic-1"
-                    src="/images/shop/5.jpg"
-                    alt="Product Image"
-                  />
-                  <img
-                    class="pic-2"
-                    src="/images/shop/6.jpg"
-                    alt="Product Image"
-                  />
-                </a>
-                <ul class="social">
-                  <li>
-                    <a href="#" data-tip="Quick View"
-                      ><i class="ti-zoom-in"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Wishlist"
-                      ><i class="ti-bag"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Cart"
-                      ><i class="ti-shopping-cart"></i
-                    ></a>
-                  </li>
-                </ul>
-                <span class="product-new-label">Sale</span>
-              </div>
-              <ul class="rating">
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star disable"></li>
-              </ul>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Product Title</a></h3>
-                <div class="price">
-                  $16.00
-                  <span>$20.00</span>
-                </div>
-                <a class="add-to-cart" href="#">+ Add To Cart</a>
-              </div>
-            </div>
-          </div>
-          <!-- End Col -->
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product-grid">
-              <div class="product-image">
-                <a href="#">
-                  <img
-                    class="pic-1"
-                    src="/images/shop/7.jpg"
-                    alt="Product Image"
-                  />
-                  <img
-                    class="pic-2"
-                    src="/images/shop/8.jpg"
-                    alt="Product Image"
-                  />
-                </a>
-                <ul class="social">
-                  <li>
-                    <a href="#" data-tip="Quick View"
-                      ><i class="ti-zoom-in"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Wishlist"
-                      ><i class="ti-bag"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#" data-tip="Add to Cart"
-                      ><i class="ti-shopping-cart"></i
-                    ></a>
-                  </li>
-                </ul>
-                <span class="product-new-label">New</span>
-              </div>
-              <ul class="rating">
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-                <li class="fa fa-star"></li>
-              </ul>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Product Title</a></h3>
-                <div class="price">
-                  $16.00
-                  <span>$20.00</span>
-                </div>
-                <a class="add-to-cart" href="#">+ Add To Cart</a>
-              </div>
-            </div>
-          </div>
-          <!-- End Col -->
         </div>
       </div>
     </div>
@@ -692,6 +495,9 @@ export default {
       comment.value = "";
     };
 
+    const arrayP = [...frontStore.products];
+    const relatedProducts = arrayP.sort(() => Math.random() - 0.5).slice(0, 4);
+
     return {
       frontStore,
       product,
@@ -717,6 +523,7 @@ export default {
       error,
       error2,
       existReview,
+      relatedProducts,
     };
   },
 };

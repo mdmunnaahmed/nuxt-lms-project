@@ -559,7 +559,7 @@ export const useFrontStore = defineStore("frontStore", {
         price: 59,
         discountPrice: 25,
         status: "new",
-        rating: 4.9,
+        rating: 5,
         sizes: ["s", "m", "l", "xl", "xxl"],
         totalQty: 156,
         colors: [
@@ -598,7 +598,7 @@ export const useFrontStore = defineStore("frontStore", {
         price: 99,
         discountPrice: 55,
         status: "sale",
-        rating: 3.9,
+        rating: 4,
         sizes: ["s", "m", "l", "xl", "xxl"],
         overview:
           "General principle of law or general legal principle refers to a principle that is recognized in all kinds of legal relations, regardless of the legal system to which it belongs. It can also be a principle that is widely recognized by people whose legal order has attained a certain level of sophistication.",
