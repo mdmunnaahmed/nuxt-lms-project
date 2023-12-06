@@ -471,11 +471,20 @@ export const useFrontStore = defineStore("frontStore", {
     courseInstructor: "",
     courseReviews: [
       {
-        name: "Cannu Boltu",
+        name: "Munna Ahmed",
         uname: "username",
         rating: "4.9",
         comment: "the course was super easy to do. i learned a lot from this course",
         sku: "CS0125",
+      },
+    ],
+    productReviews: [
+      {
+        name: "Munna Ahmed",
+        uname: "username",
+        rating: "4.9",
+        comment: "the book was super. i learned a lot from this book",
+        sku: "AFG012",
       },
     ],
     cart: [

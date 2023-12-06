@@ -36,9 +36,10 @@
                   <h4>overview:</h4>
                   <p>{{ product.overview }}</p>
                 </div>
-                <div class="pd_img_size fix">
+                <div class="pd_img_size">
                   <h4>size:</h4>
                   <span
+                    class="d-inline-flex justify-content-center flex-row"
                     @click="selectSize(size)"
                     :class="{ active: selectedSize == size }"
                     v-for="(size, index) in product.sizes"
@@ -46,10 +47,12 @@
                     >{{ size }}</span
                   >
                 </div>
-                <div class="pd_clr_qntty_dtls fix">
+
+                <div class="pd_clr_qntty_dtls">
                   <div class="pd_clr">
                     <h4>color:</h4>
                     <span
+                      class="d-inline-block"
                       @click="selectColor(color)"
                       :class="{ active: selectedColor == color }"
                       v-for="(color, index) in product.colors"
@@ -60,15 +63,22 @@
                       }"
                     ></span>
                     <p
+                      class="d-inline-block"
                       style="text-transform: capitalize"
                       :style="{ color: selectedColor.colorCode }"
                     >
                       {{ selectedColor.name }}
                     </p>
                   </div>
-                  <div class="pd_qntty_area">
+
+                  <div class="d-flex gap-2 align-items-center py-3">
+                    <h6 class="mb-0">SKU:</h6>
+                    <span class="lh-1">{{ product.sku }}</span>
+                  </div>
+
+                  <div class="pd_qntty_area float-end">
                     <h4>quantity:</h4>
-                    <div class="pd_qty fix">
+                    <div class="pd_qty">
                       <input
                         class="form-control shadow-none"
                         type="number"
@@ -82,9 +92,6 @@
                 <!-- Product Action -->
                 <div class="pd_btn fix mb-0">
                   <button class="btn btn-default acc_btn">add to bag</button>
-                  <a class="btn btn-default acc_btn btn_icn"
-                    ><i class="fa fa-heart"></i
-                  ></a>
                 </div>
                 <small
                   class="text-success fw-semibold"
@@ -94,10 +101,14 @@
                 <small class="text-danger fw-semibold" v-if="frontStore.error"
                   >already in cart</small
                 >
-                <small class="text-danger fw-semibold" v-if="sizeError && !colorError && !success"
+                <small
+                  class="text-danger fw-semibold"
+                  v-if="sizeError && !colorError && !success"
                   >Please select a size</small
                 >
-                <small class="text-danger fw-semibold" v-if="colorError && !success"
+                <small
+                  class="text-danger fw-semibold"
+                  v-if="colorError && !success"
                   >Please select a color</small
                 >
               </div>
@@ -109,23 +120,44 @@
             <div class="pd_tab_area fix">
               <ul class="pd_tab_btn nav nav-tabs">
                 <li>
-                  <a class="active" href="">Description</a>
+                  <button
+                    @click="toggleActive('description')"
+                    :class="{ active: currentActive === 'description' }"
+                  >
+                    Description
+                  </button>
                 </li>
                 <li>
-                  <a href="">Attributes</a>
+                  <button
+                    @click="toggleActive('attributes')"
+                    :class="{ active: currentActive === 'attributes' }"
+                  >
+                    Attributes
+                  </button>
                 </li>
                 <li>
-                  <a href="">Reviews</a>
+                  <button
+                    @click="toggleActive('reviews')"
+                    :class="{ active: currentActive === 'reviews' }"
+                  >
+                    Reviews
+                  </button>
                 </li>
               </ul>
 
               <!-- Tab panes -->
               <div class="tab-content">
-                <div class="tab-pane fade show">
+                <div
+                  class="tab-pane fade show"
+                  :class="{ active: currentActive === 'description' }"
+                >
                   {{ product.description }}
                 </div>
 
-                <div class="tab-pane fade show">
+                <div
+                  class="tab-pane fade show"
+                  :class="{ active: currentActive === 'attributes' }"
+                >
                   <table class="table table-striped w-50">
                     <thead>
                       <tr>
@@ -179,28 +211,21 @@
                   </table>
                 </div>
 
-                <div class="tab-pane fade show active">
+                <div
+                  class="tab-pane fade show active"
+                  :class="{ active: currentActive === 'reviews' }"
+                >
                   <div class="pda_rtng_area fix">
                     <h2>4.5 <span>(Overall)</span></h2>
                     <span class="fs-6">Based on 9 Comments</span>
                   </div>
                   <div class="rtng_cmnt_area mt-5">
-                    <div class="single_rtng_cmnt">
-                      <div class="rtngs">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <span>(4)</span>
-                      </div>
-                      <div class="rtng_author">
-                        <h3>John Doe</h3>
-                        <span>11:20</span>
-                        <span>6 May 2023</span>
-                      </div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
+                    <ProductReviewItem
+                      v-for="(r, index) in reviews"
+                      :key="index"
+                      :name="r.name"
+                      :comment="r.comment"
+                    />
                   </div>
                   <div class="col-md-6 rcf_pdnglft">
                     <div class="review-form">
@@ -580,6 +605,55 @@ export default {
       success.value = true;
     };
 
+    const currentActive = ref("description");
+    const toggleActive = (item) => {
+      currentActive.value = item;
+    };
+
+    const reviews = frontStore.productReviews;
+    const name = ref("");
+    const comment = ref("");
+    const rate = ref("");
+    const setRate = (value) => {
+      rate.value = value;
+    };
+    const notLogIn = ref(false);
+    const error = ref(false);
+    const error2 = ref(false);
+    const existReview = ref(false);
+    const addReview = () => {
+      if (name.value == "" || rate.value == "" || comment.value == "") {
+        error.value = true;
+        return;
+      }
+      error.value = false;
+      if (comment.value.length < 20 && comment.value) {
+        error2.value = true;
+        return;
+      }
+      error2.value = false;
+      notLogIn.value = false;
+
+      const ifExist = frontStore.ifExistReview(
+        authStore.authUser ? authStore.authUser.uname : "",
+        course.sku
+      );
+      if (ifExist.length) {
+        existReview.value = true;
+        return;
+      }
+      frontStore.addCourseReview({
+        name: name.value,
+        uname: authStore.authUser.uname,
+        rating: rate.value,
+        comment: comment.value,
+        sku: course.sku,
+      });
+      name.value = "";
+      rate.value = "";
+      comment.value = "";
+    };
+
     return {
       frontStore,
       product,
@@ -592,6 +666,18 @@ export default {
       success,
       sizeError,
       colorError,
+      toggleActive,
+      currentActive,
+
+      reviews,
+      addReview,
+      name,
+      comment,
+      rate,
+      setRate,
+      notLogIn,
+      error,
+      error2,
     };
   },
 };

@@ -484,10 +484,6 @@ export default {
     const error2 = ref(false);
     const existReview = ref(false);
     const addReview = () => {
-      // if (!authStore.isLoggedIn) {
-      //   notLogIn.value = true;
-      //   return;
-      // }
       if (name.value == "" || rate.value == "" || comment.value == "") {
         error.value = true;
         return;

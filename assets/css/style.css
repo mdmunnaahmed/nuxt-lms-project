@@ -5399,7 +5399,6 @@ blockquote::before,
 
 .pd_clr {
 	width: 50%;
-	float: left;
 }
 
 .pd_clr h4 {
@@ -5420,7 +5419,6 @@ blockquote::before,
 .pd_clr span {
 	opacity: .3;
 	display: block;
-	float: left;
 	height: 36px;
 	line-height: 36px;
 	margin-right: 10px;
@@ -5452,7 +5450,6 @@ blockquote::before,
 	border-style: solid;
 	border-width: 0 1px 0 0;
 	color: #303030;
-	float: left;
 	height: 35px;
 	padding: 0 5px;
 	text-align: center;
@@ -5554,7 +5551,7 @@ blockquote::before,
 	position: relative;
 }
 
-.pd_tab_btn li a {
+.pd_tab_btn li button {
 	color: #000;
 	display: block;
 	font-weight: 400;
@@ -5564,7 +5561,7 @@ blockquote::before,
 	transition: .5s;
 }
 
-.pd_tab_btn li a.active {
+.pd_tab_btn li button.active {
 	background: #2eca7f;
 	color: #fff;
 	box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.07);
