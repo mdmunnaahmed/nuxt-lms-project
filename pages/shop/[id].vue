@@ -212,7 +212,7 @@
                 </div>
 
                 <div
-                  class="tab-pane fade show active"
+                  class="tab-pane fade show"
                   :class="{ active: currentActive === 'reviews' }"
                 >
                   <div class="pda_rtng_area fix">
