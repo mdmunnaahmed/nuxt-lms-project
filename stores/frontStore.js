@@ -482,9 +482,11 @@ export const useFrontStore = defineStore("frontStore", {
       {
         name: "Munna Ahmed",
         uname: "username",
-        rating: "4.9",
+        rating: "4",
         comment: "the book was super. i learned a lot from this book",
         sku: "AFG012",
+        time: "8:12 pm",
+        date: "6 Nov, 2023",
       },
     ],
     cart: [
@@ -757,16 +759,9 @@ export const useFrontStore = defineStore("frontStore", {
     },
     async addCourseReview(review) {
       this.courseReviews.push(review);
-      this.loading = true;
-      const res = await fetch("http://localhost:3000/courseReviews", {
-        method: "POST",
-        body: JSON.stringify(review),
-        headers: { "Content-Type": "application/json" },
-      });
-      if (res.error) {
-        this.serverError = res.error;
-      }
-      this.loading = false;
+    },
+    async addProductReview(review) {
+      this.productReviews.push(review);
     },
     async addToCart(cart) {
       this.loading = true;
@@ -800,11 +795,6 @@ export const useFrontStore = defineStore("frontStore", {
         item.quantity = quantity;
       }
     },
-    // async fetchCart(uname) {
-    //   const res = await fetch("http://localhost:3000/cart/" + "username");
-    //   const data = await res.json();
-    //   this.cart = data;
-    // },
     applyCoupon(data) {
       if (this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase())) {
         this.appliedCoupon = this.coupons.filter((item) => item.uniqueId.toLowerCase() == data.coupon.toLowerCase());
@@ -857,6 +847,11 @@ export const useFrontStore = defineStore("frontStore", {
     },
     ifExistReview(uname, sku) {
       return this.courseReviews.filter((item) => {
+        return item.uname === uname && item.sku === sku;
+      });
+    },
+    ifExistProductReview(uname, sku) {
+      return this.productReviews.filter((item) => {
         return item.uname === uname && item.sku === sku;
       });
     },

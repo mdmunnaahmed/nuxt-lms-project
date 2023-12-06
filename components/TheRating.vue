@@ -24,3 +24,8 @@ export default {
   },
 };
 </script>
+<style>
+.rtng_cmnt_area .single_rtng_cmnt .rtngs i {
+  color: #80808099;
+}
+</style>

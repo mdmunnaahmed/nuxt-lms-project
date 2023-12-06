@@ -221,10 +221,13 @@
                   </div>
                   <div class="rtng_cmnt_area mt-5">
                     <ProductReviewItem
-                      v-for="(r, index) in reviews"
+                      v-for="(r, index) in frontStore.productReviews"
                       :key="index"
                       :name="r.name"
                       :comment="r.comment"
+                      :rating="r.rating"
+                      :date="r.date"
+                      :time="r.time"
                     />
                   </div>
                   <div class="col-md-6 rcf_pdnglft">
@@ -299,6 +302,7 @@
                         </div>
                         <div class="col-md-12 col-12 d-inline-flex">
                           <textarea
+                            class="mb-1"
                             rows="5"
                             placeholder="Type Here Message"
                             v-model="comment"
@@ -314,8 +318,11 @@
                           <small class="text-danger" v-if="error2"
                             >Comment should be more than 20 char</small
                           >
+                          <small class="text-danger" v-if="existReview"
+                            >you already made a comment</small
+                          >
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 pt-2">
                           <button type="submit" class="custom-button rounded">
                             Submit Review
                           </button>
@@ -621,6 +628,7 @@ export default {
     const error = ref(false);
     const error2 = ref(false);
     const existReview = ref(false);
+
     const addReview = () => {
       if (name.value == "" || rate.value == "" || comment.value == "") {
         error.value = true;
@@ -634,20 +642,50 @@ export default {
       error2.value = false;
       notLogIn.value = false;
 
-      const ifExist = frontStore.ifExistReview(
+      const ifExist = frontStore.ifExistProductReview(
         authStore.authUser ? authStore.authUser.uname : "",
-        course.sku
+        product.sku
       );
       if (ifExist.length) {
         existReview.value = true;
         return;
       }
-      frontStore.addCourseReview({
+
+      const time = new Date();
+      var hour = time.getHours();
+      const ampm = hour >= 12 ? "pm" : "am";
+      hour = hour % 12;
+      hour = hour ? hour : 12;
+      const min = time.getMinutes();
+
+      const year = time.getFullYear();
+      const month = time.getMonth();
+      const day = time.getDate();
+
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const monthName = monthNames[month - 1];
+
+      frontStore.addProductReview({
         name: name.value,
         uname: authStore.authUser.uname,
         rating: rate.value,
         comment: comment.value,
-        sku: course.sku,
+        sku: product.sku,
+        time: hour + ":" + min + " " + ampm,
+        date: day + " " + monthName + ", " + year,
       });
       name.value = "";
       rate.value = "";
@@ -678,6 +716,7 @@ export default {
       notLogIn,
       error,
       error2,
+      existReview,
     };
   },
 };

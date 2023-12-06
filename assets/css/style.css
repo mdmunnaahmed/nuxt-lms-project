@@ -5638,7 +5638,7 @@ blockquote::before,
 	display: block;
 	float: left;
 	font-size: 12px;
-	font-weight: 300;
+	font-weight: 600;
 	line-height: 13px;
 	margin-left: 15px;
 }
