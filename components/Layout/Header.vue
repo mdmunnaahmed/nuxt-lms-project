@@ -121,7 +121,7 @@
                 <button class="btn_one dropdown-toggle">Profile</button>
                 <ul class="dropdown-menu">
                   <li>
-                    <NuxtLink to="/profile">Profile</NuxtLink>
+                    <NuxtLink to="/profile/">Profile</NuxtLink>
                   </li>
                   <li>
                     <NuxtLink to="/profile/myorders">My Orders</NuxtLink>
