@@ -87,7 +87,7 @@
                     ></textarea>
                   </div>
                   <div class="col-md-12 text-center">
-                    <button class="btn_one" :disabled="alreadyError">
+                    <button class="btn_one">
                       Send Message
                     </button>
                     <br />
@@ -165,3 +165,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+button {
+  
+}
+</style>
