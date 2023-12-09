@@ -468,7 +468,6 @@ export const useFrontStore = defineStore("frontStore", {
       },
     ],
     searchTerm: "",
-    courseInstructor: "",
     courseReviews: [
       {
         name: "Munna Ahmed",
@@ -775,11 +774,6 @@ export const useFrontStore = defineStore("frontStore", {
       }
       await new Promise((resolve) => setTimeout(resolve, 500));
       this.loading = false;
-    },
-    async getIdInstructor(id) {
-      const res = await fetch("http://localhost:3000/instructors/" + id);
-      const data = await res.json();
-      this.courseInstructor = data;
     },
     getIdPost(id) {
       return this.posts.find((p) => {

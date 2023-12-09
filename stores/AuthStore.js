@@ -11,7 +11,7 @@ export const useAuthStore = defineStore("authStore", {
         accountType: "Student",
         addr1: "R-06 Road, Khoksha, Kushtia",
         addr2: "Khulna, Bangladesh",
-        postCode: '7025',
+        postCode: "7025",
         phone: "+1 (118) 613-1303",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore("authStore", {
         accountType: "Student",
         addr1: "R-06 Road, Khoksha, Kushtia",
         addr2: "Khulna, Bangladesh",
-        postCode: '7025',
+        postCode: "7025",
         phone: "+1 (118) 613-1303",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
@@ -42,7 +42,7 @@ export const useAuthStore = defineStore("authStore", {
         accountType: "Instructor",
         addr1: "R-06 Road, Khoksha, Kushtia",
         addr2: "Khulna, Bangladesh",
-        postCode: '7025',
+        postCode: "7025",
         phone: "+1 (118) 613-1303",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
@@ -57,7 +57,7 @@ export const useAuthStore = defineStore("authStore", {
         accountType: "Instructor",
         addr1: "R-06 Road, Khoksha, Kushtia",
         addr2: "Khulna, Bangladesh",
-        postCode: '7025',
+        postCode: "7025",
         phone: "+1 (118) 613-1303",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
@@ -72,7 +72,7 @@ export const useAuthStore = defineStore("authStore", {
         accountType: "Instructor",
         addr1: "R-06 Road, Khoksha, Kushtia",
         addr2: "Khulna, Bangladesh",
-        postCode: '7025',
+        postCode: "7025",
         phone: "+1 (118) 613-1303",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
@@ -87,7 +87,7 @@ export const useAuthStore = defineStore("authStore", {
         accountType: "Instructor",
         addr1: "R-06 Road, Khoksha, Kushtia",
         addr2: "Khulna, Bangladesh",
-        postCode: '7025',
+        postCode: "7025",
         phone: "+1 (118) 613-1303",
         shortBio:
           "Proficiency in Vue.js: A Vue.js developer should have a strong understanding of the Vue.js framework, including its core concepts such as components, directives, templates, and the Vue instance.Component-Based Development: Vue.js follows a component-based architecture, and a Vue.js developer should be skilled in creating and managing components.",
@@ -124,7 +124,7 @@ export const useAuthStore = defineStore("authStore", {
         this.instructorAccounts[index] = { ...this.instructorAccounts[index], ...updatedData };
         this.authUser = { ...this.authUser, ...updatedData };
         localStorage.setItem("user", JSON.stringify({ ...this.authUser, ...updatedData }));
-        console.log('updated');
+        console.log("updated");
       }
     },
     loginStudentAccount(info) {
@@ -182,6 +182,9 @@ export const useAuthStore = defineStore("authStore", {
   getters: {
     getAuthUserInfo: (state) => {
       return state.instructorAccounts.filter((ins) => ins.uname === this.authUser.uname);
+    },
+    getUser: (state) => (uname) => {
+      return state.instructorAccounts.filter((ins) => ins.uname == uname);
     },
   },
 });

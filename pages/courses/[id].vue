@@ -107,28 +107,20 @@
                   <div class="overview text-center">
                     <div class="instructor-item">
                       <div class="instructor-thumb">
-                        <a :href="frontStore.courseInstructor.username"
-                          ><img
+                          <img
                             :src="
                               '/images/all-img/' +
-                              frontStore.courseInstructor.thumb
+                              instructor[0].thumb
                             "
                             alt="instructor"
-                        /></a>
+                        />
                       </div>
                       <div class="instructor-content">
-                        <h6 class="title">
-                          <NuxtLink
-                            :to="frontStore.courseInstructor.username"
-                            >{{ frontStore.courseInstructor.name }}</NuxtLink
-                          >
-                        </h6>
-                        <span class="details">{{
-                          frontStore.courseInstructor.designation
-                        }}</span>
+                        <h6 class="title">{{ instructor[0].name }}</h6>
+                        <span class="details">{{ instructor[0].profession }}</span>
                       </div>
                     </div>
-                    <p>{{ frontStore.courseInstructor.bio }}</p>
+                    <p>{{ instructor[0].shortBio }}</p>
                     <div class="details-buttons-area">
                       <ul class="social-icons justify-content-center w-100">
                         <li>
@@ -466,10 +458,6 @@ export default {
       cTab.value = tab;
     };
 
-    onMounted(() => {
-      frontStore.getIdInstructor(course.instructorId);
-    });
-
     const reviews = frontStore.courseReviews;
 
     const name = ref("");
@@ -536,6 +524,7 @@ export default {
       authStore.authUser ? authStore.authUser.uname : "",
       course.sku
     );
+    const instructor = authStore.getUser(course.uname);
 
     return {
       authStore,
@@ -558,6 +547,7 @@ export default {
       success,
       itemPurchased,
       existReview,
+      instructor,
     };
   },
 };

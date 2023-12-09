@@ -216,7 +216,14 @@
                   :class="{ active: currentActive === 'reviews' }"
                 >
                   <div class="pda_rtng_area fix">
-                    <h2>{{ reviews.length ? (totalRating / reviews.length).toFixed(1) : 0 }} <span>(Overall)</span></h2>
+                    <h2>
+                      {{
+                        reviews.length
+                          ? (totalRating / reviews.length).toFixed(1)
+                          : 0
+                      }}
+                      <span>(Overall)</span>
+                    </h2>
                     <span class="fs-6"
                       >Based on {{ reviews.length }} Comments</span
                     >
@@ -234,11 +241,11 @@
                   </div>
                   <div class="col-md-6 rcf_pdnglft">
                     <div class="review-form">
-                      <h6 class="review-title mb-3">Add a Review</h6>
                       <form
                         class="row client-form align-items-center"
                         @submit.prevent="addReview"
                       >
+                        <h6 class="review-title mb-3">Add a Review</h6>
                         <div class="col-6">
                           <input
                             type="text"
@@ -345,7 +352,6 @@
       <div class="container">
         <!-- Section Title -->
         <div class="rp_title text-center"><h3>Related products</h3></div>
-
         <div class="row">
           <div
             class="col-lg-3 col-md-4 col-sm-6"
@@ -423,14 +429,15 @@ export default {
       currentActive.value = item;
     };
 
-    const reviews = frontStore.getProductReviews(product.sku);
+    const reviews = computed(() => {
+      return frontStore.getProductReviews(product.sku);
+    });
 
     const totalRating = ref(0);
     const calculateTotalRating = () => {
-      totalRating.value = reviews.reduce(
-        (acc, product) => acc + Number(product.rating),
-        0
-      );
+      totalRating.value = frontStore
+        .getProductReviews(product.sku)
+        .reduce((acc, product) => acc + Number(product.rating), 0);
     };
     calculateTotalRating();
 
@@ -513,6 +520,7 @@ export default {
 
     return {
       frontStore,
+      authStore,
       product,
       selectSize,
       selectedSize,
@@ -537,7 +545,7 @@ export default {
       error2,
       existReview,
       relatedProducts,
-      totalRating
+      totalRating,
     };
   },
 };
