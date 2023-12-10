@@ -87,9 +87,7 @@
                     ></textarea>
                   </div>
                   <div class="col-md-12 text-center">
-                    <button class="btn_one">
-                      Send Message
-                    </button>
+                    <button class="btn_one">Send Message</button>
                     <br />
                     <small class="text-danger fw-bold" v-if="fillError"
                       >Fill out all the inputs</small
@@ -97,9 +95,7 @@
                     <small class="text-danger fw-bold" v-if="alreadyError"
                       >you already made a request</small
                     >
-                    <small
-                      class="text-success fw-bold"
-                      v-if="success"
+                    <small class="text-success fw-bold" v-if="success"
                       >Successfully Submitted!</small
                     >
                   </div>
@@ -149,6 +145,10 @@ export default {
       alreadyError.value = false;
 
       frontStore.addContactRequest(data);
+      name.value = "";
+      email.value = "";
+      subject.value = "";
+      message.value = "";
       success.value = true;
     };
     return {
@@ -168,6 +168,5 @@ export default {
 
 <style lang="scss" scoped>
 button {
-  
 }
 </style>
