@@ -524,7 +524,7 @@ export default {
         title: course.title,
         price: course.price,
         uCode: course.uCode,
-        quantity: 1,
+        type: 'course',
         id: course.id,
       });
       success.value = true;

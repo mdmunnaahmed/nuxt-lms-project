@@ -30,6 +30,7 @@
                   :ind="index + 1"
                   :id="c.id"
                   :sku="c.sku"
+                  :type="c.type"
                 />
               </tbody>
             </table>
@@ -157,7 +158,7 @@ export default {
 
     const totalPrice = computed(() => {
       return orderItems.value.reduce(
-        (total, item) => total + item.price * item.quantity,
+        (total, item) => total + item.price * (item.quantity ? item.quantity : 1),
         0
       );
     });

@@ -15,8 +15,7 @@
       <span>${{ price }} </span>
     </td>
     <td class="qty">
-      <!-- Input Order -->
-      <div class="input-group">
+      <div class="input-group mx-auto d-block" v-if="!(type === 'course')">
         <div class="button minus">
           <button
             type="button"
@@ -45,7 +44,7 @@
           </button>
         </div>
       </div>
-      <!--/ End Input Order -->
+      <span class="d-block text-center" v-else>Null</span>
     </td>
     <td class="total-amount">
       $<span>{{ totalPrice }}</span>
@@ -63,7 +62,7 @@ import { ref } from "vue";
 import useSlug from "~/composables/useSlug";
 import { useFrontStore } from "~/stores/frontStore";
 export default {
-  props: ["thumb", "title", "price", "quantity", "ind", "id", "sku"],
+  props: ["thumb", "title", "price", "quantity", "ind", "id", "sku", "type"],
   setup(props) {
     const frontStore = useFrontStore();
     const { slug } = useSlug(props.title);
@@ -97,7 +96,7 @@ export default {
     };
 
     const totalPrice = computed(() => {
-      return qty.value * price.value;
+      return (qty.value ? qty.value : 1) * price.value;
     });
     const onSubtotalChange = () => {
       if (frontStore.appliedCoupon.length) {

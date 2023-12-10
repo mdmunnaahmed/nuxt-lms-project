@@ -504,8 +504,8 @@ export const useFrontStore = defineStore("frontStore", {
         title: "Logo Design: From Concept To Presentation",
         price: 79,
         id: 1,
-        quantity: 1,
         sku: "CS0123",
+        type: 'course'
       },
       {
         uname: "username2",
