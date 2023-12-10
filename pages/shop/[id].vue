@@ -245,6 +245,7 @@
                   <div class="col-md-6 rcf_pdnglft">
                     <div class="review-form" v-if="authStore.authUser">
                       <form
+                      v-if="!itemPurchased"
                         class="row client-form align-items-center"
                         @submit.prevent="addReview"
                       >
@@ -337,6 +338,7 @@
                           </button>
                         </div>
                       </form>
+                      <p v-else class="text-danger fs-6 fw-bold">Please Purchase the item to review.</p>
                     </div>
                   </div>
                 </div>
@@ -521,6 +523,14 @@ export default {
     const arrayP = [...frontStore.products];
     const relatedProducts = arrayP.sort(() => Math.random() - 0.5).slice(0, 4);
 
+
+    const itemPurchased = computed(() => {
+      return frontStore.checkForReview(
+        authStore.authUser ? authStore.authUser.uname : "",
+        product.sku
+      );
+    });
+
     return {
       frontStore,
       authStore,
@@ -549,6 +559,7 @@ export default {
       relatedProducts,
       totalRating,
       loginError,
+      itemPurchased
     };
   },
 };

@@ -21,24 +21,7 @@
             <nav id="main-menu" class="ms-auto">
               <ul>
                 <li>
-                  <NuxtLink class="nav-link" to="javascript:void(0)"
-                    >Home <span class="ti-angle-down"></span
-                  ></NuxtLink>
-                  <ul>
-                    <li>
-                      <NuxtLink class="nav-link" to="/">Home 01</NuxtLink>
-                    </li>
-                    <!-- <li>
-                      <NuxtLink class="nav-link" to="/index-two"
-                        >Home 02</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink class="nav-link" to="/index-three"
-                        >Home 03</NuxtLink
-                      >
-                    </li> -->
-                  </ul>
+                  <NuxtLink class="nav-link" to="/">Home</NuxtLink>
                 </li>
                 <li>
                   <NuxtLink class="nav-link" to="javascript:void(0)"
@@ -87,14 +70,7 @@
                   <NuxtLink class="nav-link" to="/shop">Shop</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink class="nav-link" to="javascript:void(0)"
-                    >Blog <span class="ti-angle-down"></span
-                  ></NuxtLink>
-                  <ul>
-                    <li>
-                      <NuxtLink class="nav-link" to="/blog">Blog List</NuxtLink>
-                    </li>
-                  </ul>
+                  <NuxtLink class="nav-link" to="/blog">Blogs</NuxtLink>
                 </li>
                 <li>
                   <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
@@ -107,7 +83,7 @@
 
         <div class="col-lg-4 col-md-3 col-sm-8 text-end">
           <div class="d-flex align-items-center justify-content-end">
-            <div class="home_lc mt-3">
+            <div class="home_lc mt-3" v-if="authStore.isLoggedIn">
               <NuxtLink to="/cart" class="hlc">
                 <i class="ti-shopping-cart-full"></i>
                 <span class="gactive">{{ uCart.length }}</span>
@@ -172,7 +148,9 @@ export default {
     });
 
     const uCart = computed(() => {
-      return frontStore.getUCarts(authStore.authUser ? authStore.authUser.uname : "");
+      return frontStore.getUCarts(
+        authStore.authUser ? authStore.authUser.uname : ""
+      );
     });
     return {
       frontStore,

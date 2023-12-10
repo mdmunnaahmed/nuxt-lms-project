@@ -27,6 +27,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@pinia/nuxt": "^0.4.11",
+    "@vercel/speed-insights": "^1.0.1",
     "autoprefixer": "^10.4.16",
     "firebase": "^10.6.0",
     "pinia": "^2.1.6",
