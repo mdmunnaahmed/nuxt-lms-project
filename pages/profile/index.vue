@@ -14,7 +14,7 @@
             :class="{ 'border-red-500': !name }"
           />
         </div>
-        <div class="mb-2">
+        <div class="mb-2" v-if="authStore.authUser.accountType.toLowerCase() === 'instructor'">
           <label class="mb-1 text-dark opacity-75">Profession</label>
           <input
             v-model.trim="profession"
@@ -104,8 +104,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-sm-12 col-xs-12">
-            <div class="single_agent">
-              <div class="single_agent_image">
+            <div class="single_agent row gy-5">
+              <div class="col-lg-4">
+                <div class="single_agent_image flex-shrink-0">
                 <img
                   v-if="authStore.authUser.thumb"
                   :src="'/images/all-img/' + authStore.authUser.thumb"
@@ -121,8 +122,10 @@
                   style="border-radius: 50%; object-fit: contain"
                 />
               </div>
-              <div class="single_agent_content">
-                <div class="flex justify-between items-center ps-2">
+              </div>
+              <div class="col-lg-8">
+                <div class="single_agent_content">
+                <div class="flex justify-between items-center">
                   <h4>
                     {{ authStore.authUser.name }}
                     <span
@@ -158,7 +161,7 @@
                     <hr />
                   </div>
                   <div class="col-lg-12">
-                    <div class="d-flex align-items-start justify-between">
+                    <div class="d-flex flex-wrap-reverse align-items-start justify-between">
                       <ul>
                         <li style="font-size: 16px !important">
                           <i class="fa fa-address-book" style="width: 14px"></i>
@@ -196,6 +199,7 @@
                   </div>
                 </div>
               </div>
+              </div>
             </div>
           </div>
         </div>
@@ -232,7 +236,7 @@ export default {
 
     const isFormValid = computed(() => {
       // Check if any of the values is empty
-      return name.value && phone.value && profession.value && shortBio.value;
+      return name.value && phone.value && shortBio.value;
     });
 
     const submitForm = async () => {
@@ -322,7 +326,7 @@ export default {
 <style scoped>
 .single_agent_image img {
   width: 360px;
-  height: 360px;
+  aspect-ratio: 1;
   object-fit: cover;
 }
 .border-red-500 {

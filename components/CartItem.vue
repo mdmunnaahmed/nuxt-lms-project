@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td class="image text-center" data-title="No">
-      <img :src="'/images/all-img/' + thumb"  style="object-fit: cover"/>
+      <img :src="'/images/all-img/' + thumb" style="object-fit: cover" />
     </td>
     <td class="product-des text-center" data-title="Description">
       <p class="product-name">

@@ -17,7 +17,7 @@
             <th class="text-center">ORDER STAUS</th>
           </tr>
         </thead>
-        <tbody v-for="(oc, index) in products" :key="index">
+        <tbody v-for="(oc, index) in products.reverse()" :key="index">
           <OrderItem
             v-for="(c, index) in oc.products"
             :key="index"
@@ -54,5 +54,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
