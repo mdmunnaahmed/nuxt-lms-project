@@ -505,7 +505,7 @@ export const useFrontStore = defineStore("frontStore", {
         price: 79,
         id: 1,
         sku: "CS0123",
-        type: 'course'
+        type: "course",
       },
       {
         uname: "username2",
@@ -811,26 +811,16 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
-    async addComment(comment) {
-      this.loading = true;
+    addComment(comment) {
       this.postComments.push(comment);
-      const res = await fetch("http://localhost:3000/postComments", {
-        method: "POST",
-        body: JSON.stringify(comment),
-        headers: { "Content-Type": "application/json" },
-      });
-      if (res.error) {
-        this.serverError = res.error;
-      }
-      this.loading = false;
     },
     setSearchTerm(term) {
       this.searchTerm = term;
     },
-    async addCourseReview(review) {
+    addCourseReview(review) {
       this.courseReviews.push(review);
     },
-    async addProductReview(review) {
+    addProductReview(review) {
       this.productReviews.push(review);
     },
     async addToCart(cart) {
@@ -887,7 +877,7 @@ export const useFrontStore = defineStore("frontStore", {
     },
     clearCart(uname) {
       console.log(uname);
-      this.cart = this.cart.filter(cart => cart.uname !== uname);
+      this.cart = this.cart.filter((cart) => cart.uname !== uname);
     },
     searchCourses(term) {
       this.searchCourse = term;
@@ -909,11 +899,6 @@ export const useFrontStore = defineStore("frontStore", {
     },
     checkoutProducts(products) {
       this.orders.push(products);
-    },
-    checkForReview(uname, sku) {
-      return this.buyingHistory.filter((item) => {
-        return item.uname === uname && item.sku === sku;
-      });
     },
     ifExistReview(uname, sku) {
       return this.courseReviews.filter((item) => {
@@ -1003,9 +988,13 @@ export const useFrontStore = defineStore("frontStore", {
     getUserOrderHistory: (state) => (username) => {
       return state.orders.filter((order) => order.uname === username);
     },
-
     getCateCourse: (state) => (cate) => {
       return state.courses.filter((item) => item.category === cate);
+    },
+    checkForReview: (state) => (uname, sku) => {
+      return state.buyingHistory.filter((item) => {
+        return item.uname === uname && item.sku === sku;
+      });
     },
   },
 });

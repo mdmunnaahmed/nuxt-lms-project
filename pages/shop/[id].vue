@@ -93,7 +93,9 @@
                 <div class="pd_btn fix mb-0">
                   <button class="btn btn-default acc_btn">add to bag</button>
                 </div>
-                <small class="text-danger" v-if="loginError">Please Login before add to cart</small>
+                <small class="text-danger" v-if="loginError"
+                  >Please Login before add to cart</small
+                >
                 <small
                   class="text-success fw-semibold"
                   v-if="success && !frontStore.error"
@@ -241,7 +243,7 @@
                     />
                   </div>
                   <div class="col-md-6 rcf_pdnglft">
-                    <div class="review-form">
+                    <div class="review-form" v-if="authStore.authUser">
                       <form
                         class="row client-form align-items-center"
                         @submit.prevent="addReview"
@@ -319,9 +321,6 @@
                           ></textarea>
                         </div>
                         <div class="col-12">
-                          <small class="text-danger" v-if="notLogIn"
-                            >Please Login to Comment</small
-                          >
                           <small class="text-danger" v-if="error"
                             >Please fill all the form</small
                           >
@@ -405,7 +404,7 @@ export default {
     const addToCart = async () => {
       if (!authStore.authUser) {
         loginError.value = true;
-        return
+        return;
       }
       loginError.value = false;
       if (selectedSize.value == "") {
@@ -441,13 +440,11 @@ export default {
       return frontStore.getProductReviews(product.sku);
     });
 
-    const totalRating = ref(0);
-    const calculateTotalRating = () => {
-      totalRating.value = frontStore
+    const totalRating = computed(() => {
+      return frontStore
         .getProductReviews(product.sku)
         .reduce((acc, product) => acc + Number(product.rating), 0);
-    };
-    calculateTotalRating();
+    });
 
     const name = ref("");
     const comment = ref("");
@@ -455,7 +452,6 @@ export default {
     const setRate = (value) => {
       rate.value = value;
     };
-    const notLogIn = ref(false);
     const error = ref(false);
     const error2 = ref(false);
     const existReview = ref(false);
@@ -471,7 +467,6 @@ export default {
         return;
       }
       error2.value = false;
-      notLogIn.value = false;
 
       const ifExist = frontStore.ifExistProductReview(
         authStore.authUser ? authStore.authUser.uname : "",
@@ -548,13 +543,12 @@ export default {
       comment,
       rate,
       setRate,
-      notLogIn,
       error,
       error2,
       existReview,
       relatedProducts,
       totalRating,
-      loginError
+      loginError,
     };
   },
 };
