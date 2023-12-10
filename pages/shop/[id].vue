@@ -93,6 +93,7 @@
                 <div class="pd_btn fix mb-0">
                   <button class="btn btn-default acc_btn">add to bag</button>
                 </div>
+                <small class="text-danger" v-if="loginError">Please Login before add to cart</small>
                 <small
                   class="text-success fw-semibold"
                   v-if="success && !frontStore.error"
@@ -400,16 +401,23 @@ export default {
     const success = ref(false);
     const colorError = ref(false);
     const sizeError = ref(false);
-
+    const loginError = ref(false);
     const addToCart = async () => {
+      if (!authStore.authUser) {
+        loginError.value = true;
+        return
+      }
+      loginError.value = false;
       if (selectedSize.value == "") {
         sizeError.value = true;
         return;
       }
+      sizeError.value = false;
       if (selectedColor.value == "") {
         colorError.value = true;
         return;
       }
+      colorError.value = false;
       await frontStore.addProductToCart({
         uname: authStore.authUser.uname,
         thumb: product.thumb,
@@ -546,6 +554,7 @@ export default {
       existReview,
       relatedProducts,
       totalRating,
+      loginError
     };
   },
 };

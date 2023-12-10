@@ -955,6 +955,11 @@ export const useFrontStore = defineStore("frontStore", {
         return item.sku === sku;
       });
     },
+    getCourseReviews(sku) {
+      return this.courseReviews.filter((item) => {
+        return item.sku === sku;
+      });
+    },
   },
   getters: {
     getIdComment() {
@@ -963,9 +968,9 @@ export const useFrontStore = defineStore("frontStore", {
     filteredSearchData() {
       return this.posts.filter((item) => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
     },
-    getCourseReviews() {
-      return this.courseReviews;
-    },
+    // getCourseReviews() {
+    //   return this.courseReviews;
+    // },
     getUCarts() {
       return this.cart;
     },

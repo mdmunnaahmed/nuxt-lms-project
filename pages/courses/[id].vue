@@ -107,17 +107,16 @@
                   <div class="overview text-center">
                     <div class="instructor-item">
                       <div class="instructor-thumb">
-                          <img
-                            :src="
-                              '/images/all-img/' +
-                              instructor[0].thumb
-                            "
-                            alt="instructor"
+                        <img
+                          :src="'/images/all-img/' + instructor[0].thumb"
+                          alt="instructor"
                         />
                       </div>
                       <div class="instructor-content">
                         <h6 class="title">{{ instructor[0].name }}</h6>
-                        <span class="details">{{ instructor[0].profession }}</span>
+                        <span class="details">{{
+                          instructor[0].profession
+                        }}</span>
                       </div>
                     </div>
                     <p>{{ instructor[0].shortBio }}</p>
@@ -145,7 +144,7 @@
                 >
                   <div class="client-review">
                     <div class="review-comments">
-                      <h6 class="review-title">Reviews (03)</h6>
+                      <h6 class="review-title">Reviews ({{ reviews.length }})</h6>
                       <ul class="review-contents">
                         <CourseReviewItem
                           v-for="(r, index) in reviews"
@@ -307,6 +306,9 @@
               <button class="btn_one hover w-100" @click="addToCart">
                 Buy this Course
               </button>
+              <small class="text-danger d-block text-center" v-if="loginError"
+                >Please Login before add to cart</small
+              >
               <small
                 class="text-danger block text-center"
                 v-if="frontStore.error"
@@ -458,7 +460,9 @@ export default {
       cTab.value = tab;
     };
 
-    const reviews = frontStore.courseReviews;
+    const reviews = computed(() => {
+      return frontStore.getCourseReviews(course.sku);
+    });
 
     const name = ref("");
     const comment = ref("");
@@ -507,7 +511,13 @@ export default {
     const arrayC = [...frontStore.courses];
     const relatedCourse = arrayC.sort(() => Math.random() - 0.5).slice(0, 3);
     const success = ref(false);
+    const loginError = ref(false);
     const addToCart = async () => {
+      if (!authStore.authUser) {
+        loginError.value = true;
+        return;
+      }
+      loginError.value = false;
       await frontStore.addToCart({
         uname: authStore.authUser.uname,
         thumb: course.thumb,
@@ -548,6 +558,7 @@ export default {
       itemPurchased,
       existReview,
       instructor,
+      loginError,
     };
   },
 };
