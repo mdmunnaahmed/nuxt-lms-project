@@ -5,7 +5,7 @@
     </td>
     <td class="product-des text-center" data-title="Description">
       <p class="product-name">
-        <NuxtLink :to="'courses/' + slug">{{ title }}</NuxtLink>
+        <NuxtLink :to="'/courses/' + slug">{{ title }}</NuxtLink>
       </p>
       <!-- <p class="product-des">
         Maboriosam in a tonto nesciung eget distingy magndapibus.

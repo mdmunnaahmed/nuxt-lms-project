@@ -508,7 +508,7 @@ export const useFrontStore = defineStore("frontStore", {
         sku: "CS0123",
       },
       {
-        uname: "username",
+        uname: "username2",
         thumb: "c3.png",
         title: "we are here on this special day",
         price: 29,
@@ -522,14 +522,14 @@ export const useFrontStore = defineStore("frontStore", {
         uniqueId: "munna",
         discount: "130",
         startDate: "05/25/2023",
-        endDate: "05/25/2024",
+        endDate: "05/25/2027",
         minSpend: "450",
       },
       {
         uniqueId: "munns",
         discount: "170",
         startDate: "01/15/2023",
-        endDate: "12/31/2025",
+        endDate: "12/31/2028",
         minSpend: "330",
       },
     ],
@@ -730,31 +730,19 @@ export const useFrontStore = defineStore("frontStore", {
       {
         uname: "username",
         userInfo: { name: "Munna Ahmed", email: "demo@mail.com", addr1: "Kushtia, Khulna", addr2: "Moragacha, Khoksa", postCode: 7020, noteToRider: "" },
-        products: [
-          { uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" },
-          { uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" },
-          { uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 },
-        ],
+        products: [{ uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" }],
         status: "pending",
       },
       {
         uname: "username",
         userInfo: { name: "Munna Ahmed", email: "demo@mail.com", addr1: "Kushtia, Khulna", addr2: "Moragacha, Khoksa", postCode: 7020, noteToRider: "" },
-        products: [
-          { uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" },
-          { uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" },
-          { uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 },
-        ],
+        products: [{ uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" }],
         status: "cancled",
       },
       {
         uname: "username",
         userInfo: { name: "Munna Ahmed", email: "demo@mail.com", addr1: "Kushtia, Khulna", addr2: "Moragacha, Khoksa", postCode: 7020, noteToRider: "" },
-        products: [
-          { uname: "username", thumb: "c2.png", title: "Logo Design: From Concept To Presentation", price: 79, id: 7, quantity: 1, sku: "CS0123" },
-          { uname: "username", thumb: "c3.png", title: "we are here on this special day", price: 29, id: 2, quantity: 2, sku: "CS0124" },
-          { uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 },
-        ],
+        products: [{ uname: "username", thumb: "1.jpg", title: "Funny Book with Images", price: 59, sku: "AFG012", quantity: 6, size: "xl", color: { name: "blue", colorCode: "#1961cc" }, id: 1 }],
         status: "delivered",
       },
     ],
@@ -893,13 +881,13 @@ export const useFrontStore = defineStore("frontStore", {
     },
     removeItem(item) {
       const index = this.cart.findIndex((cartItem) => cartItem.id === item);
-      console.log(item);
       if (index !== -1) {
         this.cart.splice(index, 1);
       }
     },
-    clearCart() {
-      this.cart = [];
+    clearCart(uname) {
+      console.log(uname);
+      this.cart = this.cart.filter(cart => cart.uname !== uname);
     },
     searchCourses(term) {
       this.searchCourse = term;
@@ -968,11 +956,11 @@ export const useFrontStore = defineStore("frontStore", {
     filteredSearchData() {
       return this.posts.filter((item) => item.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
     },
-    // getCourseReviews() {
-    //   return this.courseReviews;
-    // },
-    getUCarts() {
-      return this.cart;
+    getUCarts: (state) => (uname) => {
+      return state.cart.filter((item) => item.uname === uname);
+    },
+    getUserOrderItems: (state) => (uname) => {
+      return state.cart.filter((item) => item.uname === uname);
     },
     totalPrice: (state) => {
       return state.cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -989,7 +977,6 @@ export const useFrontStore = defineStore("frontStore", {
         );
       });
     },
-    // Getter to extract all unique languages from courses
     allLanguages: (state) => {
       const languages = new Set();
       state.courses.forEach((course) => {

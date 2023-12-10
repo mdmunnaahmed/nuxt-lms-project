@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SectionInnerBanner title="Cart Page" slug="cart" />
+    <SectionInnerBanner title="Cart to your Home" slug="cart" />
 
     <div class="shopping-cart section">
       <div class="container">
@@ -36,7 +36,7 @@
             <!--/ End Shopping Summery -->
           </div>
         </div>
-        <div class="row" v-if="frontStore.cart.length">
+        <div class="row" v-if="uCart.length">
           <div class="col-12">
             <!-- Total Amount -->
             <div class="total-amount">
@@ -79,27 +79,27 @@
                   <div class="right">
                     <ul>
                       <li>
-                        Cart Subtotal<span>{{ frontStore.totalPrice }}</span>
+                        Cart Subtotal<span>${{ totalPrice ? totalPrice.toFixed(2) : totalPrice }}</span>
                       </li>
                       <li>Shipping<span>Free</span></li>
                       <li>
                         Coupon<span
-                          >${{ discountAmount ? discountAmount : 0 }}</span
+                          >${{ discountAmount ? Number(discountAmount).toFixed(2) : 0.00 }}</span
                         >
                       </li>
                       <li class="last">
-                        You Pay<span>${{ youPay }}</span>
+                        You Pay<span>${{ youPay.toFixed(2) }}</span>
                       </li>
                     </ul>
                     <div class="button5">
                       <NuxtLink
                         @click="navigateToNextPage"
-                        class="btn"
+                        class="btn_one w-100 text-center rounded-0"
                         :to="{
                           path: '/checkout',
                           query: {
-                            cartInfo: JSON.stringify(frontStore.cart),
-                            discountAmount: discountAmount ? discountAmount: 0,
+                            cartInfo: JSON.stringify(orderItems),
+                            discountAmount: discountAmount ? discountAmount : 0,
                           },
                         }"
                         >Checkout</NuxtLink
@@ -130,22 +130,38 @@
 <script>
 import { ref, computed } from "vue";
 import { useFrontStore } from "../../stores/frontStore";
+import { useAuthStore } from "~/stores/AuthStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
+    const authStore = useAuthStore();
     const uCart = computed(() => {
-      return frontStore.getUCarts;
+      return frontStore.getUCarts(authStore.authUser ? authStore.authUser.uname : "");
     });
 
     const coupon = ref("munns");
     const discount = () => {
-      if (!coupon.value == "") {
+      if (coupon.value) {
         frontStore.applyCoupon({
           coupon: coupon.value,
           spend: youPay.value,
         });
       }
     };
+
+    const orderItems = computed(() => {
+      return frontStore.getUserOrderItems(
+        authStore.authUser ? authStore.authUser.uname : ""
+      );
+    });
+
+    const totalPrice = computed(() => {
+      return orderItems.value.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+    });
+
     const discountAmount = computed(() => {
       if (frontStore.appliedCoupon.length) {
         return frontStore.appliedCoupon[0].discount;
@@ -161,34 +177,42 @@ export default {
         "Are you sure you want to clear the entire cart?"
       );
       if (confirmed) {
-        frontStore.clearCart();
+        frontStore.clearCart(
+          authStore.authUser ? authStore.authUser.uname : ""
+        );
       }
     };
 
     const youPay = computed(() => {
       if (frontStore.appliedCoupon.length) {
         return (
-          parseInt(frontStore.totalPrice) -
+          parseInt(totalPrice.value) -
           parseInt(frontStore.appliedCoupon[0].discount)
         );
       }
-      return parseInt(frontStore.totalPrice);
+      return parseInt(totalPrice.value);
     });
 
     return {
       frontStore,
       uCart,
       coupon,
-      coupon,
       discount,
       youPay,
       discountAmount,
       clearCoup,
       clearCart,
+      orderItems,
+      totalPrice,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.btn_one {
+  &::before {
+    border-radius: 0;
+  }
+}
 </style>

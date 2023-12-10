@@ -110,7 +110,7 @@
             <div class="home_lc mt-3">
               <NuxtLink to="/cart" class="hlc">
                 <i class="ti-shopping-cart-full"></i>
-                <span class="gactive">{{ cartCount }}</span>
+                <span class="gactive">{{ uCart.length }}</span>
               </NuxtLink>
             </div>
             <div
@@ -171,16 +171,15 @@ export default {
       window.removeEventListener("scroll", handleScroll);
     });
 
-    const cartCount = computed(() => {
-      return frontStore.cart.length;
+    const uCart = computed(() => {
+      return frontStore.getUCarts(authStore.authUser ? authStore.authUser.uname : "");
     });
-
     return {
       frontStore,
       authStore,
       isScrolled,
       handleScroll,
-      cartCount,
+      uCart,
       logoutAccount,
     };
   },

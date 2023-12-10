@@ -9,16 +9,6 @@
           alt="product image"
         />
       </NuxtLink>
-      <ul class="social">
-        <li>
-          <a href="#" data-tip="Add to Wishlist"><i class="ti-bag"></i></a>
-        </li>
-        <li>
-          <a href="#" data-tip="Add to Cart"
-            ><i class="ti-shopping-cart"></i
-          ></a>
-        </li>
-      </ul>
       <span class="product-new-label">{{ status }}</span>
     </div>
     <TheRating class="mt-2 mb-0" :rating="rating" />
