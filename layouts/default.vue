@@ -1,6 +1,5 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <SpeedInsights/>
     <UIPreloader v-if="loading" />
     <div v-else>
       <LayoutHeader />
@@ -15,7 +14,6 @@
 
 // For example, in a page component
 <script setup>
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import { useAuthStore } from "~/stores/AuthStore";
 import { onMounted } from "vue";
 import { ref } from "vue";
