@@ -4,12 +4,7 @@
     <section class="section-top">
       <div class="container">
         <div class="col-lg-10 offset-lg-1 text-center">
-          <div
-            class="section-top-title wow fadeInRight"
-            data-wow-duration="1s"
-            data-wow-delay="0.3s"
-            data-wow-offset="0"
-          >
+          <div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
             <h1>Login Page</h1>
             <ul>
               <li><a href="index.html">Home</a></li>
@@ -33,41 +28,21 @@
               <h4 class="login_register_title">Sign in to your account</h4>
               <div class="d-flex mb-3">
                 <label class="flex-grow-1">
-                  <input
-                    name="acc"
-                    type="radio"
-                    value="student"
-                    checked
-                    v-model="checkAccountType"
-                  />
+                  <input name="acc" type="radio" value="student" checked v-model="checkAccountType" />
                   <span class="block py-2 px-3 text-center">Student</span>
                 </label>
                 <label class="flex-grow-1">
-                  <input
-                    name="acc"
-                    type="radio"
-                    value="instructor"
-                    v-model="checkAccountType"
-                  />
+                  <input name="acc" type="radio" value="instructor" v-model="checkAccountType" />
                   <span class="block py-2 px-3 text-center">Instructor</span>
                 </label>
               </div>
               <div class="form-group mb-3">
                 <label for="">Username or Email</label>
-                <input
-                  type="text"
-                  id="username"
-                  class="form-control input-label"
-                  v-model="uname"
-                />
+                <input type="text" id="username" class="form-control input-label" v-model="uname" />
               </div>
               <div class="form-group mb-3">
                 <label for="">Password</label>
-                <input
-                  type="password"
-                  class="form-control input-label"
-                  v-model="password"
-                />
+                <input type="password" class="form-control input-label" v-model="password" />
               </div>
               <UISpinner v-if="authStore.loading" />
               <p>{{ authStore.serverError }}</p>
@@ -135,7 +110,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 input.error {

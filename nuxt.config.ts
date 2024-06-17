@@ -13,7 +13,6 @@ export default defineNuxtConfig({
   },
   generate: {
     // Disable prerendering temporarily
-    exclude: ['/path-to-prerendered-page'],
+    exclude: ["/path-to-prerendered-page"],
   },
-
 });

@@ -17,29 +17,14 @@
     <td class="qty">
       <div class="input-group mx-auto d-block" v-if="!(type === 'course')">
         <div class="button minus">
-          <button
-            type="button"
-            class="btn btn-primary btn-number"
-            @click="dec(sku)"
-          >
+          <button type="button" class="btn btn-primary btn-number" @click="dec(sku)">
             <i class="ti-minus"></i>
           </button>
         </div>
-        <input
-          type="number"
-          class="input-number"
-          v-model.number="qty"
-          @input="checkLimit(sku)"
-        />
-        <small class="text-xs text-danger" v-if="qtyLimit">{{
-          qtyLimit
-        }}</small>
+        <input type="number" class="input-number" v-model.number="qty" @input="checkLimit(sku)" />
+        <small class="text-xs text-danger" v-if="qtyLimit">{{ qtyLimit }}</small>
         <div class="button plus">
-          <button
-            type="button"
-            class="btn btn-primary btn-number"
-            @click="inc(sku)"
-          >
+          <button type="button" class="btn btn-primary btn-number" @click="inc(sku)">
             <i class="ti-plus"></i>
           </button>
         </div>
@@ -109,9 +94,7 @@ export default {
     watch(totalPrice, onSubtotalChange);
 
     const removeItem = (item) => {
-      const confirmed = window.confirm(
-        "Are you sure you want to delete the item?"
-      );
+      const confirmed = window.confirm("Are you sure you want to delete the item?");
       if (confirmed) {
         frontStore.removeItem(item);
       }

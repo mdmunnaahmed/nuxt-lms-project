@@ -9,16 +9,8 @@
         </p>
       </div>
       <div class="row">
-        <div
-          class="col-lg-4 col-sm-6 col-xs-12"
-          v-for="(t, index) in topics"
-          :key="index"
-        >
-          <TopicItem
-            :title="t[0]"
-            :courseCount="t[1]"
-            :ind="index + 1"
-          />
+        <div class="col-lg-4 col-sm-6 col-xs-12" v-for="(t, index) in topics" :key="index">
+          <TopicItem :title="t[0]" :courseCount="t[1]" :ind="index + 1" />
         </div>
       </div>
       <!-- END ROW -->
@@ -28,18 +20,17 @@
   <!-- END TOPIC -->
 </template>
 
-
 <script>
 import { useFrontStore } from "../stores/frontStore";
 export default {
   setup() {
     const frontStore = useFrontStore();
-    const topics =  computed(() => {
+    const topics = computed(() => {
       return Object.entries(frontStore.allCategories);
     });
     return {
       frontStore,
-      topics
+      topics,
     };
   },
 };
